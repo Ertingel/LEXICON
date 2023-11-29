@@ -10,11 +10,17 @@ body {
 	align-items:	center;
 }
 
-p, h1, h2 {
-	margin:	0;
+p , b , h1 , h2 {
+	margin:	0 0 .5em 0;
+}
+
+ul , ol {
+	margin:	0 0 .5em 0;
 }
 
 #container {
+	width:	50em;
+	
 	border-radius:	3em;
 	overflow:		hidden;
 	
@@ -23,7 +29,7 @@ p, h1, h2 {
 }
 
 #container > header > img {
-	width:	50em;
+	width:	100%;
 }
 
 #container > main {
@@ -40,7 +46,7 @@ p, h1, h2 {
 	grid-template-areas: 
 		"title	title"
 		"likes	dislikes"
-		"frends	find";
+		"frends	befriending";
 	
 }
 
@@ -72,26 +78,41 @@ p, h1, h2 {
 	grid-area:	title;
 }
 
+
+#likes , #dislikes , #befrending {
+	padding:		1.5em;
+	border-radius:	2em;
+}
+
 #likes {
 	grid-area:	likes;
+	
+	color:				#294300;
+	background-color:	#b9ff5e;
 }
 
 #dislikes {
 	grid-area:	dislikes;
+	
+	color:				#6e0037;
+	background-color:	#ffdae4;
 }
 
 #frends {
 	grid-area:	frends;
 }
 
-#find {
-	grid-area:	find;
+#befrending {
+	grid-area:	befriending;
+	
+	color:				#00433a;
+	background-color:	#85ffe8;
 }
 
 
 
 #frends > img {
-	width:			20em;
-	margin:			.5em;
+	width:			100%;
+	margin-bottom:	.5em;
 	border-radius:	2em;
 }

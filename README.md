@@ -6,8 +6,8 @@ Detta är min repository för lexor i LEXICON.
 ## Homework
 
  * Week 48
-   * **Uppgift1**: Enkel hemsida om det favoritrecept
-   * **Uppgift2**: Ska din egen hemsida
+   1. [**Uppgift1**](https://github.com/Ertingel/LEXICON/tree/main/Uppgift1): Enkel hemsida om det favoritrecept
+   2. [**Uppgift2**](https://github.com/Ertingel/LEXICON/tree/main/Uppgift2): Ska din egen hemsida
 
 
 

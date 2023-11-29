@@ -1,7 +1,7 @@
 
 # LEXICON
 
-Detta är min repository för lexor i LEXICON. 
+Detta är min repository för läxor i LEXICON. 
 
 ## Homework
 

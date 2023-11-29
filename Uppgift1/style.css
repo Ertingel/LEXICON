@@ -1,0 +1,97 @@
+
+body {
+	font-family: 'Roboto', sans-serif;
+	
+	padding:			10em;
+	background-color:	#eee;
+	
+	display:		flex;
+	flex-direction:	column;
+	align-items:	center;
+}
+
+p, h1, h2 {
+	margin:	0;
+}
+
+#container {
+	border-radius:	3em;
+	overflow:		hidden;
+	
+	background-color:	#ffffff;
+	box-shadow: 0em 0em 1em 1em #00000044;
+}
+
+#container > header > img {
+	width:	50em;
+}
+
+#container > main {
+	
+	padding:	1em 3em;
+	
+	display:	grid;
+	grid-template-columns:	repeat( 2 , 1fr );
+	grid-template-rows:		repeat( 3 , auto );
+	
+	grid-column-gap:	1em;
+	grid-row-gap:		1em;
+	
+	grid-template-areas: 
+		"title	title"
+		"likes	dislikes"
+		"frends	find";
+	
+}
+
+#container > main > section {
+	display:			flex;
+	flex-direction:		column;
+	justify-content:	flex-start;
+	align-items:		flex-start;
+}
+
+#container > main > section#frends {
+	align-items:	center;
+}
+
+#container > footer {
+	padding:	1em;
+}
+
+#container > footer > address {
+	display:			flex;
+	flex-direction:		row;
+	justify-content:	space-around;
+	align-items:		center;
+}
+
+
+
+#title {
+	grid-area:	title;
+}
+
+#likes {
+	grid-area:	likes;
+}
+
+#dislikes {
+	grid-area:	dislikes;
+}
+
+#frends {
+	grid-area:	frends;
+}
+
+#find {
+	grid-area:	find;
+}
+
+
+
+#frends > img {
+	width:			20em;
+	margin:			.5em;
+	border-radius:	2em;
+}

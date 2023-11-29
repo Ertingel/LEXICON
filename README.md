@@ -6,7 +6,7 @@ Detta är min repository för läxor i LEXICON.
 ## Homework
 
  * Week 48
-   1. [**Uppgift1**](https://github.com/Ertingel/LEXICON/tree/main/Uppgift1): Enkel hemsida om det favoritrecept
+   1. [**Uppgift1**](https://github.com/Ertingel/LEXICON/tree/main/Uppgift1): Enkel hemsida om det favoritrecept *(Blev i stället om Kit the fox)*
    2. [**Uppgift2**](https://github.com/Ertingel/LEXICON/tree/main/Uppgift2): Ska din egen hemsida
 
 

@@ -1,0 +1,99 @@
+
+
+body {
+	margin:		0;
+	padding:	0;
+	
+	min-width:	100vw;
+	min-height: 100vh;
+	
+	font-family: 'Roboto', sans-serif;
+	
+	background-color:	#e1ff9f;
+	
+}
+
+
+#site-logo {
+	display:	flex;
+	flex-direction:	row;
+	align-items:	center;
+}
+
+#site-logo > img {
+	height:	2.5em;
+}
+
+#site-logo > h1 {
+	margin:			0;
+	font-size:		2rem;
+	user-select:	none;
+}
+
+header {
+	display:	flex;
+	flex-direction:		row;
+	justify-content:	space-between;
+}
+
+nav {
+	display:	flex;
+	flex-direction:	row;
+}
+
+
+main {
+	display:	grid;
+	grid-template-columns:	repeat( 5 , 1fr );
+	grid-template-rows:		repeat( 3 , auto );
+	
+	grid-column-gap:	1em;
+	grid-row-gap:		1em;
+	
+	grid-template-areas: 
+		"wellcome	wellcome	.		motto	.	."
+		"wellcome	wellcome	rocket	.		kit	."
+		".			.			rocket	.		.	doing";
+	
+}
+
+main img {
+	width:	100%;
+}
+
+
+img {
+	width: 100%;
+}
+
+
+address {
+	display:	flex;
+	flex-direction:		row;
+	justify-content:	space-evenly;
+}
+
+
+
+
+
+
+#wellcome {
+	grid-area:	wellcome;
+}
+
+#motto {
+	grid-area:	motto;
+}
+
+#kit {
+	grid-area:	kit;
+}
+
+#doing {
+	grid-area:	doing;
+}
+
+#rocket {
+	grid-area:	rocket;
+}

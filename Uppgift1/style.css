@@ -1,9 +1,11 @@
 
 body {
+	margin:		0;
+	padding:	0;
+	
 	font-family: 'Roboto', sans-serif;
 	
-	padding:			10em;
-	background-color:	#eee;
+	background-color:	#444;
 	
 	display:		flex;
 	flex-direction:	column;
@@ -18,23 +20,48 @@ ul , ol {
 	margin:	0 0 .5em 0;
 }
 
+#background {
+	
+	position:	fixed;
+	z-index:	-1;
+	height:		100vh;
+	width:		100vw; 
+	
+	/* License: https://commons.wikimedia.org/wiki/File:The_World_Factbook_-_Algeria_-_Flickr_-_The_Central_Intelligence_Agency_(7).jpg */
+	background-image:		url( "Background.jpeg" );
+	background-position:	center;
+	background-repeat:		no-repeat;
+	background-size:		cover;
+	
+	filter:	brightness( 50% ) blur( .25rem );
+	
+}
+
 #container {
 	width:	50em;
+	margin:	10em;
 	
 	border-radius:	3em;
-	overflow:		hidden;
-	
-	background-color:	#ffffff;
-	box-shadow: 0em 0em 1em 1em #00000044;
+	box-shadow:	0 0 1.5em 1.5em #00000088;
+}
+
+#container > header {
+	background-color: #ffffff;
+	border-top-left-radius:		4em;
+	border-top-right-radius:	4em;
 }
 
 #container > header > img {
 	width:	100%;
+	border-top-left-radius:		3em;
+	border-top-right-radius:	3em;
 }
 
 #container > main {
 	
 	padding:	1em 3em;
+	
+	background-color:	#ffffff;
 	
 	display:	grid;
 	grid-template-columns:	repeat( 2 , 1fr );
@@ -63,6 +90,10 @@ ul , ol {
 
 #container > footer {
 	padding:	1em;
+	
+	background-color:	#ffffff;
+	border-bottom-left-radius:	3em;
+	border-bottom-right-radius:	3em;
 }
 
 #container > footer > address {

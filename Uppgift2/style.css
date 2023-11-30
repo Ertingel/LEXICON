@@ -9,7 +9,7 @@ body {
 	
 	font-family: 'Roboto', sans-serif;
 	
-	background-color:	#e1ff9f;
+	background-color:	#a3cb00;
 	
 	display:	flex;
 	flex-direction:	column;
@@ -45,6 +45,14 @@ header {
 }
 
 #site-logo {
+	
+	padding:	0.5em 1em;
+	
+	color:				#004250;
+	background-color:	#d3f5ff;
+	border-radius:		1em;
+	box-shadow:	0 0 .5em .5em #00000022;
+	
 	display:	flex;
 	flex-direction:	row;
 	align-items:	center;
@@ -63,6 +71,52 @@ header {
 nav {
 	display:	flex;
 	flex-direction:	row;
+	
+	border-radius:		1em;
+	box-shadow:	0 0 0.5em 0.5em #00000022;
+}
+
+nav > * {
+	padding:	0.5em 1em;
+	
+	background-color:	#fff;
+	
+	display:	flex;
+	flex-direction:	row;
+	align-items:	center;
+}
+
+nav > *:hover {
+	filter: brightness( 0.95 );
+}
+
+nav > *:active {
+	filter: brightness( 0.90 );
+}
+
+nav > *:first-child {
+	border-top-left-radius:		1em;
+	border-bottom-left-radius:	1em;
+}
+
+nav > *:last-child {
+	border-top-right-radius:	1em;
+	border-bottom-right-radius:	1em;
+}
+
+nav > *:nth-child( 1 ) {
+	color:				#6e0037;
+	background-color:	#ffdae4;
+}
+
+nav > *:nth-child( 2 ) {
+	color:				#294300;
+	background-color:	#b9ff5e;
+}
+
+nav > *:nth-child( 3 ) {
+	color:				#00433a;
+	background-color:	#85ffe8;
 }
 
 
@@ -107,6 +161,7 @@ footer {
 	
 	background-color:	#444;
 	color:				#fff;
+	border-top: 		2px	solid	#222;
 }
 
 footer a:link , footer a:visited {

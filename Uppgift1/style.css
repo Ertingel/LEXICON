@@ -45,6 +45,7 @@ ul , ol {
 	box-shadow:	0 0 1.5em 1.5em #00000088;
 }
 
+/* Fixing weird bottom gap and anti aliasing artifact from rounded border. */
 #container > header {
 	background-color: #ffffff;
 	border-top-left-radius:		4em;
@@ -73,7 +74,7 @@ ul , ol {
 	grid-template-areas: 
 		"title	title"
 		"likes	dislikes"
-		"frends	befriending";
+		"frens	befriening";
 	
 }
 
@@ -82,10 +83,6 @@ ul , ol {
 	flex-direction:		column;
 	justify-content:	flex-start;
 	align-items:		flex-start;
-}
-
-#container > main > section#frends {
-	align-items:	center;
 }
 
 #container > footer {
@@ -110,7 +107,7 @@ ul , ol {
 }
 
 
-#likes , #dislikes , #befrending {
+#likes , #dislikes , #befrening {
 	padding:		1.5em;
 	border-radius:	2em;
 }
@@ -129,12 +126,13 @@ ul , ol {
 	background-color:	#ffdae4;
 }
 
-#frends {
-	grid-area:	frends;
+#frens {
+	grid-area:		frens;
+	align-items:	center !important;
 }
 
-#befrending {
-	grid-area:	befriending;
+#befrening {
+	grid-area:	befriening;
 	
 	color:				#00433a;
 	background-color:	#85ffe8;
@@ -142,7 +140,7 @@ ul , ol {
 
 
 
-#frends > img {
+#frens > img {
 	width:			100%;
 	margin-bottom:	.5em;
 	border-radius:	2em;

@@ -20,6 +20,10 @@ ul , ol {
 	margin:	0 0 .5em 0;
 }
 
+img {
+	display:	block;
+}
+
 #background {
 	
 	position:	fixed;
@@ -43,13 +47,6 @@ ul , ol {
 	
 	border-radius:	3em;
 	box-shadow:	0 0 1.5em 1.5em #00000088;
-}
-
-/* Fixing weird bottom gap and anti aliasing artifact from rounded border. */
-#container > header {
-	background-color: #ffffff;
-	border-top-left-radius:		4em;
-	border-top-right-radius:	4em;
 }
 
 #container > header > img {

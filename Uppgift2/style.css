@@ -11,8 +11,38 @@ body {
 	
 	background-color:	#e1ff9f;
 	
+	display:	flex;
+	flex-direction:	column;
+	align-items:	center;
 }
 
+p , b , h1 , h2 {
+	margin:	0 0 .5em 0;
+}
+
+img {
+	display:	block;
+}
+
+a:link , a:visited {
+	color: 				#000;
+	text-decoration:	none;
+}
+
+a:hover {	color: #333;	}
+a:active {	color: #666;	}
+
+
+header {
+	
+	align-self:	stretch;
+	padding:	1.5em;
+	
+	display:	flex;
+	flex-direction:		row;
+	justify-content:	space-between;
+	align-content:		flex-end;
+}
 
 #site-logo {
 	display:	flex;
@@ -30,12 +60,6 @@ body {
 	user-select:	none;
 }
 
-header {
-	display:	flex;
-	flex-direction:		row;
-	justify-content:	space-between;
-}
-
 nav {
 	display:	flex;
 	flex-direction:	row;
@@ -43,29 +67,54 @@ nav {
 
 
 main {
-	display:	grid;
-	grid-template-columns:	repeat( 5 , 1fr );
-	grid-template-rows:		repeat( 3 , auto );
 	
-	grid-column-gap:	1em;
-	grid-row-gap:		1em;
+	margin:		5em;
+	max-width:	75em;
+	
+	display:	grid;
+	grid-template-columns:	repeat( 2 , 1fr );
+	grid-template-rows:		repeat( 4 , auto );
+	
+	grid-column-gap:	5em;
+	grid-row-gap:		5em;
+	
+	align-items:	start;
 	
 	grid-template-areas: 
-		"wellcome	wellcome	.		motto	.	."
-		"wellcome	wellcome	rocket	.		kit	."
-		".			.			rocket	.		.	doing";
+		"wellcome	wellcome"
+		"kit		motto"
+		"doing		rocket"
+		".			rocket";
 	
+}
+
+main > section {
+	position:	relative;
+	
+	padding:		3em;
+	border-radius:	3em;
+	
+	box-shadow:	0 0 1em 1em #00000022;
 }
 
 main img {
 	width:	100%;
 }
 
-
-img {
-	width: 100%;
+footer {
+	align-self:	stretch;
+	padding:	1.5em;
+	
+	background-color:	#444;
+	color:				#fff;
 }
 
+footer a:link , footer a:visited {
+	color: 				#6effe6;
+}
+
+footer a:hover {	color: #00e6cb;	}
+footer a:active {	color: #00c6af;	}
 
 address {
 	display:	flex;
@@ -75,15 +124,59 @@ address {
 
 
 
+.image {
+	padding:	0;
+	overflow:	hidden;
+
+	transition: transform 0.25s ease-in-out;
+	transform:	scale( 1.0 );
+}
+
+.image:hover {
+	transform:	scale( 1.1 );
+}
+
+.image h2 {
+	position:		absolute;
+	width:			100%;
+	bottom:			0;
+	margin-bottom:	0;
+	padding:		.5em	0;
+	
+	text-align:	center;
+	
+	color:		#fff;
+	
+	background: #000;
+	background: linear-gradient(
+		180deg, 
+		#00000000 0%, 
+		#00000088 33%, 
+		#000000aa 100%
+	);
+}
+
+
 
 
 
 #wellcome {
 	grid-area:	wellcome;
+	
+	color:				#294300;
+	background-color:	#aeff37;
 }
 
 #motto {
 	grid-area:	motto;
+	
+	color:				#00433a;
+	background-color:	#6effe6;
+}
+
+#motto cite {
+	display:	block;
+	text-align:	right;
 }
 
 #kit {
@@ -92,6 +185,9 @@ address {
 
 #doing {
 	grid-area:	doing;
+	
+	color:				#400093;
+	background-color:	#e1deff;
 }
 
 #rocket {

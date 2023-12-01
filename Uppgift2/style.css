@@ -222,7 +222,15 @@ address {
 	text-align:	center;
 	
 	color:			#fff;
-	text-shadow:	#000000 0 0 .5em;
+	/*text-shadow:	#000000 0 0 .5em;*/
+	
+	text-shadow:	
+		.1em .1em .5em #000,
+		-.1em .1em .5em #000,
+		-.1em -.1em .5em #000,
+		.1em -.1em .5em #000;
+	
+	
 	
 	background: #000;
 	background: linear-gradient(
@@ -231,6 +239,8 @@ address {
 		#00000088 33%, 
 		#000000aa 100%
 	);
+	
+	user-select:	none;
 }
 
 

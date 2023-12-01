@@ -221,7 +221,8 @@ address {
 	
 	text-align:	center;
 	
-	color:		#fff;
+	color:			#fff;
+	text-shadow:	#000000 0 0 .5em;
 	
 	background: #000;
 	background: linear-gradient(

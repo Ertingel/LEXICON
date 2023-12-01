@@ -9,7 +9,7 @@ body {
 	
 	font-family: 'Roboto', sans-serif;
 	
-	background-color:	#a3cb00;
+	background-color:	#444;
 	
 	display:	flex;
 	flex-direction:	column;
@@ -33,6 +33,26 @@ a:hover {	color: #333;	}
 a:active {	color: #666;	}
 
 
+
+#background {
+	
+	position:	fixed;
+	z-index:	-1;
+	height:		100vh;
+	width:		100vw; 
+	
+	/* License: https://commons.wikimedia.org/wiki/File:The_World_Factbook_-_Algeria_-_Flickr_-_The_Central_Intelligence_Agency_(7).jpg */
+	background-image:		url( "../Uppgift1/Background.jpeg" );
+	background-position:	center;
+	background-repeat:		no-repeat;
+	background-size:		cover;
+	
+	filter:	brightness( 50% ) blur( .25rem );
+	
+}
+
+
+
 header {
 	
 	align-self:	stretch;
@@ -51,7 +71,7 @@ header {
 	color:				#004250;
 	background-color:	#d3f5ff;
 	border-radius:		1em;
-	box-shadow:	0 0 .5em .5em #00000022;
+	box-shadow:	0 0 1em 1em #00000066;
 	
 	display:	flex;
 	flex-direction:	row;
@@ -73,7 +93,7 @@ nav {
 	flex-direction:	row;
 	
 	border-radius:		1em;
-	box-shadow:	0 0 0.5em 0.5em #00000022;
+	box-shadow:	0 0 1em 1em #00000066;
 }
 
 nav > * {
@@ -127,16 +147,17 @@ main {
 	
 	display:	grid;
 	grid-template-columns:	repeat( 2 , 1fr );
-	grid-template-rows:		repeat( 4 , auto );
+	grid-template-rows:		repeat( 5 , auto );
 	
 	grid-column-gap:	5em;
 	grid-row-gap:		5em;
 	
-	align-items:	start;
+	align-items:	center;
 	
 	grid-template-areas: 
 		"wellcome	wellcome"
 		"kit		motto"
+		"kit		rocket"
 		"doing		rocket"
 		".			rocket";
 	
@@ -148,7 +169,7 @@ main > section {
 	padding:		3em;
 	border-radius:	3em;
 	
-	box-shadow:	0 0 1em 1em #00000022;
+	box-shadow:	0 0 1em 1em #00000066;
 }
 
 main img {

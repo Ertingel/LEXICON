@@ -212,6 +212,10 @@ address {
 	transform:	scale( 1.1 );
 }
 
+.image * {
+	user-select:	none;
+}
+
 .image h2 {
 	position:		absolute;
 	width:			100%;
@@ -240,7 +244,6 @@ address {
 		#000000aa 100%
 	);
 	
-	user-select:	none;
 }
 
 

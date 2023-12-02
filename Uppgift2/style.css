@@ -1,285 +1,267 @@
-
-
 body {
-	margin:		0;
-	padding:	0;
-	
-	min-width:	100vw;
+	margin: 0;
+	padding: 0;
+
+	min-width: 100vw;
 	min-height: 100vh;
-	
-	font-family: 'Roboto', sans-serif;
-	
-	background-color:	#444;
-	
-	display:	flex;
-	flex-direction:	column;
-	align-items:	center;
+
+	font-family: "Roboto", sans-serif;
+
+	background-color: #444;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-p , b , h1 , h2 {
-	margin:	0 0 .5em 0;
+p,
+b,
+h1,
+h2 {
+	margin: 0 0 0.5em 0;
 }
 
 img {
-	display:	block;
+	display: block;
 }
 
-a:link , a:visited {
-	color: 				#000;
-	text-decoration:	none;
+a:link,
+a:visited {
+	color: #000;
+	text-decoration: none;
 }
 
-a:hover {	color: #333;	}
-a:active {	color: #666;	}
-
-
+a:hover {
+	color: #333;
+}
+a:active {
+	color: #666;
+}
 
 #background {
-	
-	position:	fixed;
-	z-index:	-1;
-	height:		100vh;
-	width:		100vw; 
-	
+	position: fixed;
+	z-index: -1;
+	height: 100vh;
+	width: 100vw;
+
 	/* License: https://commons.wikimedia.org/wiki/File:The_World_Factbook_-_Algeria_-_Flickr_-_The_Central_Intelligence_Agency_(7).jpg */
-	background-image:		url( "../Uppgift1/Background.jpeg" );
-	background-position:	center;
-	background-repeat:		no-repeat;
-	background-size:		cover;
-	
-	filter:	brightness( 50% ) blur( .25rem );
-	
+	background-image: url("../Uppgift1/Background.jpeg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	filter: brightness(50%) blur(0.25rem);
 }
 
-
-
 header {
-	
-	align-self:	stretch;
-	padding:	1.5em;
-	
-	display:	flex;
-	flex-direction:		row;
-	justify-content:	space-between;
-	align-content:		flex-end;
+	align-self: stretch;
+	padding: 1.5em;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-content: flex-end;
 }
 
 #site-logo {
-	
-	padding:	0.5em 1em;
-	
-	color:				#004250;
-	background-color:	#d3f5ff;
-	border-radius:		1em;
-	box-shadow:	0 0 1em 1em #00000066;
-	
-	display:	flex;
-	flex-direction:	row;
-	align-items:	center;
+	padding: 0.5em 1em;
+
+	color: #004250;
+	background-color: #d3f5ff;
+	border-radius: 1em;
+	box-shadow: 0 0 1em 1em #00000066;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 #site-logo > img {
-	height:	2.5em;
+	height: 2.5em;
 }
 
 #site-logo > h1 {
-	margin:			0;
-	font-size:		2rem;
-	user-select:	none;
+	margin: 0;
+	font-size: 2rem;
+	user-select: none;
 }
 
 nav {
-	display:	flex;
-	flex-direction:	row;
-	
-	border-radius:		1em;
-	box-shadow:	0 0 1em 1em #00000066;
+	display: flex;
+	flex-direction: row;
+
+	border-radius: 1em;
+	box-shadow: 0 0 1em 1em #00000066;
 }
 
 nav > * {
-	padding:	0.5em 1em;
-	
-	background-color:	#fff;
-	
-	display:	flex;
-	flex-direction:	row;
-	align-items:	center;
+	padding: 0.5em 1em;
+
+	background-color: #fff;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 nav > *:hover {
-	filter: brightness( 0.95 );
+	filter: brightness(0.95);
 }
 
 nav > *:active {
-	filter: brightness( 0.90 );
+	filter: brightness(0.9);
 }
 
 nav > *:first-child {
-	border-top-left-radius:		1em;
-	border-bottom-left-radius:	1em;
+	border-top-left-radius: 1em;
+	border-bottom-left-radius: 1em;
 }
 
 nav > *:last-child {
-	border-top-right-radius:	1em;
-	border-bottom-right-radius:	1em;
+	border-top-right-radius: 1em;
+	border-bottom-right-radius: 1em;
 }
 
-nav > *:nth-child( 1 ) {
-	color:				#6e0037;
-	background-color:	#ffdae4;
+nav > *:nth-child(1) {
+	color: #6e0037;
+	background-color: #ffdae4;
 }
 
-nav > *:nth-child( 2 ) {
-	color:				#294300;
-	background-color:	#b9ff5e;
+nav > *:nth-child(2) {
+	color: #294300;
+	background-color: #b9ff5e;
 }
 
-nav > *:nth-child( 3 ) {
-	color:				#00433a;
-	background-color:	#85ffe8;
+nav > *:nth-child(3) {
+	color: #00433a;
+	background-color: #85ffe8;
 }
-
 
 main {
-	
-	margin:		5em;
-	max-width:	75em;
-	
-	display:	grid;
-	grid-template-columns:	repeat( 2 , 1fr );
-	grid-template-rows:		repeat( 5 , auto );
-	
-	grid-column-gap:	5em;
-	grid-row-gap:		5em;
-	
-	align-items:	center;
-	
-	grid-template-areas: 
+	margin: 5em;
+	max-width: 75em;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(5, auto);
+
+	grid-column-gap: 5em;
+	grid-row-gap: 5em;
+
+	align-items: center;
+
+	grid-template-areas:
 		"wellcome	wellcome"
 		"kit		motto"
 		"kit		rocket"
 		"doing		rocket"
 		".			rocket";
-	
 }
 
 main > section {
-	position:	relative;
-	
-	padding:		3em;
-	border-radius:	3em;
-	
-	box-shadow:	0 0 1em 1em #00000066;
+	position: relative;
+
+	padding: 3em;
+	border-radius: 3em;
+
+	box-shadow: 0 0 1em 1em #00000066;
 }
 
 main img {
-	width:	100%;
+	width: 100%;
 }
 
 footer {
-	align-self:	stretch;
-	padding:	1.5em;
-	
-	background-color:	#444;
-	color:				#fff;
-	border-top: 		2px	solid	#222;
+	align-self: stretch;
+	padding: 1.5em;
+
+	background-color: #444;
+	color: #fff;
+	border-top: 2px solid #222;
 }
 
-footer a:link , footer a:visited {
-	color: 				#6effe6;
+footer a:link,
+footer a:visited {
+	color: #6effe6;
 }
 
-footer a:hover {	color: #00e6cb;	}
-footer a:active {	color: #00c6af;	}
+footer a:hover {
+	color: #00e6cb;
+}
+footer a:active {
+	color: #00c6af;
+}
 
 address {
-	display:	flex;
-	flex-direction:		row;
-	justify-content:	space-evenly;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
 }
 
-
-
 .image {
-	padding:	0;
-	overflow:	hidden;
+	padding: 0;
+	overflow: hidden;
 
 	transition: transform 0.25s ease-in-out;
-	transform:	scale( 1.0 );
+	transform: scale(1);
 }
 
 .image:hover {
-	transform:	scale( 1.1 );
+	transform: scale(1.1);
 }
 
 .image * {
-	user-select:	none;
+	user-select: none;
 }
 
 .image h2 {
-	position:		absolute;
-	width:			100%;
-	bottom:			0;
-	margin-bottom:	0;
-	padding:		.5em	0;
-	
-	text-align:	center;
-	
-	color:			#fff;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	margin-bottom: 0;
+	padding: 0.5em 0;
+
+	text-align: center;
+
+	color: #fff;
 	/*text-shadow:	#000000 0 0 .5em;*/
-	
-	text-shadow:	
-		.1em .1em .5em #000,
-		-.1em .1em .5em #000,
-		-.1em -.1em .5em #000,
-		.1em -.1em .5em #000;
-	
-	
-	
+
+	text-shadow: 0.1em 0.1em 0.5em #000, -0.1em 0.1em 0.5em #000, -0.1em -0.1em 0.5em #000, 0.1em -0.1em 0.5em #000;
+
 	background: #000;
-	background: linear-gradient(
-		180deg, 
-		#00000000 0%, 
-		#00000088 33%, 
-		#000000aa 100%
-	);
-	
+	background: linear-gradient(180deg, #00000000 0%, #00000088 33%, #000000aa 100%);
 }
 
-
-
-
-
 #wellcome {
-	grid-area:	wellcome;
-	
-	color:				#294300;
-	background-color:	#aeff37;
+	grid-area: wellcome;
+
+	color: #294300;
+	background-color: #aeff37;
 }
 
 #motto {
-	grid-area:	motto;
-	
-	color:				#00433a;
-	background-color:	#6effe6;
+	grid-area: motto;
+
+	color: #00433a;
+	background-color: #6effe6;
 }
 
 #motto cite {
-	display:	block;
-	text-align:	right;
+	display: block;
+	text-align: right;
 }
 
 #kit {
-	grid-area:	kit;
+	grid-area: kit;
 }
 
 #doing {
-	grid-area:	doing;
-	
-	color:				#400093;
-	background-color:	#e1deff;
+	grid-area: doing;
+
+	color: #400093;
+	background-color: #e1deff;
 }
 
 #rocket {
-	grid-area:	rocket;
+	grid-area: rocket;
 }

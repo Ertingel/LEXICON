@@ -3,15 +3,15 @@
 
 Detta är min repository för läxor i LEXICON. 
 
-## Homework
+## Läxor
 
- * Week 48
+ * Vecka 48
    * [**Uppgift1**](https://github.com/Ertingel/LEXICON/tree/main/Uppgift1)([Sida](https://ertingel.github.io/LEXICON/Uppgift1)): Enkel hemsida om det favoritrecept *(Blev i stället om Kit the fox)*
    * [**Uppgift2**](https://github.com/Ertingel/LEXICON/tree/main/Uppgift2)([Sida](https://ertingel.github.io/LEXICON/Uppgift2)): Ska din egen hemsida
    * **Uppgift3**: Styla dina hemsidor
    * [**Uppgift4**](https://github.com/Ertingel/LEXICON/tree/main/Uppgift4)([Sida](https://ertingel.github.io/LEXICON/Uppgift4)): Caffe Retro
    * [**Uppgift5**](https://github.com/Ertingel/LEXICON/tree/main/Uppgift5)([Sida](https://ertingel.github.io/LEXICON/Uppgift5)): Mediaspelaren
- * Week 49
+ * Vecka 49
 
 
 ## Git Setup

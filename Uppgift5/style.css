@@ -1,0 +1,114 @@
+html {
+	--display-background: #000;
+	--display-color: #ff8512;
+	--display-color-darkend: #c56810;
+	--display-border: 0.1rem;
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+}
+
+.display {
+	color: var(--display-color);
+	background-color: var(--display-background);
+	border-radius: 2rem;
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+}
+
+#play-pannel {
+	height: 1.75rem;
+	padding-inline: 1rem;
+
+	border-top: var(--display-color) solid var(--display-border);
+
+	display: grid;
+	grid-template-columns: 4rem auto 4rem;
+	grid-template-rows: auto;
+
+	align-items: center;
+
+	grid-template-areas: "play-time	play-progress	play-length";
+}
+
+#play-time {
+	grid-area: play-time;
+	text-align: center;
+
+	user-select: none;
+}
+#play-length {
+	grid-area: play-length;
+	text-align: center;
+
+	user-select: none;
+}
+
+#play-progress[type="range"] {
+	grid-area: play-progress;
+	width: 100%;
+
+	-webkit-appearance: none;
+	appearance: none;
+	background: transparent;
+
+	cursor: pointer;
+	--progress: 50%;
+}
+
+#play-progress[type="range"]::-webkit-slider-runnable-track,
+#play-progress[type="range"]::-moz-range-track {
+	height: 0.5rem;
+
+	border: var(--display-color) solid var(--display-border);
+	border-radius: 0.25rem;
+
+	background: linear-gradient(
+		to right,
+		var(--display-color) 0%,
+		var(--display-color) var(--progress),
+		var(--display-background) var(--progress),
+		var(--display-background) 100%
+	);
+}
+
+#play-progress[type="range"]::-webkit-slider-thumb,
+#play-progress[type="range"]::-moz-range-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 0.5rem;
+	height: 0.5rem;
+
+	background-color: var(--display-background);
+	border: var(--display-color) solid 0.2rem;
+}
+
+#play-progress[type="range"]:active::-webkit-slider-thumb,
+#play-progress[type="range"]:active::-moz-range-thumb {
+	border: var(--display-color-darkend) solid 0.25rem;
+}
+
+#button-pannel {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}

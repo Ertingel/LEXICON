@@ -1,0 +1,141 @@
+#playlist {
+	display: inline-block;
+
+	width: 25rem;
+	height: 15rem;
+	max-height: 15rem;
+
+	padding-right: 0.5rem;
+
+	overflow-y: scroll;
+	scrollbar-width: thin;
+	scrollbar-color: var(--display-color) var(--display-background);
+}
+
+#playlist::-webkit-scrollbar {
+	width: 0.25rem;
+}
+
+#playlist::-webkit-scrollbar-track {
+	width: 0.25rem;
+	background: var(--display-background);
+}
+
+#playlist::-webkit-scrollbar-thumb {
+	width: 0.25rem;
+	background: var(--display-color);
+	border-radius: 0.125rem;
+}
+
+#playlist::-webkit-scrollbar-thumb:hover {
+	background: var(--display-color);
+}
+
+#playlist > thead {
+	display: block;
+	width: 100%;
+
+	border-bottom: var(--display-color) solid calc(var(--display-border) * 2);
+}
+
+#playlist > thead * {
+	display: block;
+}
+
+#playlist > thead h1 {
+	width: 100%;
+	margin-block: 0.5rem;
+
+	text-align: center;
+}
+
+#playlist > tbody {
+	width: 100%;
+	margin: 0;
+
+	border-spacing: 0;
+	border-collapse: collapse;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+}
+
+#playlist > tbody tr {
+	height: 1.75rem;
+
+	border-top: var(--display-background) solid var(--display-border);
+	border-bottom: var(--display-background) solid var(--display-border);
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+#playlist > tbody th {
+	padding-inline: 0.5rem;
+}
+
+#playlist > tbody .number {
+	position: relative;
+	min-width: 1.5rem;
+
+	user-select: none;
+}
+
+#playlist > tbody .name {
+	flex-grow: 1;
+	text-align: left;
+}
+
+#playlist > tbody .length {
+	min-width: 1.5rem;
+	text-align: right;
+
+	user-select: none;
+}
+
+#playlist > tbody .index {
+	text-align: center;
+}
+
+#playlist > tbody tr .play {
+	display: none;
+}
+
+#playlist > tbody tr .pause {
+	display: none;
+}
+
+#playlist > tbody tr.playing {
+	border-top: var(--display-color) solid var(--display-border);
+	border-bottom: var(--display-color) solid var(--display-border);
+}
+
+#playlist > tbody tr.playing .index {
+	display: none;
+}
+#playlist > tbody tr.playing .name {
+	font-weight: 800;
+}
+
+#playlist > tbody tr.playing .play {
+	display: block;
+}
+
+#playlist > tbody tr:hover {
+	color: var(--display-background);
+	background-color: var(--display-color);
+
+	border-top: var(--display-color) solid var(--display-border);
+	border-bottom: var(--display-color) solid var(--display-border);
+}
+
+#playlist > tbody tr:hover .index {
+	display: none;
+}
+
+#playlist > tbody tr:hover:not(.playing) .pause {
+	display: block;
+}

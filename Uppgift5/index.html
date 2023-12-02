@@ -13,19 +13,142 @@
 		/>
 
 		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="playlist.css" />
+		<script src="script.js"></script>
 	</head>
-	<body>
+	<body onload="init()">
 		<main>
-			<div>
-				<span class="material-symbols-rounded"> play_circle </span>
-				<span class="material-symbols-rounded"> pause_circle </span>
+			<div class="display">
+				<table id="playlist" cellspacing="0">
+					<thead>
+						<tr>
+							<th><h1>Playlist 1</h1></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="number">
+								<p class="index">1</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">Lily of the Valley</th>
+							<th class="length"><time>6:36</time></th>
+						</tr>
+						<tr class="playing">
+							<th class="number">
+								<p class="index">2</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">Before Summer</th>
+							<th class="length"><time>4:01</time></th>
+						</tr>
+						<tr>
+							<th class="number">
+								<p class="index">3</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">Immutable</th>
+							<th class="length"><time>4:09</time></th>
+						</tr>
+						<tr>
+							<th class="number">
+								<p class="index">4</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">CONFRONT</th>
+							<th class="length"><time>4:08</time></th>
+						</tr>
+						<tr>
+							<th class="number">
+								<p class="index">1</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">Lily of the Valley</th>
+							<th class="length"><time>6:36</time></th>
+						</tr>
+						<tr>
+							<th class="number">
+								<p class="index">2</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">Before Summer</th>
+							<th class="length"><time>4:01</time></th>
+						</tr>
+						<tr>
+							<th class="number">
+								<p class="index">3</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">Immutable</th>
+							<th class="length"><time>4:09</time></th>
+						</tr>
+						<tr>
+							<th class="number">
+								<p class="index">4</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">CONFRONT</th>
+							<th class="length"><time>4:08</time></th>
+						</tr>
+						<tr>
+							<th class="number">
+								<p class="index">1</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">Lily of the Valley</th>
+							<th class="length"><time>6:36</time></th>
+						</tr>
+						<tr>
+							<th class="number">
+								<p class="index">2</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">Before Summer</th>
+							<th class="length"><time>4:01</time></th>
+						</tr>
+						<tr>
+							<th class="number">
+								<p class="index">3</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">Immutable</th>
+							<th class="length"><time>4:09</time></th>
+						</tr>
+						<tr>
+							<th class="number">
+								<p class="index">4</p>
+								<p class="play material-symbols-rounded">play_circle</p>
+								<p class="pause material-symbols-rounded">pause_circle</p>
+							</th>
+							<th class="name">CONFRONT</th>
+							<th class="length"><time>4:08</time></th>
+						</tr>
+					</tbody>
+				</table>
+
+				<div id="play-pannel">
+					<time id="play-time">4:08</time>
+					<input id="play-progress" type="range" value="50" min="0" max="100" oninput="on_play_progress()" />
+					<time id="play-length">4:08</time>
+				</div>
 			</div>
 
-			<nav>
-				<span class="material-symbols-rounded">fast_rewind</span>
-				<span class="material-symbols-rounded">pause</span>
-				<span class="material-symbols-rounded">play_arrow</span>
-				<span class="material-symbols-rounded">fast_forward</span>
+			<nav id="button-pannel">
+				<button id="pause"><span class="material-symbols-rounded">pause</span></button>
+				<button id="play"><span class="material-symbols-rounded">play_arrow</span></button>
+				<button id="fast-rewind"><span class="material-symbols-rounded">fast_rewind</span></button>
+				<button id="fast-forward"><span class="material-symbols-rounded">fast_forward</span></button>
 			</nav>
 		</main>
 	</body>

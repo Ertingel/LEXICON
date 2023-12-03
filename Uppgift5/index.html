@@ -20,9 +20,12 @@
 
 		<link rel="stylesheet" href="style.css" />
 		<link rel="stylesheet" href="playlist.css" />
+		<link rel="stylesheet" href="play_pannel.css" />
 		<script src="script.js"></script>
 	</head>
 	<body onload="init()">
+		<div id="background"></div>
+
 		<main id="player">
 			<div class="display">
 				<ol id="playlist">
@@ -66,7 +69,7 @@
 
 					<li>
 						<p class="number">
-							<span class="index">1</span><span class="play material-symbols-rounded">play_circle</span
+							<span class="index">5</span><span class="play material-symbols-rounded">play_circle</span
 							><span class="pause material-symbols-rounded">pause_circle</span>
 						</p>
 						<p class="name">Lily of the Valley</p>
@@ -75,7 +78,7 @@
 
 					<li>
 						<p class="number">
-							<span class="index">2</span><span class="play material-symbols-rounded">play_circle</span
+							<span class="index">6</span><span class="play material-symbols-rounded">play_circle</span
 							><span class="pause material-symbols-rounded">pause_circle</span>
 						</p>
 						<p class="name">Before Summer</p>
@@ -84,7 +87,7 @@
 
 					<li>
 						<p class="number">
-							<span class="index">3</span><span class="play material-symbols-rounded">play_circle</span
+							<span class="index">7</span><span class="play material-symbols-rounded">play_circle</span
 							><span class="pause material-symbols-rounded">pause_circle</span>
 						</p>
 						<p class="name">Immutable</p>
@@ -93,7 +96,7 @@
 
 					<li>
 						<p class="number">
-							<span class="index">4</span><span class="play material-symbols-rounded">play_circle</span
+							<span class="index">8</span><span class="play material-symbols-rounded">play_circle</span
 							><span class="pause material-symbols-rounded">pause_circle</span>
 						</p>
 						<p class="name">CONFRONT</p>
@@ -102,7 +105,7 @@
 
 					<li>
 						<p class="number">
-							<span class="index">1</span><span class="play material-symbols-rounded">play_circle</span
+							<span class="index">9</span><span class="play material-symbols-rounded">play_circle</span
 							><span class="pause material-symbols-rounded">pause_circle</span>
 						</p>
 						<p class="name">Lily of the Valley</p>
@@ -111,7 +114,7 @@
 
 					<li>
 						<p class="number">
-							<span class="index">2</span><span class="play material-symbols-rounded">play_circle</span
+							<span class="index">10</span><span class="play material-symbols-rounded">play_circle</span
 							><span class="pause material-symbols-rounded">pause_circle</span>
 						</p>
 						<p class="name">Before Summer</p>
@@ -120,7 +123,7 @@
 
 					<li>
 						<p class="number">
-							<span class="index">3</span><span class="play material-symbols-rounded">play_circle</span
+							<span class="index">11</span><span class="play material-symbols-rounded">play_circle</span
 							><span class="pause material-symbols-rounded">pause_circle</span>
 						</p>
 						<p class="name">Immutable</p>
@@ -129,7 +132,7 @@
 
 					<li>
 						<p class="number">
-							<span class="index">4</span><span class="play material-symbols-rounded">play_circle</span
+							<span class="index">12</span><span class="play material-symbols-rounded">play_circle</span
 							><span class="pause material-symbols-rounded">pause_circle</span>
 						</p>
 						<p class="name">CONFRONT</p>
@@ -137,19 +140,21 @@
 					</li>
 				</ol>
 
-				<div id="play-pannel">
+				<nav id="play-pannel">
 					<time id="play-time">0</time>
 					<input id="play-progress" type="range" value="50" min="0" max="241" oninput="on_play_progress()" />
 					<time id="play-length">4:01</time>
-				</div>
-			</div>
 
-			<nav id="button-pannel">
-				<button id="repeat"><span class="material-symbols-rounded">repeat</span></button>
-				<button id="fast-rewind"><span class="material-symbols-rounded">fast_rewind</span></button>
-				<button id="play-pause"><span class="material-symbols-rounded">play_pause</span></button>
-				<button id="fast-forward"><span class="material-symbols-rounded">fast_forward</span></button>
-			</nav>
+					<button id="shuffle" class="material-symbols-rounded" onclick="on_shuffle()">shuffle</button>
+					<button id="rewind" class="material-symbols-rounded">fast_rewind</button>
+					<button id="play-pause" onclick="on_play_pause()">
+						<span class="play material-symbols-rounded">play_arrow</span>
+						<span class="pause material-symbols-rounded">pause</span>
+					</button>
+					<button id="forward" class="material-symbols-rounded">fast_forward</button>
+					<button id="repeat" class="material-symbols-rounded" onclick="on_repeat()">repeat</button>
+				</nav>
+			</div>
 		</main>
 	</body>
 </html>

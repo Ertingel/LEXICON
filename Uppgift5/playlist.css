@@ -7,6 +7,7 @@
 	padding-right: 0.4rem;
 
 	overflow-y: scroll;
+	scroll-behavior: smooth;
 	scrollbar-width: thin;
 	scrollbar-color: var(--display-color) var(--display-background);
 }
@@ -119,11 +120,16 @@
 #playlist li#playing .index {
 	display: none;
 }
+
 #playlist li#playing .name {
 	font-weight: 1000;
 }
 
-#playlist li#playing .number .play {
+main.playing #playlist li#playing .number .play {
+	display: block;
+}
+
+main:not(.playing) #playlist li#playing .number .pause {
 	display: block;
 }
 

@@ -30,128 +30,22 @@
 			<div class="display">
 				<ol id="playlist">
 					<h1>Playlist 1</h1>
-
-					<li>
-						<p class="number">
-							<span class="index">1</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">Lily of the Valley</p>
-						<time class="length">6:36</time>
-					</li>
-
-					<li id="playing">
-						<p class="number">
-							<span class="index">2</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">Before Summer</p>
-						<time class="length">4:01</time>
-					</li>
-
-					<li>
-						<p class="number">
-							<span class="index">3</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">Immutable</p>
-						<time class="length">4:09</time>
-					</li>
-
-					<li>
-						<p class="number">
-							<span class="index">4</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">CONFRONT</p>
-						<time class="length">4:08</time>
-					</li>
-
-					<li>
-						<p class="number">
-							<span class="index">5</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">Lily of the Valley</p>
-						<time class="length">6:36</time>
-					</li>
-
-					<li>
-						<p class="number">
-							<span class="index">6</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">Before Summer</p>
-						<time class="length">4:01</time>
-					</li>
-
-					<li>
-						<p class="number">
-							<span class="index">7</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">Immutable</p>
-						<time class="length">4:09</time>
-					</li>
-
-					<li>
-						<p class="number">
-							<span class="index">8</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">CONFRONT</p>
-						<time class="length">4:08</time>
-					</li>
-
-					<li>
-						<p class="number">
-							<span class="index">9</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">Lily of the Valley</p>
-						<time class="length">6:36</time>
-					</li>
-
-					<li>
-						<p class="number">
-							<span class="index">10</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">Before Summer</p>
-						<time class="length">4:01</time>
-					</li>
-
-					<li>
-						<p class="number">
-							<span class="index">11</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">Immutable</p>
-						<time class="length">4:09</time>
-					</li>
-
-					<li>
-						<p class="number">
-							<span class="index">12</span><span class="play material-symbols-rounded">play_circle</span
-							><span class="pause material-symbols-rounded">pause_circle</span>
-						</p>
-						<p class="name">CONFRONT</p>
-						<time class="length">4:08</time>
-					</li>
 				</ol>
 
 				<nav id="play-pannel">
 					<time id="play-time">0</time>
-					<input id="play-progress" type="range" value="50" min="0" max="241" oninput="on_play_progress()" />
-					<time id="play-length">4:01</time>
+					<input id="play-progress" type="range" value="0" min="0" max="0" oninput="on_play_progress()" />
+					<time id="play-length">0</time>
 
 					<button id="shuffle" class="material-symbols-rounded" onclick="on_shuffle()">shuffle</button>
-					<button id="rewind" class="material-symbols-rounded">fast_rewind</button>
+					<button id="rewind" class="material-symbols-rounded" onclick="on_fast_rewind()">fast_rewind</button>
 					<button id="play-pause" onclick="on_play_pause()">
 						<span class="play material-symbols-rounded">play_arrow</span>
 						<span class="pause material-symbols-rounded">pause</span>
 					</button>
-					<button id="forward" class="material-symbols-rounded">fast_forward</button>
+					<button id="forward" class="material-symbols-rounded" onclick="on_fast_forward()">
+						fast_forward
+					</button>
 					<button id="repeat" class="material-symbols-rounded" onclick="on_repeat()">repeat</button>
 				</nav>
 			</div>

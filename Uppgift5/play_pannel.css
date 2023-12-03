@@ -117,11 +117,16 @@ input#play-progress[type="range"]::-moz-range-thumb {
 	grid-area: play-pause;
 }
 
-#play-pause:not(.active) .play {
+main.playing #play-pause {
+	color: var(--display-background);
+	background-color: var(--display-color);
+}
+
+main:not(.playing) #play-pause .play {
 	display: none;
 }
 
-#play-pause.active .pause {
+main.playing #play-pause .pause {
 	display: none;
 }
 

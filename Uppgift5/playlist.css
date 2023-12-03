@@ -1,15 +1,21 @@
 #playlist {
-	display: inline-block;
+	display: flex;
+	flex-direction: column;
 
 	width: 25rem;
 	height: 15rem;
 	max-height: 15rem;
-
-	padding-right: 0.5rem;
+	margin: 0;
+	padding: 0;
+	padding-right: 0.4rem;
 
 	overflow-y: scroll;
 	scrollbar-width: thin;
 	scrollbar-color: var(--display-color) var(--display-background);
+}
+
+#playlist * {
+	user-select: none;
 }
 
 #playlist::-webkit-scrollbar {
@@ -31,111 +37,213 @@
 	background: var(--display-color);
 }
 
-#playlist > thead {
-	display: block;
+#playlist h1 {
 	width: 100%;
 
-	border-bottom: var(--display-color) solid calc(var(--display-border) * 2);
-}
+	margin: 0 0 0.25rem 0;
+	padding: 0 0 0.25rem 0;
 
-#playlist > thead * {
-	display: block;
-}
-
-#playlist > thead h1 {
-	width: 100%;
-	margin-block: 0.5rem;
-
+	font-weight: 400;
 	text-align: center;
+
+	border-bottom: var(--display-color) solid var(--display-border);
 }
 
-#playlist > tbody {
-	width: 100%;
-	margin: 0;
-
-	border-spacing: 0;
-	border-collapse: collapse;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: stretch;
-}
-
-#playlist > tbody tr {
+#playlist li {
 	height: 1.75rem;
+	min-height: 1.75rem;
+	margin: 0.1rem 0.5rem;
+	padding: 0.2rem;
 
-	border-top: var(--display-background) solid var(--display-border);
-	border-bottom: var(--display-background) solid var(--display-border);
+	border: var(--display-background) solid var(--display-border);
+	border-radius: 0.5rem;
 
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+
+	cursor: pointer;
 }
 
-#playlist > tbody th {
-	padding-inline: 0.5rem;
+#playlist li * {
+	margin: 0;
+	padding: 0;
 }
 
-#playlist > tbody .number {
-	position: relative;
+#playlist li .number {
 	min-width: 1.5rem;
-
-	user-select: none;
-}
-
-#playlist > tbody .name {
-	flex-grow: 1;
-	text-align: left;
-}
-
-#playlist > tbody .length {
-	min-width: 1.5rem;
-	text-align: right;
-
-	user-select: none;
-}
-
-#playlist > tbody .index {
 	text-align: center;
 }
 
-#playlist > tbody tr .play {
+#playlist li .name {
+	flex-grow: 1;
+	margin-inline: 0.25rem;
+	text-align: left;
+}
+
+#playlist li .length {
+	min-width: 1.5rem;
+	margin-right: 0.25rem;
+	text-align: right;
+}
+
+#playlist li .number .play {
 	display: none;
 }
 
-#playlist > tbody tr .pause {
+#playlist li .number .pause {
 	display: none;
 }
 
-#playlist > tbody tr.playing {
-	border-top: var(--display-color) solid var(--display-border);
-	border-bottom: var(--display-color) solid var(--display-border);
+#playlist li:hover {
+	border-color: var(--display-color);
 }
 
-#playlist > tbody tr.playing .index {
+#playlist li:hover .index {
 	display: none;
 }
-#playlist > tbody tr.playing .name {
-	font-weight: 800;
-}
 
-#playlist > tbody tr.playing .play {
-	display: block;
-}
-
-#playlist > tbody tr:hover {
+#playlist li#playing {
 	color: var(--display-background);
 	background-color: var(--display-color);
-
-	border-top: var(--display-color) solid var(--display-border);
-	border-bottom: var(--display-color) solid var(--display-border);
 }
 
-#playlist > tbody tr:hover .index {
+#playlist li#playing .index {
+	display: none;
+}
+#playlist li#playing .name {
+	font-weight: 1000;
+}
+
+#playlist li#playing .number .play {
+	display: block;
+}
+
+#playlist li:hover:not(#playing) .number .pause {
+	display: block;
+}
+
+#playlist li#playing:hover .number .play {
 	display: none;
 }
 
-#playlist > tbody tr:hover:not(.playing) .pause {
+#playlist li#playing:hover .number .pause {
 	display: block;
+}
+
+#play-pannel {
+	height: 1.75rem;
+	padding-inline: 1rem;
+
+	border-top: var(--display-color) solid var(--display-border);
+
+	display: grid;
+	grid-template-columns: 4rem auto 4rem;
+	grid-template-rows: auto;
+
+	align-items: center;
+
+	grid-template-areas: "play-time	play-progress	play-length";
+}
+
+#play-time {
+	grid-area: play-time;
+	text-align: center;
+
+	user-select: none;
+}
+#play-length {
+	grid-area: play-length;
+	text-align: center;
+
+	user-select: none;
+}
+
+/* https://range-input-css.netlify.app/ */
+/*********** Baseline, reset styles ***********/
+input#play-progress[type="range"] {
+	-webkit-appearance: none;
+	appearance: none;
+	background: transparent;
+	cursor: pointer;
+	width: 100%;
+}
+
+/* Removes default focus */
+input#play-progress[type="range"]:focus {
+	outline: none;
+}
+
+/******** Chrome, Safari, Opera and Edge Chromium styles ********/
+/* slider track */
+input#play-progress[type="range"]::-webkit-slider-runnable-track {
+	background-color: var(--display-background);
+	border-radius: 0.5rem;
+	height: 0.5rem;
+
+	border: var(--display-color) solid var(--display-border);
+
+	background: linear-gradient(
+		to right,
+		var(--display-color) 0%,
+		var(--display-color) var(--progress),
+		var(--display-background) var(--progress),
+		var(--display-background) 100%
+	);
+}
+
+/* slider thumb */
+input#play-progress[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none; /* Override default look */
+	appearance: none;
+	margin-top: -0.35rem; /* Centers thumb on the track */
+	background-color: var(--display-background);
+	border-radius: 0.5rem;
+	height: 1rem;
+	width: 1rem;
+
+	border: var(--display-color) solid 0.25rem;
+}
+
+input#play-progress[type="range"]:focus::-webkit-slider-thumb {
+	/*
+	outline: 3px solid var(--display-color);
+	outline-offset: 0.125rem;
+	*/
+}
+
+/*********** Firefox styles ***********/
+/* slider track */
+input#play-progress[type="range"]::-moz-range-track {
+	background-color: var(--display-background);
+	border-radius: 0.25rem;
+	height: 0.25rem;
+
+	border: var(--display-color) solid var(--display-border);
+
+	background: linear-gradient(
+		to right,
+		var(--display-color) 0%,
+		var(--display-color) var(--progress),
+		var(--display-background) var(--progress),
+		var(--display-background) 100%
+	);
+}
+
+/* slider thumb */
+input#play-progress[type="range"]::-moz-range-thumb {
+	background-color: var(--display-background);
+	border: none; /*Removes extra border that FF applies*/
+	border-radius: 1rem;
+	height: 0.5rem;
+	width: 0.5rem;
+
+	border: var(--display-color) solid 0.25rem;
+}
+
+input#play-progress[type="range"]:focus::-moz-range-thumb {
+	/*
+	outline: 3px solid var(--display-color);
+	outline-offset: 0.125rem;
+	*/
 }

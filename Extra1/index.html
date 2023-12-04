@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Extra 1</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@300;400;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@40,700,1,200"
+		/>
+
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="playlist.css" />
+		<link rel="stylesheet" href="play_pannel.css" />
+		<script src="script.js"></script>
+	</head>
+	<body onload="init()">
+		<div id="background"></div>
+
+		<main id="player">
+			<div class="display">
+				<ol id="playlist">
+					<h1>Playlist 1</h1>
+				</ol>
+
+				<nav id="play-pannel">
+					<time id="play-time">0</time>
+					<input id="play-progress" type="range" value="0" min="0" max="0" oninput="on_play_progress()" />
+					<time id="play-length">0</time>
+
+					<button id="shuffle" class="material-symbols-rounded" onclick="on_shuffle()">shuffle</button>
+					<button id="rewind" class="material-symbols-rounded" onclick="on_fast_rewind()">fast_rewind</button>
+					<button id="play-pause" onclick="on_play_pause()">
+						<span class="play material-symbols-rounded">play_arrow</span>
+						<span class="pause material-symbols-rounded">pause</span>
+					</button>
+					<button id="forward" class="material-symbols-rounded" onclick="on_fast_forward()">
+						fast_forward
+					</button>
+					<button id="repeat" class="material-symbols-rounded" onclick="on_repeat()">repeat</button>
+				</nav>
+			</div>
+		</main>
+	</body>
+</html>

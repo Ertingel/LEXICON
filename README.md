@@ -9,8 +9,9 @@ Detta är min repository för läxor i LEXICON.
     -   [**Uppgift2**](https://ertingel.github.io/LEXICON/Uppgift2): Ska din egen hemsida
     -   **Uppgift3**: Styla dina hemsidor
     -   [**Uppgift4**](https://ertingel.github.io/LEXICON/Uppgift4): Caffe Retro
-    -   [**Uppgift5**](https://ertingel.github.io/LEXICON/Uppgift5): Mediaspelaren
+    -   [**Extra1**](https://ertingel.github.io/LEXICON/Extra1): (Mediaspelaren) Missade instruktionerna.
 -   Vecka 49
+    -   [**Uppgift5**](https://ertingel.github.io/LEXICON/Uppgift5): Mediaspelaren
 
 ## Git Setup
 

@@ -46,6 +46,11 @@ p {
 	padding: 0.25rem;
 }
 
+small {
+	font-size: 0.85em;
+	font-weight: lighter !important;
+}
+
 body {
 	position: relative;
 
@@ -61,6 +66,7 @@ body {
 	justify-content: center;
 	align-items: center;
 
+	font-family: "Montserrat", sans-serif;
 	text-align: center;
 }
 
@@ -82,6 +88,7 @@ body {
 
 #player > * {
 	box-shadow: #0008 0 0 0.5rem;
+	border-radius: 0.25rem;
 }
 
 #player > header {

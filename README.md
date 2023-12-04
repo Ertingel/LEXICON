@@ -12,6 +12,7 @@ Detta är min repository för läxor i LEXICON.
     -   [**Extra1**](https://ertingel.github.io/LEXICON/Extra1): Mediaspelaren _(Missade några instruktioner)_
 -   Vecka 49
     -   [**Uppgift5**](https://ertingel.github.io/LEXICON/Uppgift5): Mediaspelaren
+    -   [**Uppgift6**](https://ertingel.github.io/LEXICON/Uppgift6): Poster shop
 
 ## Git Setup
 

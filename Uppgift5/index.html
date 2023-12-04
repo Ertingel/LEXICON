@@ -5,7 +5,57 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Mediaspelaren</title>
 
-		<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="timeline.css" />
 	</head>
-	<body></body>
+	<body>
+		<div id="player">
+			<header>
+				<button class="material-icons active">arrow_back_ios</button>
+				<p>Playlist - Moody</p>
+				<button class="material-icons active">more_vert</button>
+			</header>
+
+			<aside>
+				<ol>
+					<li>
+						<img src="" />
+						<p><b>A Rocket to the moon</b><br />Like we used to</p>
+						<p class="material-icons">play_circle</p>
+					</li>
+				</ol>
+			</aside>
+			<main>
+				<img src="" />
+
+				<nav>
+					<p class="material-icons active">add_circle_outline</p>
+					<p><b>A Rocket to the moon</b><br />Like we used to</p>
+					<p class="material-icons">favorite</p>
+				</nav>
+
+				<nav>
+					<p>0:40</p>
+					<input
+						id="play-progress"
+						type="range"
+						value="40"
+						min="0"
+						max="222"
+						oninput="this.style.setProperty('--progress', `${(this.value / this.max) * 100}%`)"
+					/>
+					<p>3:42</p>
+				</nav>
+
+				<nav>
+					<button class="material-icons active">repeat</button>
+					<button class="material-icons active">fast_rewind</button>
+					<button class="material-icons active">play_circle</button>
+					<button class="material-icons active">fast_forward</button>
+					<button class="material-icons">shuffle</button>
+				</nav>
+			</main>
+		</div>
+	</body>
 </html>

@@ -3,9 +3,10 @@
 
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	grid-template-rows: auto;
+	grid-template-rows: auto auto;
 
-	align-items: center;
+	justify-items: stretch;
+	align-items: stretch;
 
 	grid-template-areas:
 		"play-time	play-progress	play-progress	play-progress	play-progress	play-progress	play-length"

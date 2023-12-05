@@ -111,6 +111,20 @@ body {
 	justify-content: flex-start;
 
 	overflow-y: scroll;
+	scrollbar-color: #fefefe #17263e;
+	scrollbar-width: thin;
+}
+
+#player > aside::-webkit-scrollbar {
+	width: 0.25rem;
+}
+
+#player > aside::-webkit-scrollbar-thumb {
+	background: #fefefe;
+}
+
+#player > aside::-webkit-scrollbar-track {
+	background: #17263e;
 }
 
 #player > aside > ol {

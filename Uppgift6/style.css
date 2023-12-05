@@ -22,6 +22,8 @@ h3 {
 }
 
 table {
+	margin-block: 5rem;
+
 	text-align: left;
 
 	border-collapse: collapse;
@@ -102,10 +104,18 @@ main {
 	flex-flow: column nowrap;
 	align-items: center;
 
-	gap: 2rem;
-
 	color: #ffffff;
 	background-color: #000000;
+}
+
+main > div {
+	width: 70rem;
+
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: stretch;
+
+	gap: 2rem;
 }
 
 main img {
@@ -124,7 +134,7 @@ main p {
 
 main a {
 	padding: 0.5rem 1rem;
-	border-radius: 0.5rem;
+	border-radius: 0.4rem;
 
 	color: #ffffff;
 	background-color: #e83f57;
@@ -135,10 +145,13 @@ main a {
 	cursor: pointer;
 }
 
-main > h2,
-main > div,
-main > table {
-	width: 70rem;
+main a * {
+	margin: 0;
+	padding: 0;
+}
+
+main > div > a {
+	align-self: flex-end;
 }
 
 #galery {
@@ -190,6 +203,7 @@ main > table {
 	margin-bottom: 5rem;
 }
 
+main > div > a,
 #services > article > a {
 	padding: 1rem 2rem;
 }
@@ -227,4 +241,8 @@ footer > * {
 
 footer #social-media {
 	flex-direction: row;
+}
+
+footer #social-media > * {
+	margin: 0.25rem;
 }

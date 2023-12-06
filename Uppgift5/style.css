@@ -196,6 +196,8 @@ body {
 #player > main > img {
 	width: calc(100% - 2rem);
 	margin: 1rem;
+	border-radius: 1rem;
+	box-shadow: 0 0 0.5rem #000c;
 }
 
 #player > main button {

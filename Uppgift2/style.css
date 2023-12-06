@@ -194,7 +194,7 @@ footer a:active {
 
 address {
 	display: flex;
-	flex-direction: row;
+	flex-flow: row wrap;
 	justify-content: space-evenly;
 }
 
@@ -264,4 +264,24 @@ address {
 
 #rocket {
 	grid-area: rocket;
+}
+
+@media screen and (max-width: 125vmin) {
+	html {
+		font-size: 2.75vmin;
+	}
+
+	main {
+		width: 30em;
+
+		grid-template-columns: repeat(1, 1fr);
+		grid-template-rows: repeat(5, auto);
+
+		grid-template-areas:
+			"wellcome"
+			"kit"
+			"motto"
+			"rocket"
+			"doing";
+	}
 }

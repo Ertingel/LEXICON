@@ -138,3 +138,25 @@ img {
 	margin-bottom: 0.5em;
 	border-radius: 2em;
 }
+
+@media screen and (max-width: 125vmin) {
+	html {
+		font-size: 3vmin;
+	}
+
+	#container {
+		width: 30em;
+	}
+
+	#container > main {
+		grid-template-columns: repeat(1, 1fr);
+		grid-template-rows: repeat(5, auto);
+
+		grid-template-areas:
+			"title"
+			"likes"
+			"dislikes"
+			"frens"
+			"befriening";
+	}
+}

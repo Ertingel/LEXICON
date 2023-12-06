@@ -168,6 +168,8 @@ body {
 
 #player > aside > ol > li > button > img {
 	height: 100%;
+	border-radius: 0.25rem;
+	box-shadow: 0 0 0.5rem #000c;
 }
 
 #player > aside > ol > li > button > p {

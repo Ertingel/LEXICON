@@ -239,9 +239,9 @@ body {
 	font-size: 3rem;
 }
 
-@media screen and (max-width: 120vmin) {
+@media screen and (max-width: 41rem) {
 	html {
-		font-size: 4.5vmin;
+		font-size: calc(100vmin / 22);
 	}
 
 	#player {

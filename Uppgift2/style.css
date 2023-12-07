@@ -38,6 +38,10 @@ a:active {
 	color: #666;
 }
 
+blockquote {
+	margin: 1rem 1rem 1rem 2rem;
+}
+
 #background {
 	position: fixed;
 	z-index: -1;
@@ -266,7 +270,7 @@ address {
 	grid-area: rocket;
 }
 
-@media screen and (max-width: 125vmin) {
+@media screen and (max-width: 70rem) {
 	html {
 		font-size: 2.75vmin;
 	}

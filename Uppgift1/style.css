@@ -44,7 +44,7 @@ img {
 
 #container {
 	width: 50em;
-	margin: 10em;
+	margin: 10em 1rem;
 
 	border-radius: 3em;
 	box-shadow: 0 0 1.5em 1.5em #00000088;
@@ -139,11 +139,7 @@ img {
 	border-radius: 2em;
 }
 
-@media screen and (max-width: 125vmin) {
-	html {
-		font-size: 3vmin;
-	}
-
+@media screen and (max-width: 52em) {
 	#container {
 		width: 30em;
 	}
@@ -158,5 +154,11 @@ img {
 			"dislikes"
 			"frens"
 			"befriening";
+	}
+}
+
+@media screen and (max-width: 32em) {
+	html {
+		font-size: calc(100vmin / 32);
 	}
 }

@@ -21,11 +21,12 @@ h3 {
 	margin-block: 1rem;
 }
 
+a * {
+	margin: 0;
+	padding: 0;
+}
+
 table {
-	width: 100%;
-
-	margin-block: 4rem 8rem;
-
 	text-align: left;
 
 	border-collapse: collapse;
@@ -102,9 +103,14 @@ header > img {
 main {
 	padding: 10rem 0.5rem;
 
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: center;
+	display: grid;
+	grid-auto-rows: auto;
+	grid-template-columns: [col-start] 10rem 10rem [one-thirds] 10rem [col-half] 10rem [two-thirds] 10rem 10rem [col-end];
+
+	justify-content: center;
+	place-items: stretch / stretch;
+
+	gap: 10rem 1.5rem;
 
 	color: #ffffff;
 	background-color: #000000;
@@ -137,41 +143,40 @@ main a {
 	cursor: pointer;
 }
 
-main a * {
-	margin: 0;
-	padding: 0;
-}
-
-#galery {
-	width: 60rem;
-
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: center;
-	align-content: center;
-
-	gap: 10rem 1.5rem;
-}
-
-#galery > a {
+main > a {
+	grid-column: col-start / col-end;
 	margin-left: auto;
 }
 
-#galery > h2 {
+main > h2 {
+	grid-column: col-start / col-end;
 	width: 100%;
 }
 
-#galery > article {
-	width: calc((100% - 3rem) / 3);
+main > table {
+	grid-column: col-start / col-end;
+}
 
+main > article {
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: flex-start;
 }
 
-#galery > article:nth-last-of-type(1),
-#galery > article:nth-last-of-type(2) {
-	width: calc((100% - 5.5rem) / 2);
+main > article:nth-child(3n + 1) {
+	grid-column: col-start / one-thirds;
+}
+
+main > article:nth-child(3n + 2) {
+	grid-column: one-thirds / two-thirds;
+}
+
+main > article:nth-child(3n + 3) {
+	grid-column: two-thirds / col-end;
+}
+
+main > article:nth-last-of-type(1),
+main > article:nth-last-of-type(2) {
 	padding: 1rem;
 
 	color: #222222;
@@ -182,21 +187,29 @@ main a * {
 	align-items: flex-start;
 }
 
-#galery > article:nth-last-of-type(1) > img,
-#galery > article:nth-last-of-type(2) > img {
+main > article:nth-last-of-type(2) {
+	grid-column: col-start / col-half;
+}
+
+main > article:nth-last-of-type(1) {
+	grid-column: col-half / col-end;
+}
+
+main > article:nth-last-of-type(1) > img,
+main > article:nth-last-of-type(2) > img {
 	width: calc(100% + 2rem);
 	margin: -1rem;
 	margin-bottom: 1rem;
 }
 
-#galery > article:nth-last-of-type(1) > p,
-#galery > article:nth-last-of-type(2) > p {
+main > article:nth-last-of-type(1) > p,
+main > article:nth-last-of-type(2) > p {
 	margin-bottom: 5rem;
 }
 
-#galery > a,
-#galery > article:nth-last-of-type(1) > a,
-#galery > article:nth-last-of-type(2) > a {
+main > a,
+main > article:nth-last-of-type(1) > a,
+main > article:nth-last-of-type(2) > a {
 	padding: 1rem 2rem;
 }
 

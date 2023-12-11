@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&family=Frank+Ruhl+Libre:wght@300;400;700&display=swap");
+
+/*
+
+    #F17949
+    #FAB131
+    #C7DDEA
+    #A9A19E
+
+*/
+
+html {
+	font-size: 16px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	color: #000;
+	font-family: "Fira Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Frank Ruhl Libre", serif;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+}
+
+h2 {
+	color: #fff;
+}
+
+img {
+	display: block;
+	width: 100%;
+}
+
+body > header {
+	background-color: #c7ddea;
+
+	display: grid;
+	grid:
+		"article aside" auto
+		"nav nav" auto
+		/ 1fr 1fr;
+}
+
+body > header > article {
+	grid-area: article;
+}
+
+body > header > aside {
+	grid-area: aside;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+body > header > aside > * {
+	flex-grow: 1;
+}
+
+body > header > nav {
+	grid-area: nav;
+}
+
+.red-back {
+	background-color: #f17949;
+}
+
+.yellow-back {
+	background-color: #fab131;
+}
+
+.cyan-back {
+	background-color: #c7ddea;
+}
+
+.cyan-back {
+	color: #000;
+}
+
+.gray-back {
+	background-color: #a9a19e;
+}
+
+.light-gray-back {
+	background-color: #ebebeb;
+}
+
+#plans {
+	display: flex;
+	flex-flow: row nowrap;
+}

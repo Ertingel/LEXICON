@@ -14,3 +14,5 @@ Detta är min repository för läxor i LEXICON.
     -   [**Uppgift5**](https://ertingel.github.io/LEXICON/Uppgift5): Mediaspelaren
     -   [**Uppgift6-1**](https://ertingel.github.io/LEXICON/Uppgift6-1): Poster shop _(Med flexbox)_
     -   [**Uppgift6-2**](https://ertingel.github.io/LEXICON/Uppgift6-2): Poster shop _(Med grid)_
+-   Vecka 50
+    -   [**Uppgift7**](https://ertingel.github.io/LEXICON/Uppgift7): Insurance Project

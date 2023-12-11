@@ -1,16 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&family=Frank+Ruhl+Libre:wght@300;400;700&display=swap");
 
-/*
-
-    #F17949
-    #FAB131
-    #C7DDEA
-    #A9A19E
-
-*/
-
 html {
-	font-size: 16px;
+	font-size: 20px;
 }
 
 * {
@@ -28,8 +19,33 @@ h2,
 h3,
 h4,
 h5,
+h6,
+p,
+b,
+i {
+	padding-block: 0.1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
+	color: #fff;
 	font-family: "Frank Ruhl Libre", serif;
+}
+
+h1 {
+	font-size: 3rem;
+}
+
+h2 {
+	font-size: 2rem;
+}
+
+h3 {
+	font-size: 1.5rem;
 }
 
 a {
@@ -37,18 +53,24 @@ a {
 	text-decoration: none;
 }
 
-h2 {
-	color: #fff;
-}
-
 img {
 	display: block;
 	width: 100%;
 }
 
-body > header {
-	background-color: #c7ddea;
+button {
+	padding: 1em 5em;
 
+	color: #000;
+	background-color: #fff;
+	box-shadow: 0 0.25em #98918e;
+
+	border: none;
+	border-radius: 3em;
+}
+
+/* ---------- document spesific stylings ---------- */
+body > header {
 	display: grid;
 	grid:
 		"article aside" auto
@@ -73,8 +95,33 @@ body > header > aside > * {
 	flex-grow: 1;
 }
 
-body > header > nav {
-	grid-area: nav;
+footer {
+	padding-bottom: 20rem;
+	background-color: #777574;
+}
+
+footer > nav {
+	padding: 1rem;
+	background-color: #a9a19e;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+/* ---------- class spesific stylings ---------- */
+.centered {
+	padding: 5rem;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.centered > * {
+	max-width: 40rem;
 }
 
 .red-back {
@@ -89,8 +136,17 @@ body > header > nav {
 	background-color: #c7ddea;
 }
 
-.cyan-back {
+.cyan-back h1,
+.cyan-back h2,
+.cyan-back h3,
+.cyan-back h4,
+.cyan-back h5,
+.cyan-back h6 {
 	color: #000;
+}
+
+.cyan-back b {
+	color: #fff;
 }
 
 .gray-back {
@@ -101,7 +157,84 @@ body > header > nav {
 	background-color: #ebebeb;
 }
 
-#plans {
+/* ---------- id spesific stylings ---------- */
+#nav {
+	grid-area: nav;
+
+	padding-inline: 5rem;
+
+	color: #8d8d8d;
+	background-color: #ebebeb;
+
 	display: flex;
 	flex-flow: row nowrap;
+	justify-content: space-around;
+	align-content: stretch;
+}
+
+#nav > * {
+	margin: 1rem;
+	padding: 1rem;
+}
+
+#nav b {
+	color: #000;
+}
+
+#plans {
+	background: linear-gradient(0deg, #fab131 0%, #fab131 50%, #a9a19e 50%, #a9a19e 100%);
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+
+	gap: 2rem;
+}
+
+#plans > * {
+	width: 15rem;
+	height: 25rem;
+
+	background-color: #fff;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#process ol {
+	counter-reset: count 0;
+
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-rows: calc(100vw / 3);
+}
+
+#process ol > * {
+	position: relative;
+
+	padding: 2rem;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#process ol > li {
+	counter-increment: count 1;
+}
+
+#process ol > li::after {
+	content: "0" counter(count, decimal);
+
+	position: absolute;
+	top: 2rem;
+	left: 2rem;
+
+	color: #0008;
+
+	font-size: 3rem;
+	font-family: "Frank Ruhl Libre", serif;
 }

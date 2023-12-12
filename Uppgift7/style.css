@@ -86,8 +86,8 @@ label {
 	color: #fff8;
 }
 
-input[type="text"],
-textarea[type="text"] {
+input,
+textarea {
 	font-size: 1em;
 
 	width: calc(100% - 2rem);
@@ -100,15 +100,15 @@ textarea[type="text"] {
 	border-radius: 0.25rem;
 }
 
-input[type="text"]::placeholder,
-textarea[type="text"]::placeholder {
+input::placeholder,
+textarea::placeholder {
 	color: #0008;
 }
 
-input[type="text"]:focus,
-input[type="text"]:focus-visible,
-textarea[type="text"]:focus,
-textarea[type="text"]:focus-visible {
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible {
 	outline: none;
 }
 
@@ -218,6 +218,10 @@ footer > nav {
 	flex-flow: column nowrap;
 	justify-content: flex-start;
 	align-items: flex-start;
+}
+
+.align-end {
+	align-self: flex-end;
 }
 
 .white-back {
@@ -350,6 +354,8 @@ footer > nav {
 
 #process ol > li {
 	counter-increment: count 1;
+
+	text-align: center;
 }
 
 #process ol > li::after {
@@ -368,6 +374,11 @@ footer > nav {
 @media screen and (max-width: 600px) {
 	html {
 		font-size: 4vw;
+	}
+
+	button,
+	input[type="submit"] {
+		padding: 1em 2em;
 	}
 
 	/* ---------- document spesific stylings ---------- */

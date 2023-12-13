@@ -131,6 +131,8 @@ body > header {
 body > header > section {
 	position: relative;
 	grid-area: section;
+
+	overflow: hidden;
 }
 
 body > header > section > *:not(img) {
@@ -267,7 +269,7 @@ body > header#main-header {
 	width: 20rem;
 }
 
-#man-baby {
+img#man-baby {
 	position: absolute;
 
 	bottom: 0;
@@ -389,6 +391,31 @@ body > header#main-header {
 	font-family: "Frank Ruhl Libre", serif;
 }
 
+#location {
+	position: relative;
+
+	height: 40rem;
+
+	background-image: url("img/location.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#location > * {
+	position: absolute;
+
+	top: 3rem;
+	left: 6rem;
+	padding: 5rem;
+
+	color: #fffa;
+}
+
+#location > * * {
+	font-style: normal;
+}
+
 @media screen and (max-width: 600px) {
 	html {
 		font-size: 4vw;
@@ -403,7 +430,7 @@ body > header#main-header {
 
 	body > header#main-header {
 		grid:
-			"section" 40rem
+			"section" auto
 			"nav" auto
 			"aside" auto
 			/ 1fr;
@@ -443,6 +470,18 @@ body > header#main-header {
 		padding: 0;
 	}
 
+	#family {
+		position: relative !important;
+		width: 100%;
+		margin-block: 5rem -5rem;
+		margin-inline: 2rem;
+	}
+
+	h1.man-baby {
+		width: 75%;
+		align-self: flex-start;
+	}
+
 	#offer {
 		background: #a9a19e;
 		flex-direction: column;
@@ -452,5 +491,18 @@ body > header#main-header {
 	#process ol {
 		grid-template-columns: 1fr;
 		grid-auto-rows: 15rem;
+	}
+
+	#contact {
+		padding-bottom: 10rem;
+	}
+
+	#location > * {
+		position: absolute;
+
+		top: -6rem;
+		left: 1.5rem;
+		right: 1.5rem;
+		padding: 1rem 1rem 5rem 1rem;
 	}
 }

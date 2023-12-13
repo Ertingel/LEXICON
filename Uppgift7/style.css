@@ -122,22 +122,15 @@ textarea[type="text"] {
 body > header {
 	display: grid;
 	grid:
-		"section aside" auto
-		"nav nav" auto
-		/ 1fr 1fr;
+		"section" 30rem
+		"nav" auto
+		"aside" auto
+		/ 1fr;
 }
 
 body > header > section {
 	position: relative;
 	grid-area: section;
-}
-
-body > header > section > img {
-	position: absolute;
-
-	bottom: 0;
-	right: 5%;
-	width: 18rem;
 }
 
 body > header > section > *:not(img) {
@@ -259,6 +252,31 @@ footer > nav {
 }
 
 /* ---------- id spesific stylings ---------- */
+body > header#main-header {
+	grid:
+		"section aside" 40rem
+		"nav nav" auto
+		/ 1fr 1fr;
+}
+
+#family {
+	position: absolute;
+
+	bottom: 0;
+	right: 2rem;
+	width: 20rem;
+}
+
+#man-baby {
+	position: absolute;
+
+	bottom: 0;
+	right: 25%;
+	width: 20rem;
+
+	transform: translateX(50%);
+}
+
 #nav {
 	grid-area: nav;
 
@@ -382,10 +400,10 @@ footer > nav {
 	}
 
 	/* ---------- document spesific stylings ---------- */
-	body > header {
-		display: grid;
+
+	body > header#main-header {
 		grid:
-			"section" auto
+			"section" 40rem
 			"nav" auto
 			"aside" auto
 			/ 1fr;

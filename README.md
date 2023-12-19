@@ -18,3 +18,4 @@ Detta är min repository för läxor i LEXICON.
     -   [**Uppgift7**](https://ertingel.github.io/LEXICON/Uppgift7): Insurance Project
 -   Vecka 51
     -   [**Uppgift8**](https://ertingel.github.io/LEXICON/Uppgift8): Calendar
+    -   [**Uppgift9**](https://ertingel.github.io/LEXICON/Uppgift9): Around the clock

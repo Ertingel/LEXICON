@@ -17,4 +17,4 @@ Detta är min repository för läxor i LEXICON.
 -   Vecka 50
     -   [**Uppgift7**](https://ertingel.github.io/LEXICON/Uppgift7): Insurance Project
 -   Vecka 51
-    -   [**Uppgift8**](https://ertingel.github.io/LEXICON/Uppgift8): Insurance Project
+    -   [**Uppgift8**](https://ertingel.github.io/LEXICON/Uppgift8): Calendar

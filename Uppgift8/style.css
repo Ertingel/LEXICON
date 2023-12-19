@@ -1,3 +1,122 @@
 :root {
 	font-size: 2vmin;
 }
+
+body {
+	background-color: #ededed;
+	min-height: 100vh;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	background-color: transparent;
+	border: none;
+}
+
+.calendar {
+	color: #000;
+
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: stretch;
+}
+
+.calendar > header {
+	height: 4rem;
+
+	color: #fff;
+	background-color: #fe2c2c;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.calendar > header *.material-icons {
+	color: #fff;
+}
+
+.calendar > main {
+	background-color: #e1e1e1;
+
+	width: 28rem;
+	height: 22rem;
+
+	display: grid;
+	grid: 1fr repeat(5, 2fr) / repeat(7, 1fr);
+	gap: 0.15rem;
+}
+
+.calendar > main > * {
+	background-color: #ffffff;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.calendar > main > *.mon {
+	grid-column: 1 / span 1;
+}
+
+.calendar > main > *.tue {
+	grid-column: 2 / span 1;
+}
+
+.calendar > main > *.wed {
+	grid-column: 3 / span 1;
+}
+
+.calendar > main > *.thu {
+	grid-column: 4 / span 1;
+}
+
+.calendar > main > *.fri {
+	grid-column: 5 / span 1;
+}
+
+.calendar > main > *.sat {
+	grid-column: 6 / span 1;
+	background-color: #f2f2f2;
+}
+
+.calendar > main > *.sun {
+	grid-column: 7 / span 1;
+	background-color: #f2f2f2;
+}
+
+.calendar > main > *.label {
+	grid-row: 1 / span 1;
+	background-color: #cccccc;
+}
+
+.calendar > main > *.week1 {
+	grid-row: 2 / span 1;
+}
+
+.calendar > main > *.week2 {
+	grid-row: 3 / span 1;
+}
+
+.calendar > main > *.week3 {
+	grid-row: 4 / span 1;
+}
+
+.calendar > main > *.week4 {
+	grid-row: 5 / span 1;
+}
+
+.calendar > main > *.week5 {
+	grid-row: 6 / span 1;
+}

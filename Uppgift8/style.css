@@ -84,7 +84,7 @@ body {
 
 	display: grid;
 	grid: 1fr repeat(5, 2fr) / repeat(7, 1fr);
-	gap: 0.07rem;
+	gap: max(1px, 0.1rem);
 }
 
 .calendar > main > * {

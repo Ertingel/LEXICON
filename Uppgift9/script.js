@@ -100,7 +100,7 @@ function draw_hour_hand(ctx, time) {
 	ctx.lineWidth = 0.02
 	ctx.lineCap = "round"
 
-	ctx.rotate(Math.PI * 2 * time)
+	ctx.rotate(Math.PI * 2 * time * 2)
 
 	ctx.beginPath()
 	ctx.moveTo(0, 0)

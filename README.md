@@ -19,3 +19,4 @@ Detta är min repository för läxor i LEXICON.
 -   Vecka 51
     -   [**Uppgift8**](https://ertingel.github.io/LEXICON/Uppgift8): Calendar
     -   [**Uppgift9**](https://ertingel.github.io/LEXICON/Uppgift9): Around the clock
+    -   [**Uppgift10**](https://ertingel.github.io/LEXICON/Uppgift10): Animationer med Net Ninja

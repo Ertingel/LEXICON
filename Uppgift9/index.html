@@ -10,5 +10,274 @@
 	</head>
 	<body>
 		<canvas id="analog-clock" width="100" height="100"></canvas>
+
+		<section id="settings">
+			<section>
+				<h3>Hour</h3>
+
+				<label for="hour-color">Color:</label>
+				<input
+					onchange="update_vars()"
+					id="hour-color"
+					type="color"
+					value="#f55e5e"
+				/>
+
+				<label for="hour-length">Length:</label>
+				<input
+					onchange="update_vars()"
+					id="hour-length"
+					type="number"
+					value="0.7"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="hour-width">Width:</label>
+				<input
+					onchange="update_vars()"
+					id="hour-width"
+					type="number"
+					value="0.03"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="hour-base">Base:</label>
+				<input
+					onchange="update_vars()"
+					id="hour-base"
+					type="number"
+					value="0.03"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+			</section>
+
+			<section>
+				<h3>Minute</h3>
+
+				<label for="minute-color">Color:</label>
+				<input
+					onchange="update_vars()"
+					id="minute-color"
+					type="color"
+					value="#0090ff"
+				/>
+
+				<label for="minute-length">Length:</label>
+				<input
+					onchange="update_vars()"
+					id="minute-length"
+					type="number"
+					value="0.8"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="minute-width">Width:</label>
+				<input
+					onchange="update_vars()"
+					id="minute-width"
+					type="number"
+					value="0.02"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="minute-base">Base:</label>
+				<input
+					onchange="update_vars()"
+					id="minute-base"
+					type="number"
+					value="0.02"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+			</section>
+
+			<section>
+				<h3>Second</h3>
+
+				<label for="second-color">Color:</label>
+				<input
+					onchange="update_vars()"
+					id="second-color"
+					type="color"
+					value="#000000"
+				/>
+
+				<label for="second-length">Length:</label>
+				<input
+					onchange="update_vars()"
+					id="second-length"
+					type="number"
+					value="0.88"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="second-width">Width:</label>
+				<input
+					onchange="update_vars()"
+					id="second-width"
+					type="number"
+					value="0.01"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="second-base">Base:</label>
+				<input
+					onchange="update_vars()"
+					id="second-base"
+					type="number"
+					value="0.01"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+			</section>
+
+			<section>
+				<h3>Hour marks</h3>
+
+				<label for="hour-mark-color">Color:</label>
+				<input
+					onchange="update_vars()"
+					id="hour-mark-color"
+					type="color"
+					value="#000000"
+				/>
+
+				<label for="hour-mark-start">Start:</label>
+				<input
+					onchange="update_vars()"
+					id="hour-mark-start"
+					type="number"
+					value="0.8"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="hour-mark-end">End:</label>
+				<input
+					onchange="update_vars()"
+					id="hour-mark-end"
+					type="number"
+					value="0.9"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="hour-mark-width">Width:</label>
+				<input
+					onchange="update_vars()"
+					id="hour-mark-width"
+					type="number"
+					value="0.01"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+			</section>
+
+			<section>
+				<h3>Minute marks</h3>
+
+				<label for="minute-mark-color">Color:</label>
+				<input
+					onchange="update_vars()"
+					id="minute-mark-color"
+					type="color"
+					value="#666666"
+				/>
+
+				<label for="minute-mark-start">Start:</label>
+				<input
+					onchange="update_vars()"
+					id="minute-mark-start"
+					type="number"
+					value="0.85"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="minute-mark-end">End:</label>
+				<input
+					onchange="update_vars()"
+					id="minute-mark-end"
+					type="number"
+					value="0.9"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="minute-mark-width">Width:</label>
+				<input
+					onchange="update_vars()"
+					id="minute-mark-width"
+					type="number"
+					value="0.005"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+			</section>
+
+			<section>
+				<h3>Number marks</h3>
+
+				<label for="number-mark-color">Color:</label>
+				<input
+					onchange="update_vars()"
+					id="number-mark-color"
+					type="color"
+					value="#000000"
+				/>
+
+				<label for="number-mark-distance">Distance:</label>
+				<input
+					onchange="update_vars()"
+					id="number-mark-distance"
+					type="number"
+					value="0.85"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="number-mark-size">Size:</label>
+				<input
+					onchange="update_vars()"
+					id="number-mark-size"
+					type="number"
+					value="0.9"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="number-mark-font">Font:</label>
+				<input
+					onchange="update_vars()"
+					id="number-mark-font"
+					type="text"
+					value="system-ui"
+				/>
+			</section>
+		</section>
 	</body>
 </html>

@@ -2,6 +2,38 @@ let canvas
 let resizeObserver
 let requestAnimation
 
+let clock_setting = {
+	back: {
+		color: "#fff",
+		hour: { color: "#000", start: 0.8, end: 0.9, width: 0.01 },
+		minute: { color: "#666", start: 0.85, end: 0.9, width: 0.005 },
+		number: {
+			color: "#000",
+			distance: 0.7,
+			size: 0.15,
+			font: "system-ui",
+		},
+	},
+	hour: {
+		color: "#f55e5e",
+		length: 0.7,
+		width: 0.03,
+		base: 0.03,
+	},
+	minute: {
+		color: "#0090ff",
+		length: 0.8,
+		width: 0.02,
+		base: 0.02,
+	},
+	second: {
+		color: "#000",
+		length: 0.88,
+		width: 0.01,
+		base: 0.01,
+	},
+}
+
 window.addEventListener("DOMContentLoaded", event => {
 	canvas = document.getElementById("analog-clock")
 
@@ -21,6 +53,10 @@ window.addEventListener("DOMContentLoaded", event => {
 	resize_canvas()
 })
 
+function update_vars() {
+	update()
+}
+
 function update() {
 	const date = new Date()
 
@@ -31,7 +67,7 @@ function update() {
 				60) /
 		24
 
-	draw_clock(canvas, time)
+	draw_clock(canvas, time, clock_setting)
 
 	window.cancelAnimationFrame(requestAnimation)
 	requestAnimation = window.requestAnimationFrame(event => {
@@ -39,65 +75,61 @@ function update() {
 	})
 }
 
-function draw_clock(canvas, time) {
+function draw_clock(canvas, time, params) {
 	let ctx = canvas.getContext("2d")
 
 	ctx.save()
 	ctx.scale(canvas.width / 2, canvas.height / 2)
 	ctx.translate(1, 1)
 
-	draw_back(ctx, time, "#fff")
-	draw_marks(ctx, time, {
-		hour: { color: "#000", start: 0.8, end: 0.9, width: 0.01 },
-		minute: { color: "#666", start: 0.85, end: 0.9, width: 0.005 },
-	})
+	if (params.back != null) draw_back(ctx, time, params.back)
 
-	draw_hand(ctx, time, {
-		color: "#f55e5e",
-		length: 0.7,
-		width: 0.03,
-		base: 0.03,
-		timescale: 2,
-	})
-	draw_hand(ctx, time, {
-		color: "#0090ff",
-		length: 0.8,
-		width: 0.02,
-		base: 0.02,
-		timescale: 24,
-	})
-	draw_hand(ctx, time, {
-		color: "#000",
-		length: 0.88,
-		width: 0.01,
-		base: 0.01,
-		timescale: 24 * 60,
-	})
+	if (params.hour != null)
+		draw_hand(ctx, time, {
+			...params.hour,
+			timescale: 2,
+		})
+	if (params.minute != null)
+		draw_hand(ctx, time, {
+			...params.minute,
+			timescale: 24,
+		})
+	if (params.second != null)
+		draw_hand(ctx, time, {
+			...params.second,
+			timescale: 24 * 60,
+		})
 
 	ctx.restore()
 }
 
-function draw_back(ctx, time, color = "#fff") {
-	ctx.save()
-
-	ctx.fillStyle = color
-
-	ctx.beginPath()
-	ctx.arc(0, 0, 1, 0, Math.PI * 2, true)
-	ctx.fill()
-
-	ctx.restore()
-}
-
-function draw_marks(
+function draw_back(
 	ctx,
 	time,
 	{
+		color = "#ffffff",
 		hour = { color: "#000", start: 0.8, end: 0.9, width: 0.01 },
 		minute = { color: "#666", start: 0.85, end: 0.9, width: 0.005 },
-		text = { color: "#000", distance: 0.7, size: 0.15, font: "serif" },
+		number = {
+			color: "#000",
+			distance: 0.7,
+			size: 0.15,
+			font: "system-ui",
+		},
 	}
 ) {
+	if (color != null) {
+		ctx.save()
+
+		ctx.fillStyle = color
+
+		ctx.beginPath()
+		ctx.arc(0, 0, 1, 0, Math.PI * 2, true)
+		ctx.fill()
+
+		ctx.restore()
+	}
+
 	if (minute != null) {
 		const minute_step = ((Math.PI / 180) * 360) / 12 / 5
 
@@ -140,18 +172,19 @@ function draw_marks(
 		ctx.restore()
 	}
 
-	if (text != null) {
+	if (number != null) {
 		ctx.save()
 
-		ctx.strokeStyle = text.color
-		ctx.font = `${text.size}px ${text.font}`
+		ctx.fillStyle = number.color
+		ctx.font = `${number.size}px ${number.font}`
 		ctx.textAlign = "center"
 		ctx.textBaseline = "alphabetic"
 
 		for (let i = 1; i <= 12; i++) {
-			let x = Math.sin((Math.PI / 6) * i) * text.distance
+			let x = Math.sin((Math.PI / 6) * i) * number.distance
 			let y =
-				-Math.cos((Math.PI / 6) * i) * text.distance + text.size * 0.35
+				-Math.cos((Math.PI / 6) * i) * number.distance +
+				number.size * 0.35
 			ctx.fillText(i, x, y)
 		}
 

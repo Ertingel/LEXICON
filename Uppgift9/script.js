@@ -2,6 +2,8 @@ let canvas
 let resizeObserver
 let requestAnimation
 
+let inputs
+
 let clock_setting = {
 	back: {
 		color: "#fff",
@@ -50,10 +52,87 @@ window.addEventListener("DOMContentLoaded", event => {
 
 	resizeObserver = new ResizeObserver(resize_canvas).observe(canvas)
 
+	inputs = {
+		back: {
+			color: "#fff",
+			hour: {
+				color: document.getElementById("hour-marks-color"),
+				start: document.getElementById("hour-marks-start"),
+				end: document.getElementById("hour-marks-end"),
+				width: document.getElementById("hour-marks-width"),
+			},
+			minute: {
+				color: document.getElementById("minute-marks-color"),
+				start: document.getElementById("minute-marks-start"),
+				end: document.getElementById("minute-marks-end"),
+				width: document.getElementById("minute-marks-width"),
+			},
+			number: {
+				color: document.getElementById("number-marks-color"),
+				distance: document.getElementById("number-marks-distance"),
+				size: document.getElementById("number-marks-size"),
+				font: document.getElementById("number-marks-font"),
+			},
+		},
+		hour: {
+			color: document.getElementById("hour-color"),
+			length: document.getElementById("hour-length"),
+			width: document.getElementById("hour-width"),
+			base: document.getElementById("hour-base"),
+		},
+		minute: {
+			color: document.getElementById("minute-color"),
+			length: document.getElementById("minute-length"),
+			width: document.getElementById("minute-width"),
+			base: document.getElementById("minute-base"),
+		},
+		second: {
+			color: document.getElementById("second-color"),
+			length: document.getElementById("second-length"),
+			width: document.getElementById("second-width"),
+			base: document.getElementById("second-base"),
+		},
+	}
+
 	resize_canvas()
+	update_vars()
 })
 
 function update_vars() {
+	const map_inputs = input => {
+		let out = {}
+
+		Object.keys(input).forEach(key => {
+			if (
+				typeof input[key] !== "object" ||
+				Array.isArray(input[key]) ||
+				input[key] === null
+			) {
+				out[key] = input[key]
+				return
+			}
+
+			if (input[key].nodeType == null) {
+				out[key] = map_inputs(input[key])
+				return
+			}
+
+			if (
+				!isNaN(input[key].value) &&
+				!isNaN(parseFloat(input[key].value))
+			) {
+				out[key] = parseFloat(input[key].value)
+				return
+			}
+
+			out[key] = input[key].value
+		})
+
+		return out
+	}
+
+	clock_setting = map_inputs(inputs)
+
 	update()
 }
 

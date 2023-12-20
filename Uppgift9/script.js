@@ -1,11 +1,9 @@
 let canvas
 let resizeObserver
 let requestAnimation
-let ctx
 
 window.addEventListener("DOMContentLoaded", event => {
 	canvas = document.getElementById("analog-clock")
-	ctx = canvas.getContext("2d")
 
 	const resize_canvas = event => {
 		canvas.width = Math.round(
@@ -33,7 +31,7 @@ function update() {
 				60) /
 		24
 
-	draw_clock(time)
+	draw_clock(canvas, time)
 
 	window.cancelAnimationFrame(requestAnimation)
 	requestAnimation = window.requestAnimationFrame(event => {
@@ -41,25 +39,48 @@ function update() {
 	})
 }
 
-function draw_clock(time) {
+function draw_clock(canvas, time) {
+	let ctx = canvas.getContext("2d")
+
 	ctx.save()
 	ctx.scale(canvas.width / 2, canvas.height / 2)
 	ctx.translate(1, 1)
-	ctx.rotate(Math.PI)
 
-	draw_back(ctx, time)
-	draw_marks(ctx, time)
-	draw_hour_hand(ctx, time)
-	draw_minute_hand(ctx, time)
-	draw_second_hand(ctx, time)
+	draw_back(ctx, time, "#fff")
+	draw_marks(ctx, time, {
+		hour: { color: "#000", start: 0.8, end: 0.9, width: 0.01 },
+		minute: { color: "#666", start: 0.85, end: 0.9, width: 0.005 },
+	})
+
+	draw_hand(ctx, time, {
+		color: "#f55e5e",
+		length: 0.7,
+		width: 0.03,
+		base: 0.03,
+		timescale: 2,
+	})
+	draw_hand(ctx, time, {
+		color: "#0090ff",
+		length: 0.8,
+		width: 0.02,
+		base: 0.02,
+		timescale: 24,
+	})
+	draw_hand(ctx, time, {
+		color: "#000",
+		length: 0.88,
+		width: 0.01,
+		base: 0.01,
+		timescale: 24 * 60,
+	})
 
 	ctx.restore()
 }
 
-function draw_back(ctx, time) {
+function draw_back(ctx, time, color = "#fff") {
 	ctx.save()
 
-	ctx.fillStyle = "#fff"
+	ctx.fillStyle = color
 
 	ctx.beginPath()
 	ctx.arc(0, 0, 1, 0, Math.PI * 2, true)
@@ -68,78 +89,105 @@ function draw_back(ctx, time) {
 	ctx.restore()
 }
 
-function draw_marks(ctx, time) {
-	ctx.save()
+function draw_marks(
+	ctx,
+	time,
+	{
+		hour = { color: "#000", start: 0.8, end: 0.9, width: 0.01 },
+		minute = { color: "#666", start: 0.85, end: 0.9, width: 0.005 },
+		text = { color: "#000", distance: 0.7, size: 0.15, font: "serif" },
+	}
+) {
+	if (minute != null) {
+		const minute_step = ((Math.PI / 180) * 360) / 12 / 5
 
-	ctx.strokeStyle = "#000"
-	ctx.lineWidth = 0.01
-	ctx.lineCap = "round"
+		ctx.save()
+		ctx.lineCap = "round"
+		ctx.strokeStyle = minute.color
+		ctx.lineWidth = minute.width
 
-	const hour_step = ((Math.PI / 180) * 360) / 12
-	const minute_step = hour_step / 5
+		for (let i = 0; i < 60; i++) {
+			if (i % 5 != 0) {
+				ctx.beginPath()
+				ctx.moveTo(0, minute.start)
+				ctx.lineTo(0, minute.end)
+				ctx.stroke()
+			}
 
-	for (let a = 0; a < Math.PI * 2; a += minute_step) {
-		const is_hour =
-			Math.abs(((a + hour_step / 2) % hour_step) - hour_step / 2) < 0.001
+			ctx.rotate(minute_step)
+		}
 
-		ctx.beginPath()
-		ctx.moveTo(0, is_hour ? 0.8 : 0.85)
-		ctx.lineTo(0, 0.9)
-		ctx.stroke()
-
-		ctx.rotate(minute_step)
+		ctx.restore()
 	}
 
-	ctx.restore()
+	if (minute != null) {
+		const hour_step = ((Math.PI / 180) * 360) / 12
+
+		ctx.save()
+		ctx.lineCap = "round"
+		ctx.strokeStyle = hour.color
+		ctx.lineWidth = hour.width
+
+		for (let i = 0; i < 12; i++) {
+			ctx.beginPath()
+			ctx.moveTo(0, hour.start)
+			ctx.lineTo(0, hour.end)
+			ctx.stroke()
+
+			ctx.rotate(hour_step)
+		}
+
+		ctx.restore()
+	}
+
+	if (text != null) {
+		ctx.save()
+
+		ctx.strokeStyle = text.color
+		ctx.font = `${text.size}px ${text.font}`
+		ctx.textAlign = "center"
+		ctx.textBaseline = "alphabetic"
+
+		for (let i = 1; i <= 12; i++) {
+			let x = Math.sin((Math.PI / 6) * i) * text.distance
+			let y =
+				-Math.cos((Math.PI / 6) * i) * text.distance + text.size * 0.35
+			ctx.fillText(i, x, y)
+		}
+
+		ctx.restore()
+	}
 }
 
-function draw_hour_hand(ctx, time) {
+function draw_hand(
+	ctx,
+	time,
+	{
+		color = "#000",
+		length = 0.9,
+		width = 0.005,
+		base = 0.01,
+		timescale = 1440,
+	}
+) {
 	ctx.save()
 
-	ctx.strokeStyle = "#f55e5e"
-	ctx.lineWidth = 0.02
+	ctx.strokeStyle = color
+	ctx.lineWidth = width
 	ctx.lineCap = "round"
 
-	ctx.rotate(Math.PI * 2 * time * 2)
+	ctx.rotate(Math.PI * 2 * time * timescale)
 
 	ctx.beginPath()
 	ctx.moveTo(0, 0)
-	ctx.lineTo(0, 0.7)
+	ctx.lineTo(0, -length)
 	ctx.stroke()
 
-	ctx.restore()
-}
-
-function draw_minute_hand(ctx, time) {
-	ctx.save()
-
-	ctx.strokeStyle = "#000"
-	ctx.lineWidth = 0.01
-	ctx.lineCap = "round"
-
-	ctx.rotate(Math.PI * 2 * time * 24)
+	ctx.fillStyle = color
 
 	ctx.beginPath()
-	ctx.moveTo(0, 0)
-	ctx.lineTo(0, 0.8)
-	ctx.stroke()
-
-	ctx.restore()
-}
-
-function draw_second_hand(ctx, time) {
-	ctx.save()
-
-	ctx.strokeStyle = "#000"
-	ctx.lineWidth = 0.005
-	ctx.lineCap = "round"
-
-	ctx.rotate(Math.PI * 2 * time * 24 * 60)
-
-	ctx.beginPath()
-	ctx.moveTo(0, 0)
-	ctx.lineTo(0, 0.9)
-	ctx.stroke()
+	ctx.arc(0, 0, base, 0, Math.PI * 2, true)
+	ctx.fill()
 
 	ctx.restore()
 }

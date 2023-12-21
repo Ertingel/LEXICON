@@ -111,11 +111,7 @@ button {
 
 	width: 10vh;
 
-	animation-name: drive;
-	animation-duration: 3s;
-	animation-fill-mode: both;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
+	animation: drive 3s linear infinite both, jump 0.3s 1.2s ease infinite both;
 }
 
 #mario .luigi {
@@ -125,11 +121,7 @@ button {
 
 	width: 10vh;
 
-	animation-name: drive;
-	animation-duration: 5s;
-	animation-fill-mode: both;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
+	animation: drive 5s linear infinite both;
 }
 
 @keyframes drive {
@@ -138,6 +130,20 @@ button {
 	}
 	to {
 		transform: translateX(120vw);
+	}
+}
+
+@keyframes jump {
+	0% {
+		top: -2vh;
+	}
+
+	50% {
+		top: -3vh;
+	}
+
+	100% {
+		top: -2vh;
 	}
 }
 

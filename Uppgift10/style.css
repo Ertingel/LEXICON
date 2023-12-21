@@ -106,7 +106,7 @@ button {
 
 #mario .mario {
 	position: absolute;
-	top: -3vh;
+	top: -2vh;
 	left: 0;
 
 	width: 10vh;
@@ -115,6 +115,21 @@ button {
 	animation-duration: 3s;
 	animation-fill-mode: both;
 	animation-iteration-count: infinite;
+}
+
+#mario .luigi {
+	position: absolute;
+	bottom: 4vh;
+	left: 0;
+
+	width: 10vh;
+
+	animation-name: drive;
+	animation-duration: 5s;
+	animation-fill-mode: both;
+	animation-iteration-count: infinite;
+
+	animation-direction: alternate;
 }
 
 @keyframes drive {

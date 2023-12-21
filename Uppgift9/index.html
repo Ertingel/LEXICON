@@ -57,12 +57,19 @@
 					max="1"
 				/>
 
+				<label for="hour-animation">Animation:</label>
+				<select onchange="update_vars()" id="hour-animation">
+					<option value="continuous" selected>Continuous</option>
+					<option value="discreet">Discreet</option>
+					<option value="discreet_mins">Discreet mins</option>
+				</select>
+
 				<label for="hour-style">Style:</label>
 				<select onchange="update_vars()" id="hour-style">
 					<option value="butt">Butt</option>
+					<option value="pointy">Pointy</option>
 					<option value="round" selected>Round</option>
 					<option value="square">Square</option>
-					<option value="pointy">Pointy</option>
 					<option value="none">None</option>
 				</select>
 			</section>
@@ -111,12 +118,18 @@
 					max="1"
 				/>
 
+				<label for="minute-animation">Animation:</label>
+				<select onchange="update_vars()" id="minute-animation">
+					<option value="continuous" selected>Continuous</option>
+					<option value="discreet">Discreet</option>
+				</select>
+
 				<label for="minute-style">Style:</label>
 				<select onchange="update_vars()" id="minute-style">
 					<option value="butt">Butt</option>
+					<option value="pointy">Pointy</option>
 					<option value="round" selected>Round</option>
 					<option value="square">Square</option>
-					<option value="pointy">Pointy</option>
 					<option value="none">None</option>
 				</select>
 			</section>
@@ -165,12 +178,18 @@
 					max="1"
 				/>
 
+				<label for="second-animation">Animation:</label>
+				<select onchange="update_vars()" id="second-animation">
+					<option value="continuous" selected>Continuous</option>
+					<option value="discreet">Discreet</option>
+				</select>
+
 				<label for="second-style">Style:</label>
 				<select onchange="update_vars()" id="second-style">
 					<option value="butt">Butt</option>
+					<option value="pointy">Pointy</option>
 					<option value="round" selected>Round</option>
 					<option value="square">Square</option>
-					<option value="pointy">Pointy</option>
 					<option value="none">None</option>
 				</select>
 			</section>

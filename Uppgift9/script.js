@@ -21,6 +21,7 @@ let clock_setting = {
 		length: 0.7,
 		width: 0.03,
 		base: 0.03,
+		animation: "continuous",
 		style: "round",
 	},
 	minute: {
@@ -28,6 +29,7 @@ let clock_setting = {
 		length: 0.8,
 		width: 0.02,
 		base: 0.02,
+		animation: "continuous",
 		style: "rounded",
 	},
 	second: {
@@ -35,6 +37,7 @@ let clock_setting = {
 		length: 0.88,
 		width: 0.01,
 		base: 0.01,
+		animation: "continuous",
 		style: "rounded",
 	},
 }
@@ -84,6 +87,7 @@ window.addEventListener("DOMContentLoaded", event => {
 			length: document.getElementById("hour-length"),
 			width: document.getElementById("hour-width"),
 			base: document.getElementById("hour-base"),
+			animation: document.getElementById("hour-animation"),
 			style: document.getElementById("hour-style"),
 		},
 		minute: {
@@ -91,6 +95,7 @@ window.addEventListener("DOMContentLoaded", event => {
 			length: document.getElementById("minute-length"),
 			width: document.getElementById("minute-width"),
 			base: document.getElementById("minute-base"),
+			animation: document.getElementById("minute-animation"),
 			style: document.getElementById("minute-style"),
 		},
 		second: {
@@ -98,6 +103,7 @@ window.addEventListener("DOMContentLoaded", event => {
 			length: document.getElementById("second-length"),
 			width: document.getElementById("second-width"),
 			base: document.getElementById("second-base"),
+			animation: document.getElementById("second-animation"),
 			style: document.getElementById("second-style"),
 		},
 	}
@@ -300,6 +306,7 @@ function draw_hand(
 		length = 0.9,
 		width = 0.005,
 		base = 0.01,
+		animation = "continuous",
 		style = "round",
 		timescale = 1440,
 	}
@@ -313,7 +320,9 @@ function draw_hand(
 	ctx.lineWidth = width
 	ctx.lineCap = style
 
-	ctx.rotate(Math.PI * 2 * time * timescale)
+	ctx.rotate(
+		Math.PI * 2 * timescale * animation_styles[animation](time, timescale)
+	)
 
 	if (style == "pointy") {
 		ctx.beginPath()
@@ -338,10 +347,16 @@ function draw_hand(
 }
 
 const animation_styles = {
-	continuous: (time, timescale) => {
-		return time
-	},
+	continuous: (time, timescale) => time,
 	discreet: (time, timescale) => {
-		return time
+		if (timescale < 24) return Math.floor(24 * time) / 24
+
+		return Math.floor(timescale * 60 * time) / timescale / 60
+	},
+
+	discreet_mins: (time, timescale) => {
+		if (timescale < 24) return Math.floor(24 * 5 * time) / 24 / 5
+
+		return Math.floor(timescale * 60 * time) / timescale / 60
 	},
 }

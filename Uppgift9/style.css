@@ -1,5 +1,5 @@
 :root {
-	font-size: 1.5vmin;
+	font-size: 1.8vmin;
 }
 
 body {
@@ -119,4 +119,57 @@ select {
 
 #settings > section > input {
 	grid-column: 2 / span 1;
+}
+
+@media (max-width: 800px) {
+	:root {
+		font-size: 2.2vmin;
+	}
+
+	body {
+		flex-flow: column nowrap;
+	}
+
+	#settings {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	#settings > h1,
+	#settings > h2,
+	#settings > h3,
+	#settings > h4,
+	#settings > h5,
+	#settings > h6 {
+		grid-column: 1 / span 2;
+		text-align: center;
+	}
+}
+
+@media (max-width: 600px) {
+	:root {
+		font-size: 4vmin;
+	}
+
+	body {
+		flex-flow: column nowrap;
+	}
+
+	#analog-clock {
+		width: 24rem;
+		height: 24rem;
+	}
+
+	#settings {
+		grid-template-columns: 1fr;
+	}
+
+	#settings > h1,
+	#settings > h2,
+	#settings > h3,
+	#settings > h4,
+	#settings > h5,
+	#settings > h6 {
+		grid-column: 1 / span 1;
+		text-align: center;
+	}
 }

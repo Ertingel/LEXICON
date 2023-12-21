@@ -286,22 +286,6 @@ function draw_text(
 	ctx.restore()
 }
 
-function format_time(time, format) {
-	let str = format
-	str = str.replaceAll("YYYY", time.getFullYear())
-	str = str.replaceAll("YY", time.getFullYear())
-	str = str.replaceAll("MM", time.getMonth())
-	str = str.replaceAll("DD", time.getDate())
-	str = str.replaceAll("dd", time.getDay())
-
-	str = str.replaceAll("HH", time.getHours())
-	str = str.replaceAll("mm", time.getMinutes())
-	str = str.replaceAll("sss", time.getMilliseconds())
-	str = str.replaceAll("ss", time.getSeconds())
-
-	return str
-}
-
 function draw_hand(
 	ctx,
 	time,
@@ -370,4 +354,77 @@ const animation_styles = {
 
 		return Math.floor(timescale * 60 * t) / timescale / 60
 	},
+}
+
+const time_lookup = {
+	month_full: [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December",
+	],
+	month_short: [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec",
+	],
+	weekday_full: [
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+		"Sunday",
+	],
+	weekday_short: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+}
+
+/* https://doc.qt.io/qt-5/qml-qtqml-qt.html#formatDateTime-method */
+function format_time(time, format) {
+	const regex = /yyyy|yy|M{1,4}|d{1,4}|h{1,2}|m{1,2}|s{1,2}|zzz|z/gmu
+
+	return format.replaceAll(regex, match => {
+		if (match == "yyyy") return time.getFullYear()
+		if (match == "yy") return String(time.getFullYear()).substring(2)
+		if (match == "MMMM") return time_lookup.month_full[time.getMonth()]
+		if (match == "MMM") return time_lookup.month_short[time.getMonth()]
+		if (match == "MM") return String(time.getMonth()).padStart(2, "0")
+		if (match == "M") return time.getMonth()
+
+		if (match == "dddd") return time_lookup.weekday_full[time.getDay()]
+		if (match == "ddd") return time_lookup.weekday_short[time.getDay()]
+		if (match == "dd") return String(time.getDate()).padStart(2, "0")
+		if (match == "d") return time.getDate()
+
+		if (match == "hh") return String(time.getHours()).padStart(2, "0")
+		if (match == "h") return time.getHours()
+		if (match == "mm") return String(time.getMinutes()).padStart(2, "0")
+		if (match == "m") return time.getMinutes()
+		if (match == "ss") return String(time.getSeconds()).padStart(2, "0")
+		if (match == "s") return time.getSeconds()
+
+		if (match == "zzz") return
+		String(time.getMilliseconds()).padStart(3, "0")
+		if (match == "z") return time.getMilliseconds()
+
+		return match
+	})
 }

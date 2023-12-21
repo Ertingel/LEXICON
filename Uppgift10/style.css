@@ -129,9 +129,7 @@ button {
 	animation-duration: 5s;
 	animation-fill-mode: both;
 	animation-iteration-count: infinite;
-	animation-timing-function: ease-in-out;
-
-	animation-direction: alternate;
+	animation-timing-function: linear;
 }
 
 @keyframes drive {
@@ -139,6 +137,37 @@ button {
 		transform: translateX(-10vh);
 	}
 	to {
-		transform: translateX(100vw);
+		transform: translateX(120vw);
+	}
+}
+
+#mario .cloud {
+	position: absolute;
+}
+
+#mario .cloud:first-of-type {
+	top: 15vh;
+	width: 25vh;
+
+	opacity: 0.5;
+
+	animation: wind 80s linear infinite reverse both;
+}
+
+#mario .cloud:last-of-type {
+	top: 2vh;
+	width: 35vh;
+
+	opacity: 0.9;
+
+	animation: wind 50s linear infinite reverse both;
+}
+
+@keyframes wind {
+	from {
+		left: -35vh;
+	}
+	to {
+		left: 100%;
 	}
 }

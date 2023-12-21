@@ -27,8 +27,8 @@ button {
 	font-size: 1em;
 }
 
-#mario {
-	background: skyblue;
+#hover {
+	background: lightblue;
 
 	display: flex;
 	flex-flow: column nowrap;
@@ -36,14 +36,9 @@ button {
 	align-items: center;
 }
 
-.cloud {
-	transform: translate(0, 0);
-}
-
-.hover-me {
+#hover .hover-me {
 	width: 8rem;
 	height: 8rem;
-	margin: 5rem;
 
 	line-height: 0;
 
@@ -57,7 +52,74 @@ button {
 	cursor: pointer;
 }
 
-.hover-me:hover {
+#hover .hover-me:hover {
 	background: salmon;
 	transform: rotate(360deg);
+}
+
+#mario {
+	background: skyblue;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-end;
+	align-items: stretch;
+}
+
+#mario .grass {
+	min-height: 66vh;
+	padding-bottom: 1rem;
+	box-sizing: border-box;
+
+	background: green;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-end;
+	align-items: stretch;
+}
+
+#mario .road {
+	position: relative;
+
+	min-height: 33vh;
+	box-sizing: border-box;
+
+	background: gray;
+	border-top: darkgray solid 1rem;
+	border-bottom: darkgray solid 1rem;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: stretch;
+}
+
+#mario .lines {
+	position: absolute;
+	top: calc(50% - 0.25rem);
+	left: 0;
+	right: 0;
+
+	border-top: whitesmoke dashed 0.5rem;
+}
+
+#mario .mario {
+	position: absolute;
+	top: -3vh;
+	left: 0;
+
+	width: 10vh;
+
+	animation-name: drive;
+	animation-duration: 3s;
+}
+
+@keyframes drive {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(100vw);
+	}
 }

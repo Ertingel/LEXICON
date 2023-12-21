@@ -4,43 +4,7 @@ let requestAnimation
 
 let inputs
 
-let clock_setting = {
-	back: {
-		color: "#fff",
-		hour: { color: "#000", start: 0.8, end: 0.9, width: 0.01 },
-		minute: { color: "#666", start: 0.85, end: 0.9, width: 0.005 },
-		number: {
-			color: "#000",
-			distance: 0.7,
-			size: 0.15,
-			font: "system-ui",
-		},
-	},
-	hour: {
-		color: "#f55e5e",
-		length: 0.7,
-		width: 0.03,
-		base: 0.03,
-		animation: "continuous",
-		style: "round",
-	},
-	minute: {
-		color: "#0090ff",
-		length: 0.8,
-		width: 0.02,
-		base: 0.02,
-		animation: "continuous",
-		style: "rounded",
-	},
-	second: {
-		color: "#000",
-		length: 0.88,
-		width: 0.01,
-		base: 0.01,
-		animation: "continuous",
-		style: "rounded",
-	},
-}
+let clock_setting
 
 window.addEventListener("DOMContentLoaded", event => {
 	canvas = document.getElementById("analog-clock")
@@ -60,7 +24,7 @@ window.addEventListener("DOMContentLoaded", event => {
 
 	inputs = {
 		back: {
-			color: "#fff",
+			color: document.getElementById("back-color"),
 			hour: {
 				color: document.getElementById("hour-marks-color"),
 				start: document.getElementById("hour-marks-start"),
@@ -106,6 +70,14 @@ window.addEventListener("DOMContentLoaded", event => {
 			animation: document.getElementById("second-animation"),
 			style: document.getElementById("second-style"),
 		},
+		text: {
+			color: document.getElementById("time-text-color"),
+			x: document.getElementById("time-text-x"),
+			y: document.getElementById("time-text-y"),
+			size: document.getElementById("time-text-size"),
+			font: document.getElementById("time-text-font"),
+			text: document.getElementById("time-text-text"),
+		},
 	}
 
 	update_vars()
@@ -146,20 +118,12 @@ function update_vars() {
 	}
 
 	clock_setting = map_inputs(inputs)
-	console.log(clock_setting)
 
 	update()
 }
 
 function update() {
-	const date = new Date()
-
-	const time =
-		(date.getHours() +
-			(date.getMinutes() +
-				(date.getSeconds() + date.getMilliseconds() / 1000) / 60) /
-				60) /
-		24
+	const time = new Date()
 
 	draw_clock(canvas, time, clock_setting)
 
@@ -177,6 +141,7 @@ function draw_clock(canvas, time, params) {
 	ctx.translate(1, 1)
 
 	if (params.back != null) draw_back(ctx, time, params.back)
+	if (params.text != null) draw_text(ctx, time, params.text)
 
 	if (params.hour != null)
 		draw_hand(ctx, time, {
@@ -298,6 +263,45 @@ function draw_back(
 	}
 }
 
+function draw_text(
+	ctx,
+	time,
+	{
+		color = "#000000",
+		x = 0,
+		y = 0.5,
+		size = 0.15,
+		font = "system-ui",
+		text = "hh:mm:ss",
+	}
+) {
+	ctx.save()
+	ctx.fillStyle = color
+	ctx.font = `${size}px ${font}`
+	ctx.textAlign = "center"
+	ctx.textBaseline = "alphabetic"
+
+	ctx.fillText(format_time(time, text), x, y + size * 0.35)
+
+	ctx.restore()
+}
+
+function format_time(time, format) {
+	let str = format
+	str = str.replaceAll("YYYY", time.getFullYear())
+	str = str.replaceAll("YY", time.getFullYear())
+	str = str.replaceAll("MM", time.getMonth())
+	str = str.replaceAll("DD", time.getDate())
+	str = str.replaceAll("dd", time.getDay())
+
+	str = str.replaceAll("HH", time.getHours())
+	str = str.replaceAll("mm", time.getMinutes())
+	str = str.replaceAll("sss", time.getMilliseconds())
+	str = str.replaceAll("ss", time.getSeconds())
+
+	return str
+}
+
 function draw_hand(
 	ctx,
 	time,
@@ -320,8 +324,15 @@ function draw_hand(
 	ctx.lineWidth = width
 	ctx.lineCap = style
 
+	const t =
+		(time.getHours() +
+			(time.getMinutes() +
+				(time.getSeconds() + time.getMilliseconds() / 1000) / 60) /
+				60) /
+		24
+
 	ctx.rotate(
-		Math.PI * 2 * timescale * animation_styles[animation](time, timescale)
+		Math.PI * 2 * timescale * animation_styles[animation](t, timescale)
 	)
 
 	if (style == "pointy") {
@@ -347,16 +358,16 @@ function draw_hand(
 }
 
 const animation_styles = {
-	continuous: (time, timescale) => time,
-	discreet: (time, timescale) => {
-		if (timescale < 24) return Math.floor(24 * time) / 24
+	continuous: (t, timescale) => t,
+	discreet: (t, timescale) => {
+		if (timescale < 24) return Math.floor(24 * t) / 24
 
-		return Math.floor(timescale * 60 * time) / timescale / 60
+		return Math.floor(timescale * 60 * t) / timescale / 60
 	},
 
-	discreet_mins: (time, timescale) => {
-		if (timescale < 24) return Math.floor(24 * 5 * time) / 24 / 5
+	discreet_mins: (t, timescale) => {
+		if (timescale < 24) return Math.floor(24 * 5 * t) / 24 / 5
 
-		return Math.floor(timescale * 60 * time) / timescale / 60
+		return Math.floor(timescale * 60 * t) / timescale / 60
 	},
 }

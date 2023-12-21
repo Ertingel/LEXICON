@@ -60,7 +60,7 @@
 				<label for="hour-animation">Animation:</label>
 				<select onchange="update_vars()" id="hour-animation">
 					<option value="continuous" selected>Continuous</option>
-					<option value="discreet">Discreet</option>
+					<option value="discreet">Discreet hour</option>
 					<option value="discreet_mins">Discreet mins</option>
 				</select>
 
@@ -339,6 +339,79 @@
 					id="number-marks-font"
 					type="text"
 					value="system-ui"
+				/>
+			</section>
+
+			<section>
+				<h3>Time text</h3>
+
+				<label for="time-text-color">Color:</label>
+				<input
+					onchange="update_vars()"
+					id="time-text-color"
+					type="color"
+					value="#000000"
+				/>
+
+				<label for="time-text-x">X:</label>
+				<input
+					onchange="update_vars()"
+					id="time-text-x"
+					type="number"
+					value="0"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="time-text-y">Y:</label>
+				<input
+					onchange="update_vars()"
+					id="time-text-y"
+					type="number"
+					value="0.25"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="time-text-size">Size:</label>
+				<input
+					onchange="update_vars()"
+					id="time-text-size"
+					type="number"
+					value="0.15"
+					step=".01"
+					min="0"
+					max="1"
+				/>
+
+				<label for="time-text-font">Font:</label>
+				<input
+					onchange="update_vars()"
+					id="time-text-font"
+					type="text"
+					value="system-ui"
+				/>
+
+				<label for="time-text-text">Text:</label>
+				<input
+					onchange="update_vars()"
+					id="time-text-text"
+					type="text"
+					value="HH:mm"
+				/>
+			</section>
+
+			<section>
+				<h3>Back</h3>
+
+				<label for="back-color">Color:</label>
+				<input
+					onchange="update_vars()"
+					id="back-color"
+					type="color"
+					value="#ffffff"
 				/>
 			</section>
 		</section>

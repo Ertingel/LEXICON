@@ -113,11 +113,13 @@ button {
 
 	animation-name: drive;
 	animation-duration: 3s;
+	animation-fill-mode: both;
+	animation-delay: 2s;
 }
 
 @keyframes drive {
 	from {
-		transform: translateX(0);
+		transform: translateX(-10vh);
 	}
 	to {
 		transform: translateX(100vw);

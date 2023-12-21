@@ -111,7 +111,8 @@ button {
 
 	width: 10vh;
 
-	animation: drive 3s linear infinite both, jump 0.3s 1.2s ease infinite both;
+	animation: drive 3s linear infinite both,
+		jump 1.333s 1.2s ease infinite both;
 }
 
 #mario .luigi {
@@ -121,7 +122,8 @@ button {
 
 	width: 10vh;
 
-	animation: drive 5s linear infinite both;
+	animation: drive 5s linear infinite both,
+		jump2 2.222s 1.2s ease infinite both;
 }
 
 @keyframes drive {
@@ -138,12 +140,34 @@ button {
 		top: -2vh;
 	}
 
-	50% {
+	5% {
 		top: -3vh;
+	}
+
+	10% {
+		top: -2vh;
 	}
 
 	100% {
 		top: -2vh;
+	}
+}
+
+@keyframes jump2 {
+	0% {
+		bottom: 4vh;
+	}
+
+	2% {
+		bottom: 4.5vh;
+	}
+
+	4% {
+		bottom: 4vh;
+	}
+
+	100% {
+		bottom: 4vh;
 	}
 }
 

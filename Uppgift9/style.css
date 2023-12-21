@@ -5,6 +5,7 @@
 body {
 	padding-block: 5rem;
 	min-height: 100vh;
+	box-sizing: border-box;
 
 	background-color: #f2c62a;
 
@@ -25,25 +26,34 @@ body {
 }
 
 label,
-input {
+input,
+select {
 	display: block;
 	font-size: 1em;
 	box-sizing: border-box;
 	width: 100%;
 }
 
-input {
+input,
+select {
 	border: #888 solid 0.1rem;
 	border-radius: 0.25rem;
 }
 
 input[type="color"] {
 	height: 2rem;
+	outline: none;
+	overflow: hidden;
 }
 
 input[type="number"],
 input[type="text"] {
 	padding: 0.25rem;
+}
+
+select {
+	padding: 0.25rem;
+	background-color: #fff;
 }
 
 #analog-clock {
@@ -59,10 +69,10 @@ input[type="text"] {
 	background-color: #fff;
 	border-radius: 0.5rem;
 
-	display: flex;
-	flex-flow: row wrap;
-	align-items: flex-start;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-auto-rows: auto;
+	align-items: start;
 
 	gap: 1rem;
 }
@@ -73,12 +83,17 @@ input[type="text"] {
 #settings > h4,
 #settings > h5,
 #settings > h6 {
-	width: 100%;
+	grid-column: 1 / span 3;
 	text-align: center;
 }
 
 #settings > section {
-	max-width: 30%;
+	/*max-width: 10rem;*/
+
+	padding: 0.5rem;
+
+	border: #999 solid 0.1rem;
+	border-radius: 0.5rem;
 
 	display: grid;
 	grid-template-columns: auto 1fr;

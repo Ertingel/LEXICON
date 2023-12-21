@@ -21,18 +21,21 @@ let clock_setting = {
 		length: 0.7,
 		width: 0.03,
 		base: 0.03,
+		style: "round",
 	},
 	minute: {
 		color: "#0090ff",
 		length: 0.8,
 		width: 0.02,
 		base: 0.02,
+		style: "rounded",
 	},
 	second: {
 		color: "#000",
 		length: 0.88,
 		width: 0.01,
 		base: 0.01,
+		style: "rounded",
 	},
 }
 
@@ -60,12 +63,14 @@ window.addEventListener("DOMContentLoaded", event => {
 				start: document.getElementById("hour-marks-start"),
 				end: document.getElementById("hour-marks-end"),
 				width: document.getElementById("hour-marks-width"),
+				style: document.getElementById("hour-marks-style"),
 			},
 			minute: {
 				color: document.getElementById("minute-marks-color"),
 				start: document.getElementById("minute-marks-start"),
 				end: document.getElementById("minute-marks-end"),
 				width: document.getElementById("minute-marks-width"),
+				style: document.getElementById("minute-marks-style"),
 			},
 			number: {
 				color: document.getElementById("number-marks-color"),
@@ -79,23 +84,26 @@ window.addEventListener("DOMContentLoaded", event => {
 			length: document.getElementById("hour-length"),
 			width: document.getElementById("hour-width"),
 			base: document.getElementById("hour-base"),
+			style: document.getElementById("hour-style"),
 		},
 		minute: {
 			color: document.getElementById("minute-color"),
 			length: document.getElementById("minute-length"),
 			width: document.getElementById("minute-width"),
 			base: document.getElementById("minute-base"),
+			style: document.getElementById("minute-style"),
 		},
 		second: {
 			color: document.getElementById("second-color"),
 			length: document.getElementById("second-length"),
 			width: document.getElementById("second-width"),
 			base: document.getElementById("second-base"),
+			style: document.getElementById("second-style"),
 		},
 	}
 
-	resize_canvas()
 	update_vars()
+	resize_canvas()
 })
 
 function update_vars() {
@@ -132,6 +140,7 @@ function update_vars() {
 	}
 
 	clock_setting = map_inputs(inputs)
+	console.log(clock_setting)
 
 	update()
 }
@@ -187,8 +196,20 @@ function draw_back(
 	time,
 	{
 		color = "#ffffff",
-		hour = { color: "#000", start: 0.8, end: 0.9, width: 0.01 },
-		minute = { color: "#666", start: 0.85, end: 0.9, width: 0.005 },
+		hour = {
+			color: "#000",
+			start: 0.8,
+			end: 0.9,
+			width: 0.01,
+			style: "round",
+		},
+		minute = {
+			color: "#666",
+			start: 0.85,
+			end: 0.9,
+			width: 0.005,
+			style: "round",
+		},
 		number = {
 			color: "#000",
 			distance: 0.7,
@@ -209,13 +230,33 @@ function draw_back(
 		ctx.restore()
 	}
 
-	if (minute != null) {
+	if (hour != null && hour.style != "none") {
+		const hour_step = ((Math.PI / 180) * 360) / 12
+
+		ctx.save()
+		ctx.strokeStyle = hour.color
+		ctx.lineWidth = hour.width
+		ctx.lineCap = hour.style
+
+		for (let i = 0; i < 12; i++) {
+			ctx.beginPath()
+			ctx.moveTo(0, hour.start)
+			ctx.lineTo(0, hour.end)
+			ctx.stroke()
+
+			ctx.rotate(hour_step)
+		}
+
+		ctx.restore()
+	}
+
+	if (minute != null && minute.style != "none") {
 		const minute_step = ((Math.PI / 180) * 360) / 12 / 5
 
 		ctx.save()
-		ctx.lineCap = "round"
 		ctx.strokeStyle = minute.color
 		ctx.lineWidth = minute.width
+		ctx.lineCap = minute.style
 
 		for (let i = 0; i < 60; i++) {
 			if (i % 5 != 0) {
@@ -226,26 +267,6 @@ function draw_back(
 			}
 
 			ctx.rotate(minute_step)
-		}
-
-		ctx.restore()
-	}
-
-	if (minute != null) {
-		const hour_step = ((Math.PI / 180) * 360) / 12
-
-		ctx.save()
-		ctx.lineCap = "round"
-		ctx.strokeStyle = hour.color
-		ctx.lineWidth = hour.width
-
-		for (let i = 0; i < 12; i++) {
-			ctx.beginPath()
-			ctx.moveTo(0, hour.start)
-			ctx.lineTo(0, hour.end)
-			ctx.stroke()
-
-			ctx.rotate(hour_step)
 		}
 
 		ctx.restore()
@@ -279,21 +300,33 @@ function draw_hand(
 		length = 0.9,
 		width = 0.005,
 		base = 0.01,
+		style = "round",
 		timescale = 1440,
 	}
 ) {
+	if (style == "none") return
+
 	ctx.save()
 
 	ctx.strokeStyle = color
+	ctx.fillStyle = color
 	ctx.lineWidth = width
-	ctx.lineCap = "round"
+	ctx.lineCap = style
 
 	ctx.rotate(Math.PI * 2 * time * timescale)
 
-	ctx.beginPath()
-	ctx.moveTo(0, 0)
-	ctx.lineTo(0, -length)
-	ctx.stroke()
+	if (style == "pointy") {
+		ctx.beginPath()
+		ctx.moveTo(-width / 2.0, 0)
+		ctx.lineTo(0, -length)
+		ctx.lineTo(width / 2.0, 0)
+		ctx.fill()
+	} else {
+		ctx.beginPath()
+		ctx.moveTo(0, 0)
+		ctx.lineTo(0, -length)
+		ctx.stroke()
+	}
 
 	ctx.fillStyle = color
 
@@ -302,4 +335,13 @@ function draw_hand(
 	ctx.fill()
 
 	ctx.restore()
+}
+
+const animation_styles = {
+	continuous: (time, timescale) => {
+		return time
+	},
+	discreet: (time, timescale) => {
+		return time
+	},
 }

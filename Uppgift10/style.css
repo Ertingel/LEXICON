@@ -208,6 +208,8 @@ input {
 }
 
 #pop-up {
+	z-index: 0;
+
 	position: relative;
 
 	background: #222222;
@@ -220,6 +222,60 @@ input {
 
 #pop-up .pop-up {
 	position: relative;
+
+	transform-origin: 1rem 6rem;
+	transform: translateY(-80vh);
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#pop-up:hover .pop-up {
+	animation: drop 0.5s 0.5s ease forwards, swing 2s 3s ease forwards;
+}
+
+@keyframes drop {
+	0% {
+		opacity: 0;
+		transform: translateY(-80vh);
+	}
+	70% {
+		transform: translateY(5rem);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes swing {
+	0% {
+		transform: rotateZ(0deg);
+	}
+	40% {
+		transform: rotateZ(90deg);
+	}
+	70% {
+		transform: rotateZ(70deg);
+	}
+	100% {
+		transform: rotateZ(75deg);
+	}
+}
+
+#pop-up .pop-up .ninja {
+	width: 15rem;
+
+	transform: translatey(50%);
+
+	user-select: none;
+	pointer-events: none;
+}
+
+#pop-up .container {
+	position: relative;
 	padding: 2rem 2rem 1.5rem 2rem;
 
 	color: #333333;
@@ -231,16 +287,7 @@ input {
 	gap: 1rem;
 }
 
-#pop-up .ninja {
-	position: absolute;
-	bottom: 100%;
-	left: 50%;
-	width: 15rem;
-
-	transform: translateX(-50%);
-}
-
-#pop-up .close {
+#pop-up .container .close {
 	position: absolute;
 	width: 1rem;
 	height: 1rem;
@@ -255,26 +302,26 @@ input {
 	border-radius: 0.5rem;
 }
 
-#pop-up .pop-up > div {
+#pop-up .container > div {
 	margin-top: 1rem;
 
 	display: flex;
 	flex-flow: row nowrap;
 }
 
-#pop-up .pop-up > div > input {
+#pop-up .container > div > input {
 	padding: 0.25rem;
 	border: #333333 solid 0.07rem;
 	outline: none;
 }
 
-#pop-up .pop-up > div > input[type="email"] {
+#pop-up .container > div > input[type="email"] {
 	border-right: none;
 	border-top-left-radius: 0.5rem;
 	border-bottom-left-radius: 0.5rem;
 }
 
-#pop-up .pop-up > div > input[type="submit"] {
+#pop-up .container > div > input[type="submit"] {
 	color: #ffffff;
 	background-color: #333333;
 	border-top-right-radius: 0.5rem;

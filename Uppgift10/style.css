@@ -25,6 +25,11 @@ img {
 
 button {
 	font-size: 1em;
+	border: none;
+}
+
+input {
+	font-size: 1em;
 }
 
 #hover {
@@ -200,4 +205,78 @@ button {
 	to {
 		left: 100%;
 	}
+}
+
+#pop-up {
+	position: relative;
+
+	background: #222222;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#pop-up .pop-up {
+	position: relative;
+	padding: 2rem 2rem 1.5rem 2rem;
+
+	color: #333333;
+	background-color: #f0e4d2;
+
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	gap: 1rem;
+}
+
+#pop-up .ninja {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	width: 15rem;
+
+	transform: translateX(-50%);
+}
+
+#pop-up .close {
+	position: absolute;
+	width: 1rem;
+	height: 1rem;
+	top: 0.5rem;
+	left: 0.5rem;
+	box-sizing: border-box;
+
+	font-size: 0.6rem;
+
+	color: #ffffff;
+	background-color: #525557;
+	border-radius: 0.5rem;
+}
+
+#pop-up .pop-up > div {
+	margin-top: 1rem;
+
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+#pop-up .pop-up > div > input {
+	padding: 0.25rem;
+	border: #333333 solid 0.07rem;
+	outline: none;
+}
+
+#pop-up .pop-up > div > input[type="email"] {
+	border-right: none;
+	border-top-left-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+}
+
+#pop-up .pop-up > div > input[type="submit"] {
+	color: #ffffff;
+	background-color: #333333;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
 }

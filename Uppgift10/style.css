@@ -26,10 +26,14 @@ img {
 button {
 	font-size: 1em;
 	border: none;
+
+	cursor: pointer;
 }
 
 input {
 	font-size: 1em;
+
+	cursor: pointer;
 }
 
 #hover {
@@ -326,4 +330,68 @@ input {
 	background-color: #333333;
 	border-top-right-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;
+}
+
+#cart {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+#cart > header {
+	padding: 1rem 3rem;
+
+	border-bottom: #eeeeee solid 0.1rem;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#cart #basket > img {
+	width: 4rem;
+}
+
+#cart > main {
+	padding: 5rem 1rem;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+
+	flex-grow: 1;
+}
+
+#cart .products {
+	max-width: 100vmin;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-auto-rows: 1fr;
+
+	gap: 3rem;
+}
+
+#cart .products > * {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+	align-items: center;
+
+	gap: 1rem;
+}
+
+#cart .products > * img {
+	width: 100%;
+}
+
+#cart .products > * button {
+	padding: 0.5rem;
+
+	color: #ffffff;
+	background: #333333;
+	border-radius: 0.5rem;
 }

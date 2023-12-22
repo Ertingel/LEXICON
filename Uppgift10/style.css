@@ -395,7 +395,9 @@ input {
 }
 
 #cart .products {
-	max-width: 100vmin;
+	max-width: 80vmin;
+
+	font-size: 0.7rem;
 
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -410,7 +412,7 @@ input {
 	justify-content: space-between;
 	align-items: center;
 
-	gap: 1rem;
+	gap: 1em;
 }
 
 #cart .products > * img {
@@ -418,11 +420,11 @@ input {
 }
 
 #cart .products > * button {
-	padding: 0.5rem;
+	padding: 0.5em;
 
 	color: #ffffff;
 	background: #333333;
-	border-radius: 0.5rem;
+	border-radius: 0.5em;
 }
 
 #cards {

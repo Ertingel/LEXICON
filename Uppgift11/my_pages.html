@@ -8,15 +8,21 @@
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
+		<button class="burger">
+			<img src="./assets/Icons/burgir.svg" alt="Menu" />
+		</button>
+
+		<nav>
+			<a href="">PLANNER</a>
+			<a href="">HISTORIK</a>
+			<a href="">TIPS</a>
+			<a href="">LOGGA IN</a>
+		</nav>
+
 		<header>
-			<nav>
-				<a href="">PLANNER</a>
-				<a href="">HISTORIK</a>
-				<a href="">TIPS</a>
-				<a href="">LOGGA IN</a>
-			</nav>
-			<div id="hero"><img src="assets/Logo.svg" alt="Logo" /></div>
+			<div id="hero2"><img src="assets/Logo.svg" alt="Logo" /></div>
 		</header>
+
 		<main>
 			<form action="">
 				<h3>Lägg till ny plantering:</h3>
@@ -29,7 +35,7 @@
 
 				<input type="submit" value="LÄGG TILL" />
 			</form>
-			<section>
+			<section id="planned">
 				<h3>Dina planerade planteringar:</h3>
 
 				<ul>
@@ -46,12 +52,19 @@
 						<time>15 april 2024</time>
 
 						<p>Rico Coolio</p>
-						<button>TA BORT</button>
+						<button>
+							<span class="text">TA BORT</span
+							><img
+								class="icon"
+								src="./assets/Icons/trashcan.svg"
+								alt="Trashcan"
+							/>
+						</button>
 					</li>
 				</ul>
 			</section>
 
-			<section>
+			<section id="planted">
 				<h3>Dina planterade planteringar:</h3>
 
 				<ul>
@@ -68,7 +81,14 @@
 						<time>15 april 2024</time>
 
 						<p>Rico Coolio</p>
-						<button>TA BORT</button>
+						<button>
+							<span class="text">TA BORT</span
+							><img
+								class="icon"
+								src="./assets/Icons/trashcan.svg"
+								alt="Trashcan"
+							/>
+						</button>
 					</li>
 
 					<li>
@@ -84,12 +104,19 @@
 						<time>15 april 2024</time>
 
 						<p>Rico Coolio</p>
-						<button>TA BORT</button>
+						<button>
+							<span class="text">TA BORT</span
+							><img
+								class="icon"
+								src="./assets/Icons/trashcan.svg"
+								alt="Trashcan"
+							/>
+						</button>
 					</li>
 				</ul>
 			</section>
 
-			<section>
+			<section id="filler">
 				<img
 					src="./assets/Images/arpad-czapp-mnrok9qT_mk-unsplash.jpg"
 					alt="Womman in yellow dress walking on a feild. "

@@ -56,6 +56,10 @@ button {
 	color: var(--primary-color);
 	background-color: var(--accent-color-1);
 	border-radius: 0.55rem;
+
+	font-weight: bold;
+
+	cursor: pointer;
 }
 
 #menu {
@@ -122,7 +126,7 @@ header img {
 }
 
 main {
-	padding: 2.25rem 1.1rem 5.7rem 1.15rem;
+	padding: 2.25rem 1.1rem 5rem 1.15rem;
 
 	display: flex;
 	flex-flow: column nowrap;
@@ -150,6 +154,7 @@ main > h6 {
 
 .figure-section button {
 	margin: 0.5rem;
+	font-size: 1.15rem;
 }
 
 .figure-section figure {
@@ -170,6 +175,14 @@ main > h6 {
 	height: 8.8rem;
 }
 
+.card-section {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+
+	gap: 2.25rem;
+}
+
 .card-section ul {
 	display: grid;
 
@@ -185,28 +198,50 @@ main > h6 {
 	box-shadow: 0.25rem 0.25rem 0.25rem #0004;
 
 	grid-template:
-		"figure figure" auto
-		"type time" 1fr
-		"name remove" 1fr
-		/ 1fr 1fr;
+		"figure figure figure figure" auto
+		". type time ." 1.5rem
+		". name remove ." 2rem
+		/ 0.4rem 1fr 1fr 0.4rem;
+
+	align-items: center;
 }
 
 .card-section ul > li > figure {
 	grid-area: figure;
+	height: 12rem;
+
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.card-section ul > li > figure img {
+	height: 6.5rem;
 }
 
 .card-section ul > li > h4 {
 	grid-area: type;
+	align-self: end;
 	text-align: left;
 }
 
 .card-section ul > li > time {
 	grid-area: time;
+	align-self: end;
+
+	font-size: 0.7rem;
+	font-weight: bold;
 	text-align: right;
 }
 
 .card-section ul > li > p {
 	grid-area: name;
+	font-size: 0.7rem;
 	text-align: left;
 }
 
@@ -215,18 +250,23 @@ main > h6 {
 }
 
 .remove {
+	width: 1rem;
+	height: 1rem;
+	margin-inline: auto 0.2rem;
+	padding: 0;
+
+	border-radius: 0;
 	/*background-color: var(--red-color);*/
-	background: none;
+	background-color: transparent;
+	background-image: url("./assets/Icons/trashcan.svg");
+
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .remove > span {
 	display: none;
-}
-
-.remove > img {
-	height: 1rem;
-
-	color: var(--red-color);
 }
 
 /* Page specific styling */
@@ -257,4 +297,67 @@ main > h6 {
 .main-page > #seedling img,
 .main-page > #dig img {
 	height: 8.8rem;
+}
+
+#fotter-ish {
+	color: var(--primary-color);
+
+	background-image: url("./assets/Images/photo-1586281010691-f9da4be5b1f7.avif");
+
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	display: grid;
+
+	grid-template:
+		"." 28.5rem
+		"." 28.5rem
+		/ auto;
+}
+
+#fotter-ish a {
+	color: var(--primary-color);
+}
+
+#fotter-ish > figure {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#fotter-ish > figure img {
+	height: 13.2rem;
+}
+
+#fotter-ish > div {
+	position: relative;
+	padding: 1.5rem 1rem;
+
+	background-color: #000a;
+
+	display: grid;
+	grid-template:
+		"." 1fr
+		"." auto
+		/ auto;
+	align-items: center;
+}
+
+#fotter-ish > div > address {
+	margin-bottom: 0;
+
+	font-size: 0.85rem;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#fotter-ish > div img {
+	display: inline;
+	height: 1.25rem;
+	vertical-align: middle;
 }

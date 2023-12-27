@@ -1,7 +1,166 @@
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;700&display=swap");
+
 :root {
 	--primary-color: #ffffff;
 	--secondary-color: #fcf5fc;
 	--accent-color-1: #0a846e;
 	--accent-color-2: #9e6d52;
 	--text-color: #000000;
+
+	font-size: 14px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: var(--text-color);
+	text-decoration: none;
+}
+
+img {
+	display: block;
+	object-fit: contain;
+}
+
+hr {
+	width: 14.4rem;
+	height: 0.2rem;
+
+	background-color: var(--accent-color-1);
+	border: none;
+	border-radius: 0.1rem;
+}
+
+button {
+	border: none;
+	color: var(--primary-color);
+	background-color: var(--accent-color-1);
+}
+
+#menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0.75rem;
+
+	background: none;
+}
+
+body {
+	background-color: var(--secondary-color);
+	text-align: center;
+
+	font-family: "Maven Pro", sans-serif;
+}
+
+body > * {
+	background-color: var(--primary-color);
+}
+
+nav {
+	height: 3.75rem;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+nav > * {
+	padding: 0.5rem;
+
+	color: var(--accent-color-1);
+	font-weight: bold;
+}
+
+header > * {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+header img {
+	height: 14rem;
+}
+
+#hero {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+main {
+	padding: 2.2rem 1.1rem 5.7rem 1.1rem;
+
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+}
+
+main > h1,
+main > h2,
+main > h3,
+main > h4,
+main > h5,
+main > h6 {
+	color: var(--accent-color-1);
+}
+
+.figure-section {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+}
+
+.figure-section figure {
+	width: 19.2rem;
+	height: 19.2rem;
+
+	background-color: var(--accent-color-1);
+	border-radius: 9.6rem;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.figure-section figure > img {
+	height: 8.8rem;
+}
+
+/* Page specific styling */
+
+.main-page {
+	display: grid;
+
+	grid-template:
+		"hero hero" 27.5rem
+		"seedling dig" 14rem
+		/ 1fr 1fr;
+}
+
+.main-page > #hero {
+	grid-area: hero;
+}
+
+.main-page > #seedling {
+	grid-area: seedling;
+	background-color: var(--accent-color-1);
+}
+
+.main-page > #dig {
+	grid-area: dig;
+	background-color: var(--accent-color-2);
+}
+
+.main-page > #seedling img,
+.main-page > #dig img {
+	height: 8.8rem;
 }

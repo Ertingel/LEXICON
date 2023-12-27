@@ -7,12 +7,26 @@
 	--accent-color-2: #9e6d52;
 	--text-color: #000000;
 
+	--red-color: #b93857;
+
 	font-size: 14px;
 }
 
 * {
 	margin: 0;
 	padding: 0;
+}
+
+h1 {
+	font-size: 32px;
+}
+
+h2 {
+	font-size: 24px;
+}
+
+h3 {
+	font-size: 16px;
 }
 
 a {
@@ -35,9 +49,13 @@ hr {
 }
 
 button {
+	font-size: 16px;
+	padding: 0.5rem 1.5rem;
+
 	border: none;
 	color: var(--primary-color);
 	background-color: var(--accent-color-1);
+	border-radius: 0.55rem;
 }
 
 #menu {
@@ -73,7 +91,15 @@ nav {
 
 nav > * {
 	padding: 0.5rem;
+}
 
+#nav {
+	position: relative;
+	z-index: 10;
+	box-shadow: 0 0.25rem 0.25rem #0004;
+}
+
+#nav > * {
 	color: var(--accent-color-1);
 	font-weight: bold;
 }
@@ -96,11 +122,13 @@ header img {
 }
 
 main {
-	padding: 2.2rem 1.1rem 5.7rem 1.1rem;
+	padding: 2.25rem 1.1rem 5.7rem 1.15rem;
 
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
+
+	gap: 2.75rem;
 }
 
 main > h1,
@@ -116,11 +144,18 @@ main > h6 {
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
+
+	gap: 0.75rem;
+}
+
+.figure-section button {
+	margin: 0.5rem;
 }
 
 .figure-section figure {
 	width: 19.2rem;
 	height: 19.2rem;
+	margin: 0.5rem;
 
 	background-color: var(--accent-color-1);
 	border-radius: 9.6rem;
@@ -133,6 +168,65 @@ main > h6 {
 
 .figure-section figure > img {
 	height: 8.8rem;
+}
+
+.card-section ul {
+	display: grid;
+
+	grid-template-columns: 1fr 1fr;
+	grid-auto-rows: 1fr;
+
+	gap: 1rem;
+}
+
+.card-section ul > li {
+	display: grid;
+
+	box-shadow: 0.25rem 0.25rem 0.25rem #0004;
+
+	grid-template:
+		"figure figure" auto
+		"type time" 1fr
+		"name remove" 1fr
+		/ 1fr 1fr;
+}
+
+.card-section ul > li > figure {
+	grid-area: figure;
+}
+
+.card-section ul > li > h4 {
+	grid-area: type;
+	text-align: left;
+}
+
+.card-section ul > li > time {
+	grid-area: time;
+	text-align: right;
+}
+
+.card-section ul > li > p {
+	grid-area: name;
+	text-align: left;
+}
+
+.card-section ul > li > button {
+	grid-area: remove;
+}
+
+.remove {
+	/*background-color: var(--red-color);*/
+	background: none;
+}
+
+.remove > span {
+	display: none;
+}
+
+.remove > img {
+	height: 1rem;
+
+	color: var(--red-color);
 }
 
 /* Page specific styling */

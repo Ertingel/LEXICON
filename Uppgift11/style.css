@@ -101,6 +101,7 @@ body {
 }
 
 body > * {
+	box-sizing: border-box;
 	background-color: var(--primary-color);
 }
 
@@ -118,6 +119,8 @@ nav > * {
 }
 
 #nav {
+	display: none;
+
 	position: relative;
 	z-index: 10;
 	box-shadow: 0 0.25rem 0.25rem #0004;
@@ -361,8 +364,8 @@ form input[type="submit"] {
 	display: grid;
 
 	grid-template:
-		"." 28.5rem
-		"." 28.5rem
+		"figure" 28.5rem
+		"div" 28.5rem
 		/ auto;
 }
 
@@ -371,6 +374,8 @@ form input[type="submit"] {
 }
 
 #fotter-ish > figure {
+	grid-area: figure;
+
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: center;
@@ -382,6 +387,8 @@ form input[type="submit"] {
 }
 
 #fotter-ish > div {
+	grid-area: div;
+
 	position: relative;
 	padding: 1.5rem 1rem;
 
@@ -431,4 +438,73 @@ form input[type="submit"] {
 	background-repeat: no-repeat;
 	background-size: cover;
 	opacity: 0.5;
+}
+
+.to-top {
+	font-size: 0.75rem;
+}
+
+@media screen and (min-width: 875px) {
+	#menu {
+		display: none;
+	}
+
+	body {
+		padding-bottom: 10rem;
+
+		display: flex;
+		flex-flow: column nowrap;
+		align-items: center;
+	}
+
+	body > * {
+		width: 62rem;
+	}
+
+	#nav {
+		display: flex;
+	}
+
+	.card-section ul {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+
+	/* Page specific styling */
+
+	.main-page {
+		grid-template:
+			"hero seedling" 16.9rem
+			"hero dig" 16.9rem
+			/ 1fr 1fr;
+	}
+
+	#fotter-ish {
+		grid-template:
+			"div figure" 36.9rem
+			/ 1fr 1fr;
+	}
+
+	#filler {
+		grid-template:
+			". . . ." 17.3rem
+			/ 1fr 1fr 1fr 1fr;
+	}
+}
+
+@media screen and (min-width: 1000px) {
+	:root {
+		font-size: 16px;
+	}
+
+	h1 {
+		font-size: 32px;
+	}
+
+	h2 {
+		font-size: 24px;
+	}
+
+	h3 {
+		font-size: 16px;
+	}
 }

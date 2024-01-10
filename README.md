@@ -22,3 +22,5 @@ Detta är min repository för läxor i LEXICON.
     -   [**Uppgift10**](https://ertingel.github.io/LEXICON/Uppgift10): Animationer med Net Ninja
 -   Vecka 52
     -   [**Uppgift11**](https://ertingel.github.io/LEXICON/Uppgift11): Planned planthood
+-   Vecka 2
+    -   [**Uppgift12**](https://ertingel.github.io/LEXICON/Uppgift12): Javascript Övningar

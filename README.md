@@ -26,3 +26,10 @@ Detta är min repository för läxor i LEXICON.
     -   [**Uppgift12**](https://ertingel.github.io/LEXICON/Uppgift12): Variables and Datatypes
     -   [**Uppgift13**](https://ertingel.github.io/LEXICON/Uppgift13): Enkel dataregistrering och miniräknare
     -   [**Uppgift14**](https://ertingel.github.io/LEXICON/Uppgift14): Miniräknare
+-   Vecka 3 _(Javascript)_
+    -   [**Uppgift15**](https://ertingel.github.io/LEXICON/Uppgift15): Functions
+    -   [**Uppgift16**](https://ertingel.github.io/LEXICON/Uppgift16): Arrays
+    -   [**Uppgift17**](https://ertingel.github.io/LEXICON/Uppgift17): Arrays and Loops
+    -   [**Uppgift18**](https://ertingel.github.io/LEXICON/Uppgift18): The Sauna
+    -   [**Uppgift19**](https://ertingel.github.io/LEXICON/Uppgift19): Objects
+    -   [**Uppgift20**](https://ertingel.github.io/LEXICON/Uppgift20): Skolan med objects

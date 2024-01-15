@@ -234,3 +234,13 @@ lexicon.teachers.forEach(teacher => {
 console.log(lexicon.subjects[0].print_students())
 console.log(lexicon.students[0].print_subjects())
 console.log(lexicon.teachers[0].print_subjects())
+
+// 16
+lexicon.students.forEach(student => {
+	student.grades = student.subjects.map(subject => ({
+		grade: "C",
+		subject,
+	}))
+})
+
+console.log(lexicon.students)

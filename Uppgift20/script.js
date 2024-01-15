@@ -6,81 +6,86 @@ let lexicon = {
 	city: "STOCKHOLM",
 	students: [],
 	teachers: [],
+	subjects: [],
 }
 
 // 2
-let matematik = {
+lexicon.subjects.push({
 	name: "matematik",
 	students: [],
 	teacher: {},
-}
+})
 
-let svenska = {
+lexicon.subjects.push({
 	name: "svenska",
 	students: [],
 	teacher: {},
-}
+})
 
-let historia = {
+lexicon.subjects.push({
 	name: "historia",
 	students: [],
 	teacher: {},
-}
+})
 
 // 3
-let student1 = {
+lexicon.students.push({
 	name: "student1",
 	age: 12,
 	gender: "male",
 	subjects: [],
-}
+})
 
-let student2 = {
+lexicon.students.push({
 	name: "student2",
 	age: 13,
 	gender: "male",
 	subjects: [],
-}
+})
 
-let student3 = {
+lexicon.students.push({
 	name: "student3",
 	age: 12,
 	gender: "female",
 	subjects: [],
-}
+})
 
-let student4 = {
+lexicon.students.push({
 	name: "student4",
 	age: 11,
 	gender: "female",
 	subjects: [],
-}
+})
 
-let student5 = {
+lexicon.students.push({
 	name: "student5",
 	age: 12,
 	gender: "male",
 	subjects: [],
-}
+})
 
 // 4
-let teacher1 = {
+lexicon.teachers.push({
 	name: "teacher1",
 	subjects: [],
-}
+})
 
-let teacher2 = {
+lexicon.teachers.push({
 	name: "teacher2",
 	subjects: [],
-}
+})
 
 // 5
-//teacher1.subjects.push(matematik)
-//console.log(teacher1)
+/*
+lexicon.teachers[0].subjects.push(matematik)
+console.log(lexicon.teachers[0])
+*/
 
 // 6
-//matematik.students.push(student1)
-//console.log(matematik)
+/*
+lexicon.subjects[0].students.push(student1)
+console.log(lexicon.subjects[0])
+*/
 
 // 7
 function add_teacher(teacher, subject) {
@@ -89,18 +94,15 @@ function add_teacher(teacher, subject) {
 }
 
 // 8
-teacher1.add_subject = function (subject) {
-	add_teacher(this, subject)
-	return this
-}
+lexicon.teachers.forEach(teacher => {
+	teacher.add_subject = function (subject) {
+		add_teacher(this, subject)
+		return this
+	}
+})
 
-teacher2.add_subject = function (subject) {
-	add_teacher(this, subject)
-	return this
-}
-
-teacher2.add_subject(svenska)
-console.log(teacher2)
+lexicon.teachers[1].add_subject(lexicon.subjects[1])
+console.log(lexicon.teachers[1])
 
 // 9
 function add_student(student, subject) {
@@ -108,77 +110,127 @@ function add_student(student, subject) {
 	subject.students.push(student)
 }
 
-student1.add_subject = function (subject) {
-	add_student(this, subject)
-	return this
-}
+lexicon.students.forEach(student => {
+	student.add_subject = function (subject) {
+		add_student(this, subject)
+		return this
+	}
+})
 
-student2.add_subject = function (subject) {
-	add_student(this, subject)
-	return this
-}
+lexicon.subjects.forEach(subject => {
+	subject.add_student = function (student) {
+		add_student(student, this)
+		return this
+	}
 
-student3.add_subject = function (subject) {
-	add_student(this, subject)
-	return this
-}
-
-student4.add_subject = function (subject) {
-	add_student(this, subject)
-	return this
-}
-
-student5.add_subject = function (subject) {
-	add_student(this, subject)
-	return this
-}
-
-matematik.add_student = function (student) {
-	add_student(student, this)
-	return this
-}
-
-matematik.add_teacher = function (teacher) {
-	add_teacher(teacher, this)
-	return this
-}
-
-svenska.add_student = function (student) {
-	add_student(student, this)
-	return this
-}
-
-svenska.add_teacher = function (teacher) {
-	add_teacher(teacher, this)
-	return this
-}
-
-historia.add_student = function (student) {
-	add_student(student, this)
-	return this
-}
-
-historia.add_teacher = function (teacher) {
-	add_teacher(teacher, this)
-	return this
-}
+	subject.add_teacher = function (teacher) {
+		add_teacher(teacher, this)
+		return this
+	}
+})
 
 // 10
-teacher1.add_subject(matematik)
-historia.add_teacher(teacher1)
+lexicon.teachers[0].add_subject(lexicon.subjects[0])
+lexicon.subjects[1].add_teacher(lexicon.teachers[0])
+lexicon.subjects[2].add_teacher(lexicon.teachers[1])
 
-student1.add_subject(matematik)
-student2.add_subject(matematik)
-student3.add_subject(matematik)
+lexicon.students[0].add_subject(lexicon.subjects[0])
+lexicon.students[1].add_subject(lexicon.subjects[0])
+lexicon.students[2].add_subject(lexicon.subjects[0])
 
-svenska.add_student(student3)
-svenska.add_student(student4)
-svenska.add_student(student5)
+lexicon.subjects[1].add_student(lexicon.students[2])
+lexicon.subjects[1].add_student(lexicon.students[3])
+lexicon.subjects[1].add_student(lexicon.students[4])
 
-historia.add_student(student1)
-historia.add_student(student3)
-historia.add_student(student5)
+lexicon.subjects[2].add_student(lexicon.students[0])
+lexicon.subjects[2].add_student(lexicon.students[2])
+lexicon.subjects[2].add_student(lexicon.students[4])
 
-console.log(matematik)
-console.log(svenska)
-console.log(historia)
+console.log(lexicon.subjects[0])
+console.log(lexicon.subjects[1])
+console.log(lexicon.subjects[2])
+
+// 11
+function remove_teacher(teacher, subject) {
+	teacher.subjects = teacher.subjects.filter(e => e != subject)
+	subject.teacher = {}
+}
+
+function remove_student(student, subject) {
+	student.subjects = student.subjects.filter(e => e != subject)
+	subject.students = subject.students.filter(e => e != student)
+}
+
+lexicon.teachers.forEach(teacher => {
+	teacher.remove_subject = function (subject) {
+		remove_teacher(this, subject)
+		return this
+	}
+})
+
+lexicon.students.forEach(student => {
+	student.remove_subject = function (subject) {
+		remove_student(this, subject)
+		return this
+	}
+})
+
+lexicon.subjects.forEach(subject => {
+	subject.remove_teacher = function (teacher) {
+		remove_teacher(teacher, this)
+		return this
+	}
+
+	subject.remove_student = function (teacher) {
+		remove_student(teacher, this)
+		return this
+	}
+})
+
+// 12
+lexicon.subjects[2].remove_student(lexicon.students[2])
+console.log(lexicon.subjects[2])
+
+lexicon.teachers[0].remove_subject(lexicon.subjects[0])
+console.log(lexicon.teachers[0])
+
+// 13
+// Allready done.
+
+// 14
+lexicon.print_students = function () {
+	return this.students.map(s => s.name).join("\n")
+}
+
+console.log(lexicon.print_students())
+
+// 15
+lexicon.print_teachers = function () {
+	return this.teachers.map(s => s.name).join("\n")
+}
+
+lexicon.print_subjects = function () {
+	return this.subjects.map(s => s.name).join("\n")
+}
+
+lexicon.subjects.forEach(subject => {
+	subject.print_students = function () {
+		return this.students.map(s => s.name).join("\n")
+	}
+})
+
+lexicon.students.forEach(student => {
+	student.print_subjects = function () {
+		return this.subjects.map(s => s.name).join("\n")
+	}
+})
+
+lexicon.teachers.forEach(teacher => {
+	teacher.print_subjects = function () {
+		return this.subjects.map(s => s.name).join("\n")
+	}
+})
+
+console.log(lexicon.subjects[0].print_students())
+console.log(lexicon.students[0].print_subjects())
+console.log(lexicon.teachers[0].print_subjects())

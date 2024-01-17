@@ -5,6 +5,18 @@ class School {
 		this.teachers = teachers
 		this.subjets = subjets
 	}
+
+	get_students_string() {
+		return this.students.map(t => t.name).join("\n")
+	}
+
+	get_teachers_string() {
+		return this.teachers.map(t => t.name).join("\n")
+	}
+
+	get_subjects_string() {
+		return this.subjets.map(t => t.name).join("\n")
+	}
 }
 
 class Subject {
@@ -41,6 +53,10 @@ class Subject {
 
 		return this
 	}
+
+	get_students_string() {
+		return this.students.map(t => t.name).join("\n")
+	}
 }
 
 class Student {
@@ -62,6 +78,10 @@ class Student {
 		if (subject) subject.remove_student(this)
 		return this
 	}
+
+	get_subjects_string() {
+		return this.subjects.map(t => t.name).join("\n")
+	}
 }
 
 class Teacher {
@@ -80,6 +100,10 @@ class Teacher {
 	remove_subject(subject) {
 		if (subject) if (subject.teacher === this) subject.set_teacher(null)
 		return this
+	}
+
+	get_subjects_string() {
+		return this.subjects.map(t => t.name).join("\n")
 	}
 }
 
@@ -101,14 +125,24 @@ school1.students[1].add_subject(school1.subjets[0])
 school1.students[2].add_subject(school1.subjets[0])
 school1.teachers[0].add_subject(school1.subjets[0])
 
-school1.subjets[1].add_student(school1.students[2])
-school1.subjets[1].add_student(school1.students[3])
-school1.subjets[1].add_student(school1.students[4])
-school1.subjets[1].set_teacher(school1.teachers[1])
+school1.subjets[1]
+	.add_student(school1.students[2])
+	.add_student(school1.students[3])
+	.add_student(school1.students[4])
+	.set_teacher(school1.teachers[1])
 
-school1.subjets[2].add_student(school1.students[0])
-school1.subjets[2].add_student(school1.students[2])
-school1.subjets[2].add_student(school1.students[4])
-school1.subjets[2].set_teacher(school1.teachers[0])
+school1.subjets[2]
+	.add_student(school1.students[0])
+	.add_student(school1.students[2])
+	.add_student(school1.students[4])
+	.set_teacher(school1.teachers[0])
 
 console.log(school1)
+
+console.log(school1.get_students_string())
+console.log(school1.get_teachers_string())
+console.log(school1.get_subjects_string())
+
+console.log(school1.students[0].get_subjects_string())
+console.log(school1.teachers[0].get_subjects_string())
+console.log(school1.subjets[0].get_students_string())

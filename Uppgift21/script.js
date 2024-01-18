@@ -32,6 +32,7 @@ class Subject {
 	add_student(student) {
 		this.students.push(student)
 		student.subjects.push(this)
+		student.grades.push(new Grade(student, this))
 
 		return this
 	}
@@ -59,14 +60,23 @@ class Subject {
 	}
 }
 
+class Grade {
+	constructor(student, subject, grade = "E") {
+		this.student = student
+		this.subject = subject
+		this.grade = grade
+	}
+}
+
 class Student {
-	constructor(name, age, gender, subjects = []) {
+	constructor(name, age, gender, subjects = [], grades = []) {
 		this.name = name
 		this.age = age
 		this.gender = gender
 
 		this.subjects = []
 		subjects.forEach(s => this.add_subject(s))
+		this.grades = grades
 	}
 
 	add_subject(subject) {

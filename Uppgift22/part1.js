@@ -22,3 +22,26 @@ const img = {
 }
 
 console.log(img)
+
+// 6
+console.log(
+	document.getElementsByClassName("ingredients-list-paste")[0].children.length
+)
+
+// 7
+console.log(
+	document.getElementsByClassName("ingredients-list-paste")[0].children[3]
+		.innerHTML
+)
+
+// 8
+console.log(
+	[...document.getElementsByClassName("instructions-list")[0].children].map(
+		(e, i) => {
+			return {
+				order: i,
+				text: e.innerHTML.replaceAll(/\n|\t/gu, ""),
+			}
+		}
+	)
+)

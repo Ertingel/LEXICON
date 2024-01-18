@@ -34,3 +34,6 @@ Detta är min repository för läxor i LEXICON.
     -   [**Uppgift19**](https://ertingel.github.io/LEXICON/Uppgift19): Objects
     -   [**Uppgift20**](https://ertingel.github.io/LEXICON/Uppgift20): Skolan med objects
     -   [**Uppgift21**](https://ertingel.github.io/LEXICON/Uppgift21): Skolan med klasser
+-   Vecka 4 _(Javascript)_
+    -   [**Uppgift22**](https://ertingel.github.io/LEXICON/Uppgift22): Exercises in DOM manipulation Del1
+    -   **Uppgift23**: Exercises in DOM manipulation Del2

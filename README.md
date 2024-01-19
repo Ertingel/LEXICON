@@ -35,5 +35,7 @@ Detta är min repository för läxor i LEXICON.
     -   [**Uppgift20**](https://ertingel.github.io/LEXICON/Uppgift20): Skolan med objects
     -   [**Uppgift21**](https://ertingel.github.io/LEXICON/Uppgift21): Skolan med klasser
 -   Vecka 4 _(Javascript)_
-    -   [**Uppgift22**](https://ertingel.github.io/LEXICON/Uppgift22): Exercises in DOM manipulation Del1
-    -   **Uppgift23**: Exercises in DOM manipulation Del2
+    -   [**Uppgift22**](https://ertingel.github.io/LEXICON/Uppgift22): Bucket List
+    -   [**Uppgift23**](https://ertingel.github.io/LEXICON/Uppgift23): Exercises in DOM manipulation Del1
+    -   **Uppgift24**: Exercises in DOM manipulation Del2 _(Se del1)_
+    -   [**Uppgift25**](https://ertingel.github.io/LEXICON/Uppgift25): Sirius Minishop

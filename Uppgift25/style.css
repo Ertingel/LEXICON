@@ -1,0 +1,96 @@
+body {
+	min-height: 100vh;
+	color: #ffffff;
+	background-color: #004c91;
+
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol";
+}
+
+form {
+	padding: 0.85rem 1rem;
+
+	color: #000000;
+	background-color: #ffffff;
+	border-radius: 0.25rem;
+}
+
+input {
+	padding: 1rem;
+	background-color: #ffffff;
+	border-radius: 0.25rem;
+}
+
+label {
+	padding: 0 0.25rem;
+	background-color: #ffffff;
+}
+
+#account-registration {
+	display: grid;
+	justify-content: stretch;
+	align-items: stretch;
+	gap: 1rem;
+
+	grid-template:
+		"first-name last-name" auto
+		"username username" auto
+		"username username" auto
+		"email email" auto
+		"password password" auto
+		"create create" auto
+		/ 1fr 1fr;
+}
+
+#account-registration > div {
+	position: relative;
+}
+
+#account-registration > div > input {
+	box-sizing: border-box;
+	width: 100%;
+}
+
+#account-registration > div > label {
+	position: absolute;
+	top: 0;
+	left: 1rem;
+
+	transform: translateY(-50%);
+}
+
+#account-registration > .first-name {
+	grid-area: first-name;
+}
+
+#account-registration > .last-name {
+	grid-area: last-name;
+}
+
+#account-registration > .username {
+	grid-area: username;
+}
+
+#account-registration > .email {
+	grid-area: email;
+}
+
+#account-registration > .password {
+	grid-area: password;
+}
+
+#account-registration > #create {
+	grid-area: create;
+
+	color: #ffffff;
+	background-color: #008000;
+	border: none;
+
+	font-weight: bold;
+}

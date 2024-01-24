@@ -138,6 +138,10 @@ body {
 	transition: background-color 0.25s;
 }
 
+#account-registration > #create:hover {
+	background-color: #00a000;
+}
+
 #account-registration > #create:disabled {
 	background-color: #808080;
 }

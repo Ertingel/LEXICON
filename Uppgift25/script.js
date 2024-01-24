@@ -1,6 +1,8 @@
 const minPasswordLength = 8
 
 window.onload = () => {
+	const form = document.getElementById("account-registration")
+
 	const firstName = document.getElementById("first-name")
 	const lastName = document.getElementById("last-name")
 
@@ -12,49 +14,80 @@ window.onload = () => {
 
 	const create = document.getElementById("create")
 
-	const fields = [firstName, lastName, username, email]
+	const verify = function () {
+		const fields = [firstName, lastName, username]
+		const fieldsValid = fields.every(f => f.value.length > 0)
 
-	const verify = function (e) {
-		const f = fields.every(f => f.value.length > 0)
+		const emailValid = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email.value)
+		email.classList.toggle("wrong", !emailValid && email.value.length > 0)
 
-		const p1 = password.value.length >= minPasswordLength
-		const p2 =
+		const password1Valid = password.value.length >= minPasswordLength
+		const password2Valid =
 			confirmPassword.value.length >= minPasswordLength &&
 			password.value === confirmPassword.value
 
-		password.classList.toggle("wrong", !p1 && password.value.length > 0)
+		password.classList.toggle(
+			"wrong",
+			!password1Valid && password.value.length > 0
+		)
 		confirmPassword.classList.toggle(
 			"wrong",
-			!p2 && confirmPassword.value.length > 0
+			!password2Valid && confirmPassword.value.length > 0
 		)
 
-		create.disabled = !(f && p1 && p2)
+		create.disabled = !(
+			fieldsValid &&
+			emailValid &&
+			password1Valid &&
+			password2Valid
+		)
 	}
 
-	password.onchange = function (e) {
-		verify()
-	}
-
-	confirmPassword.onchange = function (e) {
-		verify()
-	}
-
-	const blockWhiteSpace = function (e) {
+	const keydown = function (e) {
 		return !/\s/g.test(String.fromCharCode(e.which))
 	}
 
-	firstName.onkeydown = blockWhiteSpace
-	lastName.onkeydown = blockWhiteSpace
-	username.onkeydown = blockWhiteSpace
-	email.onkeydown = blockWhiteSpace
+	firstName.onkeydown = keydown
+	lastName.onkeydown = keydown
+	username.onkeydown = keydown
+	email.onkeydown = keydown
+	password.onkeydown = keydown
+	confirmPassword.onkeydown = keydown
 
-	const stripWhiteSpace = function (e) {
+	const keyup = function (e) {
+		verify()
+	}
+
+	firstName.onkeyup = keyup
+	lastName.onkeyup = keyup
+	username.onkeyup = keyup
+	email.onkeyup = keyup
+	password.onkeyup = keyup
+	confirmPassword.onkeyup = keyup
+
+	const change = function (e) {
 		e.target.value = e.target.value.replace(/\s/g, "")
 		verify()
 	}
 
-	firstName.onchange = stripWhiteSpace
-	lastName.onchange = stripWhiteSpace
-	username.onchange = stripWhiteSpace
-	email.onchange = stripWhiteSpace
+	firstName.onchange = change
+	lastName.onchange = change
+	username.onchange = change
+	email.onchange = change
+	password.onchange = change
+	confirmPassword.onchange = change
+
+	form.onsubmit = function (e) {
+		const data = {
+			firstName: firstName.value,
+			lastName: lastName.value,
+			username: username.value,
+			email: email.value,
+			password: password.value,
+		}
+
+		console.log(data)
+
+		return false
+	}
 }

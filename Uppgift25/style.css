@@ -95,7 +95,7 @@ body {
 	border-color: #ff0000;
 }
 
-#account-registration > div > label.wrong + label {
+#account-registration > div > input.wrong + label {
 	color: #ff0000;
 }
 

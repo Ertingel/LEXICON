@@ -1,3 +1,5 @@
+const minPasswordLength = 8
+
 window.onload = () => {
 	const firstName = document.getElementById("first-name")
 	const lastName = document.getElementById("last-name")
@@ -8,25 +10,51 @@ window.onload = () => {
 	const password = document.getElementById("password")
 	const confirmPassword = document.getElementById("confirm-password")
 
-	const blockWhiteSpace = function (e) {
-		if (e.which === 32) return false
-		console.log(e)
+	const create = document.getElementById("create")
+
+	const fields = [firstName, lastName, username, email]
+
+	const verify = function (e) {
+		const f = fields.every(f => f.value.length > 0)
+
+		const p1 = password.value.length >= minPasswordLength
+		const p2 =
+			confirmPassword.value.length >= minPasswordLength &&
+			password.value === confirmPassword.value
+
+		password.classList.toggle("wrong", !p1 && password.value.length > 0)
+		confirmPassword.classList.toggle(
+			"wrong",
+			!p2 && confirmPassword.value.length > 0
+		)
+
+		create.disabled = !(f && p1 && p2)
 	}
 
-	const stripWhiteSpace = function (e) {
-		console.log(e)
+	password.onchange = function (e) {
+		verify()
+	}
 
-		e.preventDefault()
+	confirmPassword.onchange = function (e) {
+		verify()
+	}
 
-		this.value = this.value.replace(/\s/g, "")
+	const blockWhiteSpace = function (e) {
+		return !/\s/g.test(String.fromCharCode(e.which))
 	}
 
 	firstName.onkeydown = blockWhiteSpace
-	firstName.onpaste = stripWhiteSpace
-
 	lastName.onkeydown = blockWhiteSpace
-	lastName.onpaste = stripWhiteSpace
-
 	username.onkeydown = blockWhiteSpace
-	username.onpaste = stripWhiteSpace
+	email.onkeydown = blockWhiteSpace
+
+	const stripWhiteSpace = function (e) {
+		e.target.value = e.target.value.replace(/\s/g, "")
+		verify()
+	}
+
+	firstName.onchange = stripWhiteSpace
+	lastName.onchange = stripWhiteSpace
+	username.onchange = stripWhiteSpace
+	email.onchange = stripWhiteSpace
 }

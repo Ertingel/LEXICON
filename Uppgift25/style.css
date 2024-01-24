@@ -13,26 +13,13 @@ body {
 		"Segoe UI Symbol";
 }
 
-form {
-	padding: 0.85rem 1rem;
+#account-registration {
+	padding: 1rem;
 
 	color: #000000;
 	background-color: #ffffff;
 	border-radius: 0.25rem;
-}
 
-input {
-	padding: 1rem;
-	background-color: #ffffff;
-	border-radius: 0.25rem;
-}
-
-label {
-	padding: 0 0.25rem;
-	background-color: #ffffff;
-}
-
-#account-registration {
 	display: grid;
 	justify-content: stretch;
 	align-items: stretch;
@@ -43,9 +30,18 @@ label {
 		"username username" auto
 		"username username" auto
 		"email email" auto
-		"password password" auto
+		"password confirm-password" auto
 		"create create" auto
 		/ 1fr 1fr;
+}
+
+#account-registration input {
+	padding: 1em;
+	font-size: 1em;
+
+	border-radius: 0.25rem;
+
+	outline: none;
 }
 
 #account-registration > div {
@@ -55,14 +51,52 @@ label {
 #account-registration > div > input {
 	box-sizing: border-box;
 	width: 100%;
+
+	color: #808080;
+	background-color: #ffffff;
+	border: #808080 solid 0.15rem;
+
+	transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out;
 }
 
 #account-registration > div > label {
 	position: absolute;
-	top: 0;
+	top: 50%;
 	left: 1rem;
-
+	padding: 0 0.25em;
 	transform: translateY(-50%);
+
+	color: #808080;
+	background-color: #ffffff;
+	background-color: #ffffff00;
+
+	transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+		top 0.25s ease-in-out;
+
+	user-select: none;
+	cursor: text;
+}
+
+#account-registration > div > input:focus,
+#account-registration > div > input:not(:placeholder-shown) {
+	color: #004c91;
+	border-color: #004c91;
+}
+
+#account-registration > div > input:focus + label,
+#account-registration > div > input:not(:placeholder-shown) + label {
+	color: #004c91;
+	background-color: #ffffffff;
+	top: 0%;
+}
+
+#account-registration > div > input.wrong {
+	color: #ff0000;
+	border-color: #ff0000;
+}
+
+#account-registration > div > label.wrong + label {
+	color: #ff0000;
 }
 
 #account-registration > .first-name {
@@ -85,12 +119,25 @@ label {
 	grid-area: password;
 }
 
+#account-registration > .confirm-password {
+	grid-area: confirm-password;
+}
+
 #account-registration > #create {
 	grid-area: create;
+
+	font-size: 1.5rem;
+	padding: 0.5rem;
 
 	color: #ffffff;
 	background-color: #008000;
 	border: none;
 
 	font-weight: bold;
+
+	transition: background-color 0.25s;
+}
+
+#account-registration > #create:disabled {
+	background-color: #808080;
 }

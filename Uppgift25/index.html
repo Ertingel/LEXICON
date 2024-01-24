@@ -9,33 +9,45 @@
 		<script src="script.js"></script>
 	</head>
 	<body>
+		<h1>Register your account</h1>
+
 		<form id="account-registration">
 			<div class="first-name">
-				<input id="first-name" type="text" />
+				<input id="first-name" type="text" placeholder="" required />
 				<label for="first-name">First name</label>
 			</div>
 
 			<div class="last-name">
-				<input id="last-name" type="text" />
+				<input id="last-name" type="text" placeholder="" required />
 				<label for="last-name">Last name</label>
 			</div>
 
 			<div class="username">
-				<input id="username" type="text" />
+				<input id="username" type="text" placeholder="" required />
 				<label for="username">Username</label>
 			</div>
 
 			<div class="email">
-				<input id="email" type="email" />
+				<input id="email" type="email" placeholder="" required />
 				<label for="email">Email</label>
 			</div>
 
 			<div class="password">
-				<input id="password" type="password" />
+				<input id="password" type="password" placeholder="" required />
 				<label for="password">Password</label>
 			</div>
 
-			<input id="create" type="submit" value="Create" />
+			<div class="confirm-password">
+				<input
+					id="confirm-password"
+					type="password"
+					placeholder=""
+					required
+				/>
+				<label for="confirm-password">Confirm password</label>
+			</div>
+
+			<input id="create" type="submit" value="Create" disabled />
 		</form>
 	</body>
 </html>

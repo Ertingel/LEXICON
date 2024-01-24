@@ -90,4 +90,6 @@ window.onload = () => {
 
 		return false
 	}
+
+	verify()
 }

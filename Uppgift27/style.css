@@ -1,0 +1,72 @@
+body {
+	min-height: 100vh;
+
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol";
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+#background {
+	position: fixed;
+	z-index: -1;
+	height: 100vh;
+	width: 100vw;
+
+	background-image: url("./assets/images/selective-focus-photography-of-cherry-blossoms.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	filter: blur(0.25rem);
+}
+
+#todo {
+	width: 25rem;
+	padding: 1rem;
+
+	color: #994538;
+	background-color: #d5c0b5aa;
+	border-radius: 1rem;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	gap: 0.5rem;
+}
+
+#todo > h1 {
+	text-align: center;
+}
+
+#todo-add {
+	display: flex;
+	flex-flow: row nowrap;
+	gap: 0.5rem;
+}
+
+input {
+	padding: 0.5rem;
+	font-size: 1em;
+
+	color: #994538;
+	background-color: #ffffff88;
+	border-radius: 0.5rem;
+
+	border: none;
+	outline: none;
+}
+
+#todo-add input[type="text"] {
+	flex-grow: 1;
+}

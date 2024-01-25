@@ -16,6 +16,44 @@ body {
 	margin: 0;
 }
 
+input {
+	padding: 0.5rem;
+	font-size: 1em;
+
+	color: #994538;
+	background-color: #ffffff88;
+	border-radius: 0.5rem;
+
+	border: none;
+	outline: none;
+}
+
+.todo {
+	display: flex;
+	flex-flow: row nowrap;
+	gap: 0.5rem;
+}
+
+.todo > input {
+	box-sizing: border-box;
+
+	min-width: 2.75em;
+	min-height: 2.75em;
+}
+
+.todo > input[type="text"] {
+	flex-grow: 1;
+}
+
+.todo > input[type="button"],
+.todo > input[type="submit"] {
+	font-weight: bold;
+}
+
+.todo > input[type="checkbox"] {
+	border: #994538 solid 0.2rem;
+}
+
 #background {
 	position: fixed;
 	z-index: -1;
@@ -49,24 +87,14 @@ body {
 	text-align: center;
 }
 
-#todo-add {
+#todo-list {
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
 	gap: 0.5rem;
 }
 
-input {
-	padding: 0.5rem;
-	font-size: 1em;
-
-	color: #994538;
-	background-color: #ffffff88;
-	border-radius: 0.5rem;
-
-	border: none;
-	outline: none;
-}
-
-#todo-add input[type="text"] {
-	flex-grow: 1;
+#todo-list > li {
+	list-style-type: none;
 }

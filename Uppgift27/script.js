@@ -19,8 +19,22 @@ window.onload = () => {
 
 	const todoList = document.getElementById("todo-list")
 
+	const moveTodo = (entry, position) => {
+		console.log(position, entry.previousSibling, entry.nextSibling)
+		if (position == 0) return
+		if (position < 0) todoList.insertBefore(entry, entry.previousSibling)
+		else {
+			if (entry.nextSibling) entry.nextSibling.after(entry)
+			else todoList.insertBefore(entry, todoList.firstChild)
+		}
+	}
+
+	const removeTodo = entry => {
+		todoList.removeChild(entry)
+	}
+
 	const addTodo = data => {
-		const item = make(todoList, "li", {
+		const item = make(null, "li", {
 			class: "todo",
 		})
 
@@ -29,27 +43,44 @@ window.onload = () => {
 		})
 
 		make(item, "input", {
+			class: "remove",
 			type: "button",
-			value: "-",
+			value: "✕",
+			onclick: () => {
+				removeTodo(item)
+			},
 		})
 
 		make(item, "input", {
 			type: "text",
 			value: data,
+			onchange: e => {
+				if (e.target.value.length <= 0) removeTodo(item)
+			},
 		})
 
 		make(item, "input", {
 			type: "button",
 			value: "⭡",
+			onclick: () => {
+				moveTodo(item, -1)
+			},
 		})
 
 		make(item, "input", {
 			type: "button",
 			value: "⭣",
+			onclick: () => {
+				moveTodo(item, 1)
+			},
 		})
+
+		todoList.prepend(item)
 	}
 
 	addTodo("Pizza")
+	addTodo("Taco")
+	addTodo("Snacks")
 
 	todoAdd.onsubmit = function (e) {
 		if (todoAddText.value.length > 0) {

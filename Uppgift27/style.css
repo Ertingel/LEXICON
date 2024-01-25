@@ -51,14 +51,51 @@ input {
 }
 
 .todo > input[type="checkbox"] {
-	border: #994538 solid 0.2rem;
+	position: relative;
+	appearance: none;
+
+	background: none;
+}
+
+.todo > input[type="checkbox"]::after {
+	content: " ";
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	padding: 0.5rem;
+
+	color: #ffffffaa;
+	background-color: #ffffff88;
+	border: #994538 solid 0.15rem;
+	border-radius: 0.5rem;
+
+	text-align: center;
+}
+
+.todo > input[type="checkbox"]:checked:after {
+	content: "✓";
+
+	background-color: #994538;
+}
+
+.todo > input[type="checkbox"]:not(:checked) + .remove {
+	display: none;
+}
+
+.todo > input[type="checkbox"]:checked + * + input[type="text"] {
+	text-decoration: line-through;
 }
 
 #background {
 	position: fixed;
 	z-index: -1;
-	height: 100vh;
-	width: 100vw;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
 
 	background-image: url("./assets/images/selective-focus-photography-of-cherry-blossoms.jpg");
 	background-position: center;
@@ -69,7 +106,7 @@ input {
 }
 
 #todo {
-	width: 25rem;
+	width: 30rem;
 	padding: 1rem;
 
 	color: #994538;

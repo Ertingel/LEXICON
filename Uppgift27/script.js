@@ -15,88 +15,62 @@ function make(parent, type, { id, class: class_, ...data }) {
 window.onload = () => {
 	const todoAdd = document.getElementById("todo-add")
 	const todoAddText = document.getElementById("todo-add-text")
-	const todoAddButton = document.getElementById("todo-add-button")
+	//const todoAddButton = document.getElementById("todo-add-button")
 
 	const todoList = document.getElementById("todo-list")
 
-	const moveTodo = (entry, position) => {
-		console.log(position, entry.previousSibling, entry.nextSibling)
-		if (position == 0) return
-		if (position < 0) todoList.insertBefore(entry, entry.previousSibling)
-		else {
-			if (entry.nextSibling) entry.nextSibling.after(entry)
-			else todoList.insertBefore(entry, todoList.firstChild)
-		}
-	}
-
-	const removeTodo = entry => {
-		todoList.removeChild(entry)
-	}
-
-	/*
-	todoList.ondragover = e => {
-		e.preventDefault()
-		e.dataTransfer.dropEffect = "move"
-	}
-
-	todoList.ondrop = e => {
-		e.preventDefault()
-		const data = e.dataTransfer.getData("text/html")
-		console.log(data)
-		e.target.appendChild(document.getElementById(data))
-	}
-	*/
-
 	let draggedItem = null
-	const getDragAfterElement = (container, y) => {
-		const draggableElements = [
-			...container.querySelectorAll("li:not(.dragging)"),
-		]
-
-		return draggableElements.reduce(
+	const getDragAfterElement = y => {
+		return [...todoList.childNodes].reduce(
 			(closest, child) => {
+				if (
+					child.style.visibility == "hidden" ||
+					child.style.display == "none"
+				)
+					return closest
+
 				const box = child.getBoundingClientRect()
 				const offset = y - box.top - box.height / 2
-				if (offset < 0 && offset > closest.offset) {
-					return {
-						offset: offset,
-						element: child,
-					}
-				} else {
-					return closest
+				if (offset >= 0 || offset <= closest.offset) return closest
+
+				return {
+					offset: offset,
+					element: child,
 				}
 			},
-			{
-				offset: Number.NEGATIVE_INFINITY,
-			}
+			{ offset: Number.NEGATIVE_INFINITY }
 		).element
 	}
 
 	todoList.ondragstart = e => {
+		console.log(e)
+
+		if (draggedItem) draggedItem.style.visibility = "visible"
 		draggedItem = e.target
-		console.log(draggedItem)
+
 		setTimeout(() => {
-			e.target.style.visibility = "hidden"
-		}, 0)
-	}
-	todoList.ondragend = e => {
-		console.log(draggedItem)
-		setTimeout(() => {
-			e.target.style.visibility = "visible"
-			draggedItem = null
+			if (draggedItem) draggedItem.style.visibility = "hidden"
 		}, 0)
 	}
 
+	todoList.ondragend = e => {
+		console.log(e)
+		if (draggedItem) draggedItem.style.visibility = "visible"
+		draggedItem = null
+	}
+
 	todoList.ondragover = e => {
-		console.log(draggedItem)
+		//console.log(e)
 		e.preventDefault()
-		const afterElement = getDragAfterElement(todoList, e.clientY)
-		const currentElement = document.querySelector(".dragging")
-		if (afterElement == null) {
-			todoList.appendChild(draggedItem)
-		} else {
-			todoList.insertBefore(draggedItem, afterElement)
-		}
+		if (!draggedItem) return
+
+		const afterElement = getDragAfterElement(e.clientY)
+		if (afterElement == null) todoList.appendChild(draggedItem)
+		else todoList.insertBefore(draggedItem, afterElement)
+	}
+
+	const removeTodo = entry => {
+		todoList.removeChild(entry)
 	}
 
 	const addTodo = data => {

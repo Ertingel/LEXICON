@@ -81,11 +81,11 @@ input {
 	background-color: #994538;
 }
 
-.todo > input[type="checkbox"]:not(:checked) + .remove {
+.todo > input[type="checkbox"]:not(:checked) ~ .remove {
 	display: none;
 }
 
-.todo > input[type="checkbox"]:checked + * + input[type="text"] {
+.todo > input[type="checkbox"]:checked ~ input[type="text"] {
 	text-decoration: line-through;
 }
 
@@ -129,9 +129,10 @@ input {
 	flex-flow: column nowrap;
 	justify-content: flex-start;
 	align-items: stretch;
-	gap: 0.5rem;
+
+	list-style-type: none;
 }
 
 #todo-list > li {
-	list-style-type: none;
+	padding-block: 0.25rem;
 }

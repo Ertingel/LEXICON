@@ -33,13 +33,88 @@ window.onload = () => {
 		todoList.removeChild(entry)
 	}
 
+	/*
+	todoList.ondragover = e => {
+		e.preventDefault()
+		e.dataTransfer.dropEffect = "move"
+	}
+
+	todoList.ondrop = e => {
+		e.preventDefault()
+		const data = e.dataTransfer.getData("text/html")
+		console.log(data)
+		e.target.appendChild(document.getElementById(data))
+	}
+	*/
+
+	let draggedItem = null
+	const getDragAfterElement = (container, y) => {
+		const draggableElements = [
+			...container.querySelectorAll("li:not(.dragging)"),
+		]
+
+		return draggableElements.reduce(
+			(closest, child) => {
+				const box = child.getBoundingClientRect()
+				const offset = y - box.top - box.height / 2
+				if (offset < 0 && offset > closest.offset) {
+					return {
+						offset: offset,
+						element: child,
+					}
+				} else {
+					return closest
+				}
+			},
+			{
+				offset: Number.NEGATIVE_INFINITY,
+			}
+		).element
+	}
+
+	todoList.ondragstart = e => {
+		draggedItem = e.target
+		console.log(draggedItem)
+		setTimeout(() => {
+			e.target.style.visibility = "hidden"
+		}, 0)
+	}
+	todoList.ondragend = e => {
+		console.log(draggedItem)
+		setTimeout(() => {
+			e.target.style.visibility = "visible"
+			draggedItem = null
+		}, 0)
+	}
+
+	todoList.ondragover = e => {
+		console.log(draggedItem)
+		e.preventDefault()
+		const afterElement = getDragAfterElement(todoList, e.clientY)
+		const currentElement = document.querySelector(".dragging")
+		if (afterElement == null) {
+			todoList.appendChild(draggedItem)
+		} else {
+			todoList.insertBefore(draggedItem, afterElement)
+		}
+	}
+
 	const addTodo = data => {
 		const item = make(null, "li", {
 			class: "todo",
+			draggable: "true",
 		})
 
 		make(item, "input", {
 			type: "checkbox",
+		})
+
+		make(item, "input", {
+			type: "text",
+			value: data,
+			onchange: e => {
+				if (/^\s*$/gu.test(e.target.value)) removeTodo(item)
+			},
 		})
 
 		make(item, "input", {
@@ -51,30 +126,6 @@ window.onload = () => {
 			},
 		})
 
-		make(item, "input", {
-			type: "text",
-			value: data,
-			onchange: e => {
-				if (e.target.value.length <= 0) removeTodo(item)
-			},
-		})
-
-		make(item, "input", {
-			type: "button",
-			value: "⭡",
-			onclick: () => {
-				moveTodo(item, -1)
-			},
-		})
-
-		make(item, "input", {
-			type: "button",
-			value: "⭣",
-			onclick: () => {
-				moveTodo(item, 1)
-			},
-		})
-
 		todoList.prepend(item)
 	}
 
@@ -83,10 +134,9 @@ window.onload = () => {
 	addTodo("Snacks")
 
 	todoAdd.onsubmit = function (e) {
-		if (todoAddText.value.length > 0) {
-			addTodo(todoAddText.value)
-			todoAddText.value = ""
-		}
+		if (!/^\s*$/gu.test(todoAddText.value)) addTodo(todoAddText.value)
+
+		todoAddText.value = ""
 
 		return false
 	}

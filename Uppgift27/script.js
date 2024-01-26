@@ -37,7 +37,6 @@ function getDragAfterElement(listElement, y) {
 function getTimeStr(time) {
 	const now = new Date()
 	const delta = now - time
-	console.log(delta)
 
 	const second = 1000
 	const minute = second * 60
@@ -45,12 +44,15 @@ function getTimeStr(time) {
 	const day = hour * 24
 	const year = day * 365
 
-	if (delta / second < 0) return "Now"
-	if (delta / minute < 0) return `${delta / second} seconds ago`
-	if (delta / hour < 0) return `${delta / minute} minutes ago`
+	if (delta / second < 1) return "Now"
+	if (delta / minute < 1) return `${Math.floor(delta / second)}sec ago`
+	if (delta / hour < 1) return `${Math.floor(delta / minute)}min ago`
 
-	const clock = `${time.getHours()}:${time.getMinutes()}`
-	if (delta / day < 0) return `${clock} today`
+	const clock = `${String(time.getHours()).padStart(2, "0")}:${String(
+		time.getMinutes()
+	).padStart(2, "0")}`
+
+	if (delta / day < 1) return `${clock} Today`
 
 	const month_name =
 		[
@@ -70,9 +72,11 @@ function getTimeStr(time) {
 		" " +
 		time.getDate()
 
-	if (delta / year < 0) return `${month_name} ${clock}`
+	if (delta / year < 1) return `${month_name} ${clock}`
 
-	return `${time.getFullYear()}-${time.getDate()}-${time.getMonth()} ${clock}`
+	return `${time.getFullYear()}-${
+		time.getMonth() + 1
+	}-${time.getDate()} ${clock}`
 }
 
 window.onload = () => {
@@ -111,9 +115,9 @@ window.onload = () => {
 		todoList.removeChild(entry)
 	}
 
-	const addTodo = (data, time = new Date()) => {
+	const addTodo = ({ text, time = new Date() }) => {
 		const item = make(null, "li", {
-			class: "todo",
+			class: "todo-item",
 			draggable: "true",
 		})
 
@@ -125,18 +129,12 @@ window.onload = () => {
 		make(item, "input", {
 			class: "text",
 			type: "text",
-			value: data,
+			placeholder: "Delete?",
+			value: text,
 			onchange: e => {
 				if (/^\s*$/gu.test(e.target.value)) removeTodo(item)
 			},
 		})
-
-		const timeElement = make(item, "time", {
-			class: "time",
-			value: time,
-			innerHTML: getTimeStr(time),
-		})
-		timeElement.setAttribute("datetime", time.toString())
 
 		make(item, "input", {
 			class: "remove",
@@ -147,15 +145,33 @@ window.onload = () => {
 			},
 		})
 
+		const timeElement = make(item, "time", {
+			class: "date",
+			value: time,
+			innerHTML: getTimeStr(time),
+		})
+		timeElement.setAttribute("datetime", time.toString())
+
 		todoList.prepend(item)
 	}
 
-	addTodo("Pizza")
-	addTodo("Taco")
-	addTodo("Snacks")
+	window.setInterval(e => {
+		document.querySelectorAll("time.date").forEach(e => {
+			const str = getTimeStr(e.value)
+			if (str !== e.value) e.innerText = getTimeStr(e.value)
+		})
+	}, 15000)
+
+	addTodo({ text: "Pizza", time: new Date(new Date() - 100000000) })
+	addTodo({ text: "Taco", time: new Date(new Date() - 10000000) })
+	addTodo({ text: "Snacks", time: new Date(new Date() - 1000000) })
 
 	todoAdd.onsubmit = function (e) {
-		if (!/^\s*$/gu.test(todoAddText.value)) addTodo(todoAddText.value)
+		if (!/^\s*$/gu.test(todoAddText.value))
+			addTodo({
+				text: todoAddText.value,
+				time: new Date(),
+			})
 
 		todoAddText.value = ""
 

@@ -18,6 +18,10 @@ body {
 
 input,
 input[type="checkbox"]::after {
+	box-sizing: border-box;
+
+	min-width: 2.75rem;
+	min-height: 2.75rem;
 	padding: 0.5rem;
 	font-size: 1em;
 
@@ -27,6 +31,14 @@ input[type="checkbox"]::after {
 
 	border: none;
 	outline: none;
+}
+
+input[type="text"] {
+	flex-grow: 1;
+}
+
+input::placeholder {
+	color: #99453888;
 }
 
 input[type="button"],
@@ -85,38 +97,6 @@ input[type="checkbox"]:checked:after {
 	gap: 0.5rem;
 }
 
-.todo > input {
-	box-sizing: border-box;
-
-	min-width: 2.75rem;
-	min-height: 2.75rem;
-}
-
-.todo > input[type="text"] {
-	flex-grow: 1;
-}
-
-.todo > input::placeholder {
-	color: #99453888;
-}
-
-.todo > .remove {
-	overflow: hidden;
-	transition: 0.15s;
-}
-
-.todo > input[type="checkbox"]:not(:checked) ~ .remove {
-	/*display: none;*/
-	min-width: 0;
-	width: 0;
-	padding: 0;
-	margin-left: -0.5rem;
-}
-
-.todo > input[type="checkbox"]:checked ~ input[type="text"] {
-	text-decoration: line-through;
-}
-
 #background {
 	position: fixed;
 	z-index: -1;
@@ -161,28 +141,52 @@ input[type="checkbox"]:checked:after {
 	list-style-type: none;
 }
 
-#todo-list > li {
+.todo-item {
 	padding-block: 0.25rem;
 
 	display: grid;
+	gap: 0 0;
 	grid:
-		"completed text remove" auto
-		". time ." auto
-		/ auto 1fr auto;
+		"completed . text remove" auto
+		". . date date" auto
+		/ auto 0.5rem 1fr auto;
 }
 
-#todo-list > li > .completed {
+.todo-item > .completed {
 	grid-area: completed;
 }
 
-#todo-list > li > .text {
+.todo-item > .completed:checked ~ input[type="text"],
+.todo-item > .completed:checked ~ .date {
+	text-decoration: line-through;
+}
+
+.todo-item > .completed:not(:checked) ~ .remove {
+	min-width: 0;
+	width: 0;
+	padding: 0;
+}
+
+.todo-item > .completed:checked ~ .remove {
+	margin-left: 0.5rem;
+}
+
+.todo-item > .text {
 	grid-area: text;
 }
 
-#todo-list > li > .remove {
+.todo-item > .remove {
 	grid-area: remove;
+
+	overflow: hidden;
+	transition: 0.15s;
 }
 
-#todo-list > li > .time {
-	grid-area: time;
+.todo-item > .date {
+	grid-area: date;
+
+	margin-top: -0.25rem;
+	padding-inline: 0.5rem;
+
+	text-align: right;
 }

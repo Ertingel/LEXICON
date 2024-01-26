@@ -16,7 +16,8 @@ body {
 	margin: 0;
 }
 
-input {
+input,
+input[type="checkbox"]::after {
 	padding: 0.5rem;
 	font-size: 1em;
 
@@ -28,6 +29,56 @@ input {
 	outline: none;
 }
 
+input[type="button"],
+input[type="submit"],
+input[type="checkbox"]::after {
+	font-weight: bold;
+	font-size: 1.5em;
+	padding: 0.25rem;
+
+	text-align: center;
+
+	transition: 0.15s ease-in-out;
+	transform: scale(1);
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="checkbox"]:hover::after {
+	transform: scale(1.15);
+}
+
+input[type="button"]:active,
+input[type="submit"]:active {
+	color: #ffffff88;
+	background-color: #994538;
+}
+
+input[type="checkbox"] {
+	position: relative;
+	appearance: none;
+
+	background: none;
+}
+
+input[type="checkbox"]::after {
+	content: " ";
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+
+	color: #ffffffcc;
+	border: #994538 solid 0.15rem;
+}
+
+input[type="checkbox"]:checked:after {
+	content: "✓";
+	background-color: #994538;
+}
+
 .todo {
 	display: flex;
 	flex-flow: row nowrap;
@@ -37,8 +88,8 @@ input {
 .todo > input {
 	box-sizing: border-box;
 
-	min-width: 2.75em;
-	min-height: 2.75em;
+	min-width: 2.75rem;
+	min-height: 2.75rem;
 }
 
 .todo > input[type="text"] {
@@ -49,44 +100,17 @@ input {
 	color: #99453888;
 }
 
-.todo > input[type="button"],
-.todo > input[type="submit"] {
-	font-weight: bold;
-}
-
-.todo > input[type="checkbox"] {
-	position: relative;
-	appearance: none;
-
-	background: none;
-}
-
-.todo > input[type="checkbox"]::after {
-	content: " ";
-
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	padding: 0.5rem;
-
-	color: #ffffffaa;
-	background-color: #ffffff88;
-	border: #994538 solid 0.15rem;
-	border-radius: 0.5rem;
-
-	text-align: center;
-}
-
-.todo > input[type="checkbox"]:checked:after {
-	content: "✓";
-
-	background-color: #994538;
+.todo > .remove {
+	overflow: hidden;
+	transition: 0.15s;
 }
 
 .todo > input[type="checkbox"]:not(:checked) ~ .remove {
-	display: none;
+	/*display: none;*/
+	min-width: 0;
+	width: 0;
+	padding: 0;
+	margin-left: -0.5rem;
 }
 
 .todo > input[type="checkbox"]:checked ~ input[type="text"] {
@@ -140,5 +164,5 @@ input {
 #todo-list > li {
 	padding-block: 0.25rem;
 
-	transition: transform 0.25s ease-in-out;
+	transition: transform 0.15s ease-in-out;
 }

@@ -12,6 +12,28 @@ function make(parent, type, { id, class: class_, ...data }) {
 	return e
 }
 
+function getDragAfterElement(listElement, y) {
+	return [...listElement.childNodes].reduce(
+		(closest, child) => {
+			if (
+				child.style.visibility == "hidden" ||
+				child.style.display == "none"
+			)
+				return closest
+
+			const box = child.getBoundingClientRect()
+			const offset = y - box.top - box.height / 2
+			if (offset >= 0 || offset <= closest.offset) return closest
+
+			return {
+				offset: offset,
+				element: child,
+			}
+		},
+		{ offset: Number.NEGATIVE_INFINITY }
+	).element
+}
+
 window.onload = () => {
 	const todoAdd = document.getElementById("todo-add")
 	const todoAddText = document.getElementById("todo-add-text")
@@ -20,31 +42,8 @@ window.onload = () => {
 	const todoList = document.getElementById("todo-list")
 
 	let draggedItem = null
-	const getDragAfterElement = y => {
-		return [...todoList.childNodes].reduce(
-			(closest, child) => {
-				if (
-					child.style.visibility == "hidden" ||
-					child.style.display == "none"
-				)
-					return closest
-
-				const box = child.getBoundingClientRect()
-				const offset = y - box.top - box.height / 2
-				if (offset >= 0 || offset <= closest.offset) return closest
-
-				return {
-					offset: offset,
-					element: child,
-				}
-			},
-			{ offset: Number.NEGATIVE_INFINITY }
-		).element
-	}
 
 	todoList.ondragstart = e => {
-		console.log(e)
-
 		if (draggedItem) draggedItem.style.visibility = "visible"
 		draggedItem = e.target
 
@@ -54,17 +53,15 @@ window.onload = () => {
 	}
 
 	todoList.ondragend = e => {
-		console.log(e)
 		if (draggedItem) draggedItem.style.visibility = "visible"
 		draggedItem = null
 	}
 
 	todoList.ondragover = e => {
-		//console.log(e)
 		e.preventDefault()
 		if (!draggedItem) return
 
-		const afterElement = getDragAfterElement(e.clientY)
+		const afterElement = getDragAfterElement(todoList, e.clientY)
 		if (afterElement == null) todoList.appendChild(draggedItem)
 		else todoList.insertBefore(draggedItem, afterElement)
 	}

@@ -61,6 +61,8 @@ function timeToStr(time) {
 }
 
 window.onload = () => {
+	const background = document.getElementById("background")
+
 	const playlist_title = document.getElementById("playlist-title")
 	const list = document.getElementById("playlist")
 
@@ -71,10 +73,24 @@ window.onload = () => {
 	const play_progress = document.getElementById("play-progress")
 	const length = document.getElementById("length")
 
+	const rewind = document.getElementById("rewind")
 	const play_pause = document.getElementById("play-pause")
+	const forward = document.getElementById("forward")
+
 	const audio = document.getElementById("audio")
 
 	let playing = null
+
+	function play(bool) {
+		if (playing)
+			if (bool) {
+				play_pause.innerText = "pause_circle"
+				audio.play()
+			} else {
+				play_pause.innerText = "play_circle"
+				audio.pause()
+			}
+	}
 
 	function setSong(song) {
 		if (playing) playing.classList.remove("playing")
@@ -83,8 +99,15 @@ window.onload = () => {
 		playing.classList.add("playing")
 
 		album_cover.src = playing.cover_file
+		background.style.setProperty(
+			"background-image",
+			`url("${playing.cover_file}")`
+		)
+
 		title.innerHTML = `${playing.artist}<br /><small>${playing.song}</small>`
 		audio.src = playing.audio_file
+
+		play(true)
 	}
 
 	audio.onloadedmetadata = () => {
@@ -101,14 +124,32 @@ window.onload = () => {
 		)
 	}
 
+	audio.onended = () => {
+		if (playing.next) setSong(playing.next)
+		else play(false)
+	}
+
 	play_progress.oninput = () => {
 		audio.currentTime = play_progress.value
 	}
 
+	rewind.onclick = () => {
+		if (audio.currentTime < 1 && playing.prev) setSong(playing.prev)
+		else {
+			audio.currentTime = 0
+			play(true)
+		}
+	}
+
 	play_pause.onclick = () => {
-		if (playing) {
-			if (audio.paused) audio.play()
-			else audio.pause()
+		play(audio.paused)
+	}
+
+	forward.onclick = () => {
+		if (playing.next) setSong(playing.next)
+		else {
+			audio.currentTime = audio.duration
+			play(false)
 		}
 	}
 
@@ -133,8 +174,20 @@ window.onload = () => {
 			class: "material-icons",
 			innerText: "play_circle",
 		})
+
+		return li
 	}
 
 	playlist_title.innerText = `Playlist - ${playlist.title}`
-	playlist.songs.forEach(e => addPlaylistSong(e))
+	let prev = null
+	playlist.songs.forEach(e => {
+		let li = addPlaylistSong(e)
+
+		if (prev) {
+			li.prev = prev
+			prev.next = li
+		}
+
+		prev = li
+	})
 }

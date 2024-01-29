@@ -12,9 +12,14 @@
 			rel="stylesheet"
 		/>
 
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
 		<link rel="stylesheet" href="style.css" />
 		<link rel="stylesheet" href="timeline.css" />
+
+		<script src="script.js"></script>
 	</head>
 	<body>
 		<div id="background"></div>
@@ -22,13 +27,13 @@
 		<div id="player">
 			<header>
 				<button class="material-icons active">arrow_back_ios</button>
-				<p>Playlist - Moody</p>
+				<p id="playlist-title">Playlist - Moody</p>
 				<button class="material-icons active">more_vert</button>
 			</header>
 
 			<aside>
-				<ol>
-					<li>
+				<ol id="playlist">
+					<!-- <li>
 						<button>
 							<img src="https://picsum.photos/id/0/100" />
 							<p>A Rocket to the moon<br /><small>Like we used to</small></p>
@@ -90,21 +95,29 @@
 							<p>A Rocket to the moon<br /><small>Like we used to</small></p>
 							<div class="material-icons">play_circle</div>
 						</button>
-					</li>
+					</li> -->
 				</ol>
 			</aside>
 			<main>
-				<img src="image1.png" />
+				<img id="album-cover" src="image1.png" />
 
 				<div>
 					<nav>
-						<button class="material-icons active">add_circle_outline</button>
-						<p>A Rocket to the moon<br /><small>Like we used to</small></p>
-						<button class="material-icons">favorite</button>
+						<button id="add" class="material-icons active">
+							add_circle_outline
+						</button>
+						<p id="title">
+							A Rocket to the moon<br /><small
+								>Like we used to</small
+							>
+						</p>
+						<button id="favorite" class="material-icons">
+							favorite
+						</button>
 					</nav>
 
 					<nav>
-						<p>0:40</p>
+						<p id="play-time">0:40</p>
 						<input
 							id="play-progress"
 							type="range"
@@ -116,17 +129,36 @@
 								 + this.getBoundingClientRect().height / this.getBoundingClientRect().width / 2
 								) * 100 }%`)"
 						/>
-						<p>3:42</p>
+						<p id="length">3:42</p>
 					</nav>
 
 					<nav>
-						<button class="material-icons active">repeat</button>
+						<button id="repeat" class="material-icons active">
+							repeat
+						</button>
 						<nav>
-							<button class="material-icons active fast-rewind">fast_rewind</button>
-							<button class="material-icons active play-circle">play_circle</button>
-							<button class="material-icons active fast-forward">fast_forward</button>
+							<button
+								id="rewind"
+								class="material-icons active fast-rewind"
+							>
+								fast_rewind
+							</button>
+							<button
+								id="play"
+								class="material-icons active play-circle"
+							>
+								play_circle
+							</button>
+							<button
+								id="forward"
+								class="material-icons active fast-forward"
+							>
+								fast_forward
+							</button>
 						</nav>
-						<button class="material-icons">shuffle</button>
+						<button id="shuffle" class="material-icons">
+							shuffle
+						</button>
 					</nav>
 				</div>
 			</main>

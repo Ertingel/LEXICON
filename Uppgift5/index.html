@@ -27,79 +27,15 @@
 		<div id="player">
 			<header>
 				<button class="material-icons active">arrow_back_ios</button>
-				<p id="playlist-title">Playlist - Moody</p>
+				<p id="playlist-title">Playlist - ???</p>
 				<button class="material-icons active">more_vert</button>
 			</header>
 
 			<aside>
-				<ol id="playlist">
-					<!-- <li>
-						<button>
-							<img src="https://picsum.photos/id/0/100" />
-							<p>A Rocket to the moon<br /><small>Like we used to</small></p>
-							<div class="material-icons">play_circle</div>
-						</button>
-					</li>
-					<li>
-						<button class="playing">
-							<img src="image1.png" />
-							<p>A Rocket to the moon<br /><small>Like we used to</small></p>
-							<div class="material-icons">play_circle</div>
-						</button>
-					</li>
-					<li>
-						<button>
-							<img src="https://picsum.photos/id/10/100" />
-							<p>A Rocket to the moon<br /><small>Like we used to</small></p>
-							<div class="material-icons">play_circle</div>
-						</button>
-					</li>
-					<li>
-						<button>
-							<img src="https://picsum.photos/id/20/100" />
-							<p>A Rocket to the moon<br /><small>Like we used to</small></p>
-							<div class="material-icons">play_circle</div>
-						</button>
-					</li>
-					<li>
-						<button>
-							<img src="https://picsum.photos/id/30/100" />
-							<p>A Rocket to the moon<br /><small>Like we used to</small></p>
-							<div class="material-icons">play_circle</div>
-						</button>
-					</li>
-					<li>
-						<button>
-							<img src="https://picsum.photos/id/40/100" />
-							<p>A Rocket to the moon<br /><small>Like we used to</small></p>
-							<div class="material-icons">play_circle</div>
-						</button>
-					</li>
-					<li>
-						<button>
-							<img src="https://picsum.photos/id/50/100" />
-							<p>A Rocket to the moon<br /><small>Like we used to</small></p>
-							<div class="material-icons">play_circle</div>
-						</button>
-					</li>
-					<li>
-						<button>
-							<img src="https://picsum.photos/id/60/100" />
-							<p>A Rocket to the moon<br /><small>Like we used to</small></p>
-							<div class="material-icons">play_circle</div>
-						</button>
-					</li>
-					<li>
-						<button>
-							<img src="https://picsum.photos/id/70/100" />
-							<p>A Rocket to the moon<br /><small>Like we used to</small></p>
-							<div class="material-icons">play_circle</div>
-						</button>
-					</li> -->
-				</ol>
+				<ol id="playlist"></ol>
 			</aside>
 			<main>
-				<img id="album-cover" src="image1.png" />
+				<img id="album-cover" src="./placeholder.png" />
 
 				<div>
 					<nav>
@@ -107,9 +43,7 @@
 							add_circle_outline
 						</button>
 						<p id="title">
-							A Rocket to the moon<br /><small
-								>Like we used to</small
-							>
+							Artist Name<br /><small>Song Title</small>
 						</p>
 						<button id="favorite" class="material-icons">
 							favorite
@@ -117,19 +51,15 @@
 					</nav>
 
 					<nav>
-						<p id="play-time">0:40</p>
+						<p id="play-time">0:00</p>
 						<input
 							id="play-progress"
 							type="range"
-							value="40"
+							value="0"
 							min="0"
-							max="222"
-							oninput="this.style.setProperty('--progress', `${(
-								this.value / this.max * ( 1 - this.getBoundingClientRect().height / this.getBoundingClientRect().width )
-								 + this.getBoundingClientRect().height / this.getBoundingClientRect().width / 2
-								) * 100 }%`)"
+							max="0"
 						/>
-						<p id="length">3:42</p>
+						<p id="length">0:00</p>
 					</nav>
 
 					<nav>
@@ -144,7 +74,7 @@
 								fast_rewind
 							</button>
 							<button
-								id="play"
+								id="play-pause"
 								class="material-icons active play-circle"
 							>
 								play_circle
@@ -160,6 +90,8 @@
 							shuffle
 						</button>
 					</nav>
+
+					<audio id="audio" src=""></audio>
 				</div>
 			</main>
 		</div>

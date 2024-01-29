@@ -7,7 +7,7 @@
 	left: 0;
 	right: 0;
 
-	background-image: url("image1.png");
+	background-image: url("placeholder.png");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -158,11 +158,11 @@ body {
 	align-items: center;
 }
 
-#player > aside > ol > li > button.playing {
+#player > aside > ol > li.playing > button {
 	background-color: #17263eaa;
 }
 
-#player > aside > ol > li > button.playing *.material-icons {
+#player > aside > ol > li.playing > button *.material-icons {
 	color: #fefefe !important;
 }
 

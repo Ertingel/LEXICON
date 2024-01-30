@@ -68,33 +68,44 @@ window.onload = () => {
 
 	const album_cover = document.getElementById("album-cover")
 	const title = document.getElementById("title")
+	const favorite = document.getElementById("favorite")
 
 	const play_time = document.getElementById("play-time")
 	const play_progress = document.getElementById("play-progress")
 	const length = document.getElementById("length")
 
+	const repeat = document.getElementById("repeat")
 	const rewind = document.getElementById("rewind")
 	const play_pause = document.getElementById("play-pause")
 	const forward = document.getElementById("forward")
+	const shuffle = document.getElementById("shuffle")
 
 	const audio = document.getElementById("audio")
 
 	let playing = null
+	let is_repeat = false
+	let is_shuffle = false
 
 	function play(bool) {
 		if (playing)
 			if (bool) {
+				playing.icon.innerText = "pause_circle"
 				play_pause.innerText = "pause_circle"
 				audio.play()
 			} else {
+				playing.icon.innerText = "play_circle"
 				play_pause.innerText = "play_circle"
 				audio.pause()
 			}
 	}
 
 	function setSong(song) {
-		if (playing) playing.classList.remove("playing")
+		if (playing) {
+			if (song === playing) return play(audio.paused)
 
+			playing.icon.innerText = "play_circle"
+			playing.classList.remove("playing")
+		}
 		playing = song
 		playing.classList.add("playing")
 
@@ -106,8 +117,44 @@ window.onload = () => {
 
 		title.innerHTML = `${playing.artist}<br /><small>${playing.song}</small>`
 		audio.src = playing.audio_file
+		favorite.classList.toggle("active", playing.favorite)
 
 		play(true)
+	}
+
+	function playPrev() {
+		if (audio.currentTime < 1 && playing.prev) setSong(playing.prev)
+		else if (is_repeat) {
+			let e = playing
+
+			while (e.next) e = e.next
+
+			setSong(e)
+		} else {
+			audio.currentTime = 0
+			play(true)
+		}
+	}
+
+	function playNext() {
+		if (playing.next) setSong(playing.next)
+		else if (is_repeat) {
+			let e = playing
+
+			while (e.prev) e = e.prev
+
+			setSong(e)
+		} else {
+			audio.currentTime = audio.duration
+			play(false)
+		}
+	}
+
+	favorite.onclick = () => {
+		if (!playing) return
+
+		playing.favorite = !playing.favorite
+		favorite.classList.toggle("active", playing.favorite)
 	}
 
 	audio.onloadedmetadata = () => {
@@ -125,20 +172,20 @@ window.onload = () => {
 	}
 
 	audio.onended = () => {
-		if (playing.next) setSong(playing.next)
-		else play(false)
+		playNext()
 	}
 
 	play_progress.oninput = () => {
 		audio.currentTime = play_progress.value
 	}
 
+	repeat.onclick = () => {
+		is_repeat = !is_repeat
+		repeat.classList.toggle("active", is_repeat)
+	}
+
 	rewind.onclick = () => {
-		if (audio.currentTime < 1 && playing.prev) setSong(playing.prev)
-		else {
-			audio.currentTime = 0
-			play(true)
-		}
+		playPrev()
 	}
 
 	play_pause.onclick = () => {
@@ -146,19 +193,27 @@ window.onload = () => {
 	}
 
 	forward.onclick = () => {
-		if (playing.next) setSong(playing.next)
-		else {
-			audio.currentTime = audio.duration
-			play(false)
-		}
+		playNext()
 	}
 
-	function addPlaylistSong({ artist, song, audio_file, cover_file }) {
+	shuffle.onclick = () => {
+		is_shuffle = !is_shuffle
+		shuffle.classList.toggle("active", is_shuffle)
+	}
+
+	function addPlaylistSong({
+		artist,
+		song,
+		audio_file,
+		cover_file,
+		favorite = false,
+	}) {
 		const li = make(list, "li", {
 			artist,
 			song,
 			audio_file: `./media/${audio_file}`,
 			cover_file: `./media/${cover_file}`,
+			favorite,
 		})
 		const button = make(li, "button", {
 			onclick: () => {
@@ -170,7 +225,8 @@ window.onload = () => {
 		make(button, "p", {
 			innerHTML: `${artist}<br /><small>${song}</small>`,
 		})
-		make(button, "div", {
+
+		li.icon = make(button, "div", {
 			class: "material-icons",
 			innerText: "play_circle",
 		})

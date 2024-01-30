@@ -45,8 +45,8 @@ function getTimeStr(time) {
 	const year = day * 365
 
 	if (delta / second < 1) return "Now"
-	if (delta / minute < 1) return `${Math.floor(delta / second)}sec ago`
-	if (delta / hour < 1) return `${Math.floor(delta / minute)}min ago`
+	if (delta / minute < 1) return `${Math.floor(delta / second)}sec Ago`
+	if (delta / hour < 1) return `${Math.floor(delta / minute)}min Ago`
 
 	const clock = `${String(time.getHours()).padStart(2, "0")}:${String(
 		time.getMinutes()
@@ -69,9 +69,7 @@ function getTimeStr(time) {
 			"Oct",
 			"Nov",
 			"Dec",
-		][time.getMonth()] +
-		" " +
-		time.getDate()
+		][time.getMonth()] + time.getDate()
 
 	if (delta / year < 1) return `${month_name} ${clock}`
 
@@ -90,6 +88,14 @@ window.onload = () => {
 
 	const get_list = () => Array.from(todoList.children).map(e => e.getData())
 
+	const save_state = () => {
+		const data = {
+			list: get_list(),
+		}
+		console.log("saved", data)
+		localStorage.setItem("todo", JSON.stringify(data))
+	}
+
 	todoList.ondragstart = e => {
 		if (draggedItem) draggedItem.style.visibility = ""
 		draggedItem = e.target
@@ -102,6 +108,8 @@ window.onload = () => {
 	todoList.ondragend = e => {
 		if (draggedItem) draggedItem.style.visibility = ""
 		draggedItem = null
+
+		save_state()
 	}
 
 	todoList.ondragover = e => {
@@ -115,6 +123,8 @@ window.onload = () => {
 
 	const removeTodo = entry => {
 		todoList.removeChild(entry)
+
+		save_state()
 	}
 
 	const addTodo = ({ text, completed = false, time = new Date() }) => {
@@ -127,6 +137,9 @@ window.onload = () => {
 			class: "completed",
 			type: "checkbox",
 			checked: completed,
+			onchange: e => {
+				save_state()
+			},
 		})
 
 		const text_element = make(item, "input", {
@@ -173,29 +186,46 @@ window.onload = () => {
 		})
 	}, 15000)
 
-	const set_list = list => [...list].reverse().forEach(e => addTodo(e))
-
-	set_list([
-		{ text: "Pizza", time: new Date(new Date() - 100000000) },
-		{
-			text: "Taco",
-			time: new Date(new Date() - 10000000),
-			completed: true,
-		},
-		{ text: "Snacks", time: new Date(new Date() - 1000000) },
-	])
-
-	console.log(get_list())
-
 	todoAdd.onsubmit = function (e) {
-		if (!/^\s*$/gu.test(todoAddText.value))
+		if (!/^\s*$/gu.test(todoAddText.value)) {
 			addTodo({
 				text: todoAddText.value,
 				time: new Date(),
 			})
 
+			save_state()
+		}
+
 		todoAddText.value = ""
 
 		return false
 	}
+
+	const set_list = list => [...list].reverse().forEach(e => addTodo(e))
+
+	const load_state = () => {
+		let data
+
+		try {
+			data = JSON.parse(localStorage.getItem("todo"))
+			data.list.forEach(e => (e.time = new Date(e.time)))
+		} catch (error) {
+			data = {
+				list: [
+					{ text: "Pizza", time: new Date(new Date() - 100000000) },
+					{
+						text: "Taco",
+						time: new Date(new Date() - 10000000),
+						completed: true,
+					},
+					{ text: "Snacks", time: new Date(new Date() - 1000000) },
+				],
+			}
+		}
+
+		set_list(data.list)
+		console.log("loaded", data)
+	}
+
+	load_state()
 }

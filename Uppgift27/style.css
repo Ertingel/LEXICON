@@ -185,7 +185,6 @@ input[type="checkbox"]:checked:after {
 .todo-item > .date {
 	grid-area: date;
 
-	margin-top: -0.25rem;
 	padding-inline: 0.5rem;
 
 	text-align: right;

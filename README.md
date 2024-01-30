@@ -43,3 +43,4 @@ Detta är min repository för läxor i LEXICON.
     -   [**Uppgift27**](https://ertingel.github.io/LEXICON/Uppgift27): Todo List
 -   Vecka 5 _(Javascript)_
     -   **Uppgift28**: Javascript audio _([Se Mediaspelaren](https://ertingel.github.io/LEXICON/Uppgift5))_
+    -   [**Uppgift29**](https://ertingel.github.io/LEXICON/Uppgift29): Hangman

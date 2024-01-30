@@ -52,7 +52,8 @@ function getTimeStr(time) {
 		time.getMinutes()
 	).padStart(2, "0")}`
 
-	if (delta / day < 1) return `${clock} Today`
+	if (delta / day < 1 && now.getDate() === time.getDate())
+		return `${clock} Today`
 
 	const month_name =
 		[
@@ -82,11 +83,12 @@ function getTimeStr(time) {
 window.onload = () => {
 	const todoAdd = document.getElementById("todo-add")
 	const todoAddText = document.getElementById("todo-add-text")
-	//const todoAddButton = document.getElementById("todo-add-button")
 
 	const todoList = document.getElementById("todo-list")
 
 	let draggedItem = null
+
+	const get_list = () => Array.from(todoList.children).map(e => e.getData())
 
 	todoList.ondragstart = e => {
 		if (draggedItem) draggedItem.style.visibility = ""
@@ -115,18 +117,19 @@ window.onload = () => {
 		todoList.removeChild(entry)
 	}
 
-	const addTodo = ({ text, time = new Date() }) => {
+	const addTodo = ({ text, completed = false, time = new Date() }) => {
 		const item = make(null, "li", {
 			class: "todo-item",
 			draggable: "true",
 		})
 
-		make(item, "input", {
+		const completed_element = make(item, "input", {
 			class: "completed",
 			type: "checkbox",
+			checked: completed,
 		})
 
-		make(item, "input", {
+		const text_element = make(item, "input", {
 			class: "text",
 			type: "text",
 			placeholder: "Delete?",
@@ -152,6 +155,14 @@ window.onload = () => {
 		})
 		timeElement.setAttribute("datetime", time.toString())
 
+		item.getData = () => {
+			return {
+				text: text_element.value,
+				completed: completed_element.checked,
+				time,
+			}
+		}
+
 		todoList.prepend(item)
 	}
 
@@ -162,9 +173,19 @@ window.onload = () => {
 		})
 	}, 15000)
 
-	addTodo({ text: "Pizza", time: new Date(new Date() - 100000000) })
-	addTodo({ text: "Taco", time: new Date(new Date() - 10000000) })
-	addTodo({ text: "Snacks", time: new Date(new Date() - 1000000) })
+	const set_list = list => [...list].reverse().forEach(e => addTodo(e))
+
+	set_list([
+		{ text: "Pizza", time: new Date(new Date() - 100000000) },
+		{
+			text: "Taco",
+			time: new Date(new Date() - 10000000),
+			completed: true,
+		},
+		{ text: "Snacks", time: new Date(new Date() - 1000000) },
+	])
+
+	console.log(get_list())
 
 	todoAdd.onsubmit = function (e) {
 		if (!/^\s*$/gu.test(todoAddText.value))

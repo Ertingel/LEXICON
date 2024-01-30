@@ -9,9 +9,7 @@ window.onload = () => {
 
 	let state, word, cars, guess, current_guess
 
-	function redraw() {
-		console.log(word, cars, guess)
-
+	function update() {
 		const wrong = new Set()
 		const correct = new Set()
 		guess.forEach(e => {
@@ -19,21 +17,36 @@ window.onload = () => {
 			else wrong.add(e)
 		})
 
+		if (wrong.size >= hangman.children.length) state = "lose"
+		else if (correct.size >= cars.size) state = "win"
+
+		document.body.classList.toggle("lose", state === "lose")
+		document.body.classList.toggle("win", state === "win")
+
 		gueses.innerHTML = Array.from(wrong)
 			.map(c =>
 				c === current_guess ? `<span class="highlight">${c}</span>` : c
 			)
 			.join(" ")
 
-		text.innerHTML = Array.from(word)
-			.map(c =>
-				correct.has(c)
-					? `<p${
-							c === current_guess ? ' class="highlight"' : ""
-					  }>${c}</p$>`
-					: "<p></p>"
-			)
-			.join("")
+		if (state === "play")
+			text.innerHTML = Array.from(word)
+				.map(c =>
+					correct.has(c)
+						? `<p${
+								c === current_guess ? ' class="highlight"' : ""
+						  }>${c}</p$>`
+						: "<p></p>"
+				)
+				.join("")
+		else
+			text.innerHTML = Array.from(word)
+				.map(c => `<p>${c}</p>`)
+				.join("")
+
+		Array.from(hangman.children).forEach((e, i) =>
+			e.classList.toggle("visible", i < wrong.size)
+		)
 	}
 
 	function newGame() {
@@ -43,10 +56,15 @@ window.onload = () => {
 
 		state = "play"
 
-		redraw()
+		update()
 	}
 
 	document.onkeyup = e => {
+		if (state != "play") {
+			newGame()
+			return
+		}
+
 		const key = e.key.toUpperCase()
 
 		if (!/^[A-Z]$/gu.test(key)) return
@@ -54,7 +72,7 @@ window.onload = () => {
 		current_guess = key
 		guess.add(key)
 
-		redraw()
+		update()
 	}
 
 	newGame()

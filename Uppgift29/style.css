@@ -1,20 +1,67 @@
+:root {
+	font-size: 3vmin;
+}
+
 body {
 	min-height: 100vh;
-	padding: 0;
-	margin: 0;
 
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: center;
+
+	gap: 1rem;
+}
+
+* {
+	padding: 0;
+	margin: 0;
 }
 
 svg {
-	width: 50vmin;
+	height: 50vmin;
 }
 
 #gueses,
+#word,
+#tip {
+	min-height: 1.5rem;
+}
+
+#gueses {
+	color: #ccc;
+	font-weight: bold;
+}
+
+#gueses > .highlight {
+	color: #f66;
+}
+
 #word {
 	display: flex;
 	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+#word > * {
+	min-width: 1.2rem;
+	min-height: 1.5rem;
+
+	text-align: center;
+	line-height: 1.5rem;
+	font-weight: bold;
+
+	background-color: #e0e0e0;
+	border-bottom: solid 0.1rem #000;
+}
+
+#word > *.highlight {
+	background-color: #9f9;
+}
+
+#tip {
+	color: #ccc;
+	font-weight: bold;
 }

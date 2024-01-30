@@ -211,6 +211,66 @@ body {
 	border-radius: 50%;
 }
 
+#player > main > nav {
+	flex-grow: 1;
+
+	display: grid;
+	justify-content: center;
+	align-items: center;
+
+	grid:
+		"add title favorite" 1fr
+		"play-time play-progress length" 1fr
+		"repeat center shuffle" 1fr
+		/ 3rem 1fr 3rem;
+}
+
+#player > main > nav > div {
+	grid-area: center;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+#add {
+	grid-area: add;
+}
+
+#title {
+	grid-area: title;
+}
+
+#favorite {
+	grid-area: favorite;
+}
+
+#favorite.active {
+	color: #fe145e;
+}
+
+#play-time {
+	grid-area: play-time;
+}
+
+#play-progress {
+	grid-area: play-progress;
+}
+
+#length {
+	grid-area: length;
+}
+
+#repeat {
+	grid-area: repeat;
+}
+
+#shuffle {
+	grid-area: shuffle;
+}
+
+/*
 #player > main > div {
 	flex-grow: 1;
 
@@ -234,6 +294,7 @@ body {
 	justify-content: center;
 	align-items: center;
 }
+*/
 
 .fast-rewind,
 .fast-forward {

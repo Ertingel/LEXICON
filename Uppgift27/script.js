@@ -127,7 +127,14 @@ window.onload = () => {
 		save_state()
 	}
 
-	const addTodo = ({ text, completed = false, time = new Date() }) => {
+	const addTodo = ({
+		text = "",
+		completed = false,
+		tag = "",
+		time = new Date(),
+	}) => {
+		if (text === "") return
+
 		const item = make(null, "li", {
 			class: "todo-item",
 			draggable: "true",
@@ -138,6 +145,18 @@ window.onload = () => {
 			type: "checkbox",
 			checked: completed,
 			onchange: e => {
+				save_state()
+			},
+		})
+
+		const tag_element = make(item, "input", {
+			class: "tag",
+			type: "text",
+			placeholder: "Untagged",
+			value: tag,
+			onchange: e => {
+				if (/^\s*$/gu.test(e.target.value)) e.target.value = ""
+
 				save_state()
 			},
 		})
@@ -172,6 +191,7 @@ window.onload = () => {
 			return {
 				text: text_element.value,
 				completed: completed_element.checked,
+				tag: tag_element.value,
 				time,
 			}
 		}
@@ -212,13 +232,22 @@ window.onload = () => {
 		} catch (error) {
 			data = {
 				list: [
-					{ text: "Pizza", time: new Date(new Date() - 100000000) },
+					{
+						text: "Pizza",
+						tag: "Food",
+						time: new Date(new Date() - 100000000),
+					},
 					{
 						text: "Taco",
+						tag: "Food",
 						time: new Date(new Date() - 10000000),
 						completed: true,
 					},
-					{ text: "Snacks", time: new Date(new Date() - 1000000) },
+					{
+						text: "Snacks",
+						tag: "Food",
+						time: new Date(new Date() - 1000000),
+					},
 				],
 			}
 		}

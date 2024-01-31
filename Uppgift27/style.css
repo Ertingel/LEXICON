@@ -142,11 +142,13 @@ input[type="checkbox"]:checked:after {
 }
 
 .todo-item {
-	padding-block: 0.25rem;
+	/*padding-block: 0.25rem;*/
+	margin-block: -0.3rem;
 
 	display: grid;
 	gap: 0 0;
 	grid:
+		". . tags ." auto
 		"completed . text remove" auto
 		". . date date" auto
 		/ auto 0.5rem 1fr auto;
@@ -169,6 +171,17 @@ input[type="checkbox"]:checked:after {
 
 .todo-item > .completed:checked ~ .remove {
 	margin-left: 0.5rem;
+}
+
+.todo-item > .tag {
+	grid-area: tags;
+
+	margin: 0;
+	padding: 0;
+	min-height: 1em;
+	padding-inline: 0.5rem;
+
+	background: none;
 }
 
 .todo-item > .text {

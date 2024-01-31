@@ -138,27 +138,40 @@ function initTodoAdd(onadd) {
 function initTodoFilter(todoList) {
 	const text = document.getElementById("todo-filter-text")
 	const clear = document.getElementById("todo-filter-clear")
+	const info = document.getElementById("todo-filter-info")
+
+	info.innerText = `${Array.from(todoList.children).length} Items`
 
 	const filter = () => {
 		const list = Array.from(todoList.children)
 
-		if (text.value === "") {
+		if (/^\s*$/gu.test(text.value)) {
 			list.forEach(e => {
 				e.style.display = "grid"
 			})
+
+			info.innerText = `${list.length} Items`
 			return
 		}
 
 		const pattern = new RegExp(text.value.match(/\S+/gu).join("|"), "giu")
+		let count = 0
 
 		list.forEach(e => {
 			const data = e.getData()
 			console.log(pattern.test(data.text), pattern.test(data.tag))
-			e.style.display =
-				pattern.test(data.text) || pattern.test(data.tag)
-					? "grid"
-					: "none"
+
+			if (
+				pattern.test(data.text) ||
+				pattern.test(data.tag) ||
+				pattern.test(data.time.toString().substring(0, 24))
+			) {
+				e.style.display = "grid"
+				count++
+			} else e.style.display = "none"
 		})
+
+		info.innerText = `${count} / ${list.length} Items`
 	}
 
 	text.onchange = e => {
@@ -167,7 +180,6 @@ function initTodoFilter(todoList) {
 	}
 
 	text.onkeyup = e => {
-		if (/^\s*$/gu.test(e.target.value)) e.target.value = ""
 		filter()
 	}
 
@@ -213,7 +225,7 @@ function makeTodoItem(
 	})
 
 	const completedElement = make(item, "input", {
-		class: "completed",
+		class: ["completed", "material-symbols-rounded"],
 		type: "checkbox",
 		checked: completed,
 		onchange: e => {
@@ -222,9 +234,9 @@ function makeTodoItem(
 	})
 
 	make(item, "input", {
-		class: "remove",
+		class: ["remove", "material-symbols-rounded"],
 		type: "button",
-		value: "✕",
+		value: "delete",
 		onclick: () => {
 			onremove(item)
 		},
@@ -260,7 +272,6 @@ window.onload = () => {
 		localStorage.setItem("todo", JSON.stringify(data))
 	}
 
-	initTodoFilter(todoList)
 	makeDragable(todoList, () => save_state())
 
 	const removeTodo = entry => {
@@ -326,4 +337,5 @@ window.onload = () => {
 	}
 
 	load_state()
+	initTodoFilter(todoList)
 }

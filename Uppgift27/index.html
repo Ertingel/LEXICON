@@ -5,6 +5,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Todo List</title>
 
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+		/>
+
 		<link rel="stylesheet" href="style.css" />
 		<script src="script.js"></script>
 	</head>
@@ -16,7 +21,10 @@
 
 			<div id="todo-filter">
 				<input id="todo-filter-text" type="text" placeholder="Filter" />
-				<button id="todo-filter-clear">⟳</button>
+				<button id="todo-filter-clear" class="material-symbols-rounded">
+					refresh
+				</button>
+				<p id="todo-filter-info"></p>
 			</div>
 
 			<ul id="todo-list"></ul>
@@ -37,9 +45,9 @@
 				/>
 				<input
 					id="todo-add-button"
-					class="completed"
+					class="completed material-symbols-rounded"
 					type="submit"
-					value="+"
+					value="add"
 				/>
 				<p class="date">Add</p>
 			</form>

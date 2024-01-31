@@ -12,28 +12,6 @@ function make(parent, type, { id, class: class_, ...data }) {
 	return e
 }
 
-function getDragAfterElement(listElement, y) {
-	return [...listElement.childNodes].reduce(
-		(closest, child) => {
-			if (
-				child.style.visibility == "hidden" ||
-				child.style.display == "none"
-			)
-				return closest
-
-			const box = child.getBoundingClientRect()
-			const offset = y - box.top - box.height / 2
-			if (offset >= 0 || offset <= closest.offset) return closest
-
-			return {
-				offset: offset,
-				element: child,
-			}
-		},
-		{ offset: Number.NEGATIVE_INFINITY }
-	).element
-}
-
 function getTimeStr(time) {
 	const now = new Date()
 	const delta = now - time
@@ -69,7 +47,9 @@ function getTimeStr(time) {
 			"Oct",
 			"Nov",
 			"Dec",
-		][time.getMonth()] + time.getDate()
+		][time.getMonth()] +
+		" " +
+		time.getDate()
 
 	if (delta / year < 1) return `${month_name} ${clock}`
 
@@ -78,25 +58,31 @@ function getTimeStr(time) {
 	}-${time.getDate()} ${clock}`
 }
 
-window.onload = () => {
-	const todoAdd = document.getElementById("todo-add")
-	const todoAddText = document.getElementById("todo-add-text")
-
-	const todoList = document.getElementById("todo-list")
-
+function makeDragable(element, onchange) {
 	let draggedItem = null
 
-	const get_list = () => Array.from(todoList.children).map(e => e.getData())
+	const getDragAfterElement = y =>
+		[...element.childNodes].reduce(
+			(closest, child) => {
+				if (
+					child.style.visibility == "hidden" ||
+					child.style.display == "none"
+				)
+					return closest
 
-	const save_state = () => {
-		const data = {
-			list: get_list(),
-		}
-		console.log("saved", data)
-		localStorage.setItem("todo", JSON.stringify(data))
-	}
+				const box = child.getBoundingClientRect()
+				const offset = y - box.top - box.height / 2
+				if (offset >= 0 || offset <= closest.offset) return closest
 
-	todoList.ondragstart = e => {
+				return {
+					offset: offset,
+					element: child,
+				}
+			},
+			{ offset: Number.NEGATIVE_INFINITY }
+		).element
+
+	element.ondragstart = e => {
 		if (draggedItem) draggedItem.style.visibility = ""
 		draggedItem = e.target
 
@@ -105,21 +91,62 @@ window.onload = () => {
 		}, 0)
 	}
 
-	todoList.ondragend = e => {
+	element.ondragend = e => {
 		if (draggedItem) draggedItem.style.visibility = ""
 		draggedItem = null
 
-		save_state()
+		if (onchange) onchange()
 	}
 
-	todoList.ondragover = e => {
+	element.ondragover = e => {
 		e.preventDefault()
 		if (!draggedItem) return
 
-		const afterElement = getDragAfterElement(todoList, e.clientY)
-		if (afterElement == null) todoList.appendChild(draggedItem)
-		else todoList.insertBefore(draggedItem, afterElement)
+		const afterElement = getDragAfterElement(e.clientY)
+		if (afterElement == null) element.appendChild(draggedItem)
+		else element.insertBefore(draggedItem, afterElement)
 	}
+}
+
+function initTodoAdd(onadd) {
+	const todoAdd = document.getElementById("todo-add")
+	const todoAddText = document.getElementById("todo-add-text")
+	const todoAddTag = document.getElementById("todo-add-tag")
+
+	todoAdd.onsubmit = e => {
+		if (/^\s*$/gu.test(todoAddTag.value)) todoAddTag.value = ""
+
+		if (!/^\s*$/gu.test(todoAddText.value)) {
+			onadd({
+				text: todoAddText.value,
+				completed: false,
+				tag: todoAddTag.value,
+				time: new Date(),
+			})
+
+			todoAddTag.value = ""
+		}
+
+		todoAddText.value = ""
+
+		return false
+	}
+
+	return todoAdd
+}
+
+window.onload = () => {
+	const todoList = document.getElementById("todo-list")
+
+	const save_state = () => {
+		const data = {
+			list: Array.from(todoList.children).map(e => e.getData()),
+		}
+		console.log("saved", data)
+		localStorage.setItem("todo", JSON.stringify(data))
+	}
+
+	makeDragable(todoList, () => save_state())
 
 	const removeTodo = entry => {
 		todoList.removeChild(entry)
@@ -140,12 +167,13 @@ window.onload = () => {
 			draggable: "true",
 		})
 
-		const completed_element = make(item, "input", {
-			class: "completed",
-			type: "checkbox",
-			checked: completed,
+		const text_element = make(item, "input", {
+			class: "text",
+			type: "text",
+			placeholder: "Delete?",
+			value: text,
 			onchange: e => {
-				save_state()
+				if (/^\s*$/gu.test(e.target.value)) removeTodo(item)
 			},
 		})
 
@@ -161,13 +189,12 @@ window.onload = () => {
 			},
 		})
 
-		const text_element = make(item, "input", {
-			class: "text",
-			type: "text",
-			placeholder: "Delete?",
-			value: text,
+		const completed_element = make(item, "input", {
+			class: "completed",
+			type: "checkbox",
+			checked: completed,
 			onchange: e => {
-				if (/^\s*$/gu.test(e.target.value)) removeTodo(item)
+				save_state()
 			},
 		})
 
@@ -196,7 +223,7 @@ window.onload = () => {
 			}
 		}
 
-		todoList.prepend(item)
+		todoList.appendChild(item)
 	}
 
 	window.setInterval(e => {
@@ -206,22 +233,12 @@ window.onload = () => {
 		})
 	}, 15000)
 
-	todoAdd.onsubmit = function (e) {
-		if (!/^\s*$/gu.test(todoAddText.value)) {
-			addTodo({
-				text: todoAddText.value,
-				time: new Date(),
-			})
+	initTodoAdd(data => {
+		addTodo(data)
+		save_state()
+	})
 
-			save_state()
-		}
-
-		todoAddText.value = ""
-
-		return false
-	}
-
-	const set_list = list => [...list].reverse().forEach(e => addTodo(e))
+	const set_list = list => list.forEach(e => addTodo(e))
 
 	const load_state = () => {
 		let data

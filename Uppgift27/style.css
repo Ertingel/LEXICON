@@ -56,7 +56,10 @@ input[type="checkbox"]::after {
 
 input[type="button"]:hover,
 input[type="submit"]:hover,
-input[type="checkbox"]:hover::after {
+input[type="checkbox"]:hover::after,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input[type="checkbox"]:focus::after {
 	transform: scale(1.15);
 }
 
@@ -91,12 +94,6 @@ input[type="checkbox"]:checked:after {
 	background-color: #994538;
 }
 
-.todo {
-	display: flex;
-	flex-flow: row nowrap;
-	gap: 0.5rem;
-}
-
 #background {
 	position: fixed;
 	z-index: -1;
@@ -125,7 +122,6 @@ input[type="checkbox"]:checked:after {
 	flex-flow: column nowrap;
 	justify-content: flex-start;
 	align-items: stretch;
-	gap: 0.5rem;
 }
 
 #todo > h1 {
@@ -142,7 +138,6 @@ input[type="checkbox"]:checked:after {
 }
 
 .todo-item {
-	/*padding-block: 0.25rem;*/
 	margin-block: -0.3rem;
 
 	display: grid;
@@ -201,4 +196,8 @@ input[type="checkbox"]:checked:after {
 	padding-inline: 0.5rem;
 
 	text-align: right;
+}
+
+#todo-add.todo-item > .date {
+	color: #99453888;
 }

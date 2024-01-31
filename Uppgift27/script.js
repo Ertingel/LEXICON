@@ -135,6 +135,120 @@ function initTodoAdd(onadd) {
 	return todoAdd
 }
 
+function initTodoFilter(todoList) {
+	const text = document.getElementById("todo-filter-text")
+	const clear = document.getElementById("todo-filter-clear")
+
+	const filter = () => {
+		const list = Array.from(todoList.children)
+
+		if (text.value === "") {
+			list.forEach(e => {
+				e.style.display = "grid"
+			})
+			return
+		}
+
+		const pattern = new RegExp(text.value.match(/\S+/gu).join("|"), "giu")
+
+		list.forEach(e => {
+			const data = e.getData()
+			console.log(pattern.test(data.text), pattern.test(data.tag))
+			e.style.display =
+				pattern.test(data.text) || pattern.test(data.tag)
+					? "grid"
+					: "none"
+		})
+	}
+
+	text.onchange = e => {
+		if (/^\s*$/gu.test(e.target.value)) e.target.value = ""
+		filter()
+	}
+
+	text.onkeyup = e => {
+		if (/^\s*$/gu.test(e.target.value)) e.target.value = ""
+		filter()
+	}
+
+	clear.onclick = e => {
+		text.value = ""
+		filter()
+	}
+}
+
+function makeTodoItem(
+	{ text = "", completed = false, tag = "", time = new Date() },
+	onchange,
+	onremove
+) {
+	if (text === "") return
+
+	const item = make(null, "li", {
+		class: "todo-item",
+		draggable: "true",
+	})
+
+	const textElement = make(item, "input", {
+		class: "text",
+		type: "text",
+		placeholder: "Delete?",
+		value: text,
+		onchange: e => {
+			if (/^\s*$/gu.test(e.target.value)) onremove(item)
+			else onchange(item)
+		},
+	})
+
+	const tagElement = make(item, "input", {
+		class: "tag",
+		type: "text",
+		placeholder: "Untagged",
+		value: tag,
+		onchange: e => {
+			if (/^\s*$/gu.test(e.target.value)) e.target.value = ""
+
+			onchange(item)
+		},
+	})
+
+	const completedElement = make(item, "input", {
+		class: "completed",
+		type: "checkbox",
+		checked: completed,
+		onchange: e => {
+			onchange(item)
+		},
+	})
+
+	make(item, "input", {
+		class: "remove",
+		type: "button",
+		value: "✕",
+		onclick: () => {
+			onremove(item)
+		},
+	})
+
+	const timeElement = make(item, "time", {
+		class: "date",
+		value: time,
+		innerHTML: getTimeStr(time),
+	})
+	timeElement.setAttribute("datetime", time.toString())
+
+	item.getData = () => {
+		return {
+			text: textElement.value,
+			completed: completedElement.checked,
+			tag: tagElement.value,
+			time,
+		}
+	}
+
+	return item
+}
+
 window.onload = () => {
 	const todoList = document.getElementById("todo-list")
 
@@ -146,84 +260,22 @@ window.onload = () => {
 		localStorage.setItem("todo", JSON.stringify(data))
 	}
 
+	initTodoFilter(todoList)
 	makeDragable(todoList, () => save_state())
 
 	const removeTodo = entry => {
 		todoList.removeChild(entry)
-
 		save_state()
 	}
 
-	const addTodo = ({
-		text = "",
-		completed = false,
-		tag = "",
-		time = new Date(),
-	}) => {
-		if (text === "") return
-
-		const item = make(null, "li", {
-			class: "todo-item",
-			draggable: "true",
-		})
-
-		const text_element = make(item, "input", {
-			class: "text",
-			type: "text",
-			placeholder: "Delete?",
-			value: text,
-			onchange: e => {
-				if (/^\s*$/gu.test(e.target.value)) removeTodo(item)
-			},
-		})
-
-		const tag_element = make(item, "input", {
-			class: "tag",
-			type: "text",
-			placeholder: "Untagged",
-			value: tag,
-			onchange: e => {
-				if (/^\s*$/gu.test(e.target.value)) e.target.value = ""
-
-				save_state()
-			},
-		})
-
-		const completed_element = make(item, "input", {
-			class: "completed",
-			type: "checkbox",
-			checked: completed,
-			onchange: e => {
-				save_state()
-			},
-		})
-
-		make(item, "input", {
-			class: "remove",
-			type: "button",
-			value: "✕",
-			onclick: () => {
-				removeTodo(item)
-			},
-		})
-
-		const timeElement = make(item, "time", {
-			class: "date",
-			value: time,
-			innerHTML: getTimeStr(time),
-		})
-		timeElement.setAttribute("datetime", time.toString())
-
-		item.getData = () => {
-			return {
-				text: text_element.value,
-				completed: completed_element.checked,
-				tag: tag_element.value,
-				time,
-			}
-		}
-
-		todoList.appendChild(item)
+	const addTodo = data => {
+		todoList.appendChild(
+			makeTodoItem(
+				data,
+				item => save_state(),
+				item => removeTodo(item)
+			)
+		)
 	}
 
 	window.setInterval(e => {

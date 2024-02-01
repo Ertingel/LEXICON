@@ -80,12 +80,12 @@ function makeDragable(element, onchange) {
 
 		const onend = e => {
 			element.classList.remove("draging")
-			draggedItem.classList.remove("draging")
+			if (draggedItem) draggedItem.classList.remove("draging")
 
 			element.onmouseup = null
 			element.onmouseleave = null
-
 			element.onmousemove = null
+
 			draggedItem = null
 
 			if (onchange) onchange()
@@ -103,6 +103,9 @@ function makeDragable(element, onchange) {
 
 			element.classList.add("draging")
 			draggedItem.classList.add("draging")
+
+			if (document.selection) document.selection.empty()
+			else window.getSelection().removeAllRanges()
 
 			const box = draggedItem.getBoundingClientRect()
 			const isAbove = box.y + box.height > e.y

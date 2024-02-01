@@ -1,4 +1,5 @@
-#background {
+#background1,
+#background2 {
 	position: fixed;
 	z-index: -1;
 
@@ -269,32 +270,6 @@ body {
 #shuffle {
 	grid-area: shuffle;
 }
-
-/*
-#player > main > div {
-	flex-grow: 1;
-
-	margin-top: 1rem;
-
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: space-between;
-}
-
-#player > main > div > nav {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-around;
-	align-items: center;
-}
-
-#player > main > div > nav > nav {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	align-items: center;
-}
-*/
 
 .fast-rewind,
 .fast-forward {

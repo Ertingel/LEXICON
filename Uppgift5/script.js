@@ -61,7 +61,8 @@ function timeToStr(time) {
 }
 
 window.onload = () => {
-	const background = document.getElementById("background")
+	const background1 = document.getElementById("background1")
+	const background2 = document.getElementById("background2")
 
 	const playlist_title = document.getElementById("playlist-title")
 	const list = document.getElementById("playlist")
@@ -110,10 +111,21 @@ window.onload = () => {
 		playing.classList.add("playing")
 
 		album_cover.src = playing.cover_file
-		background.style.setProperty(
+
+		background2.style.setProperty(
+			"background-image",
+			background1.style.getPropertyValue("background-image")
+		)
+
+		background1.style.setProperty(
 			"background-image",
 			`url("${playing.cover_file}")`
 		)
+
+		//background1.classList.remove("transition")
+		background1.animate([{ opacity: "0" }, { opacity: "1" }], {
+			duration: 1000,
+		})
 
 		title.innerHTML = `${playing.artist}<br /><small>${playing.song}</small>`
 		audio.src = playing.audio_file

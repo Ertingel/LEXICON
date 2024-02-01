@@ -108,6 +108,70 @@ function makeDragable(element, onchange) {
 	}
 }
 
+function makeDragable2(element, onchange) {
+	let draggedItem = null
+
+	const getDragAfterElement = y =>
+		[...element.childNodes].reduce(
+			(closest, child) => {
+				if (
+					child.style.visibility == "hidden" ||
+					child.style.display == "none"
+				)
+					return closest
+
+				const box = child.getBoundingClientRect()
+				const offset = y - box.top - box.height / 2
+				if (offset >= 0 || offset <= closest.offset) return closest
+
+				return {
+					offset: offset,
+					element: child,
+				}
+			},
+			{ offset: Number.NEGATIVE_INFINITY }
+		).element
+
+	const getElement = target => {
+		if (target === element) return null
+
+		while (target.parentElement != element)
+			if (target.parentElement) target = target.parentElement
+			else return null
+
+		return target
+	}
+
+	element.onmousedown = e => {
+		console.log("down", e)
+		draggedItem = getElement(e.target)
+
+		element.onmouseup = e => {
+			console.log("up", e)
+
+			element.onmouseup = null
+			element.onmousemove = null
+			draggedItem = null
+
+			if (onchange) onchange()
+		}
+
+		element.onmousemove = e => {
+			console.log("move", e)
+
+			if (!draggedItem) return
+			if (getElement(e.target) === draggedItem) return
+
+			const afterElement = getDragAfterElement(e.clientY)
+
+			//console.log(getElement(e.target) === draggedItem)
+
+			if (afterElement == null) element.appendChild(draggedItem)
+			else element.insertBefore(draggedItem, afterElement)
+		}
+	}
+}
+
 function initTodoAdd(onadd) {
 	const todoAdd = document.getElementById("todo-add")
 	const todoAddText = document.getElementById("todo-add-text")
@@ -198,7 +262,7 @@ function makeTodoItem(
 
 	const item = make(null, "li", {
 		class: "todo-item",
-		draggable: "true",
+		//draggable: "true",
 	})
 
 	const textElement = make(item, "input", {
@@ -272,7 +336,8 @@ window.onload = () => {
 		localStorage.setItem("todo", JSON.stringify(data))
 	}
 
-	makeDragable(todoList, () => save_state())
+	//makeDragable(todoList, () => save_state())
+	makeDragable2(todoList, () => save_state())
 
 	const removeTodo = entry => {
 		todoList.removeChild(entry)

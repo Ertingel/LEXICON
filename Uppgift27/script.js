@@ -59,56 +59,6 @@ function getTimeStr(time) {
 }
 
 function makeDragable(element, onchange) {
-	let draggedItem = null
-
-	const getDragAfterElement = y =>
-		[...element.childNodes].reduce(
-			(closest, child) => {
-				if (
-					child.style.visibility == "hidden" ||
-					child.style.display == "none"
-				)
-					return closest
-
-				const box = child.getBoundingClientRect()
-				const offset = y - box.top - box.height / 2
-				if (offset >= 0 || offset <= closest.offset) return closest
-
-				return {
-					offset: offset,
-					element: child,
-				}
-			},
-			{ offset: Number.NEGATIVE_INFINITY }
-		).element
-
-	element.ondragstart = e => {
-		if (draggedItem) draggedItem.style.visibility = ""
-		draggedItem = e.target
-
-		setTimeout(() => {
-			if (draggedItem) draggedItem.style.visibility = "hidden"
-		}, 0)
-	}
-
-	element.ondragend = e => {
-		if (draggedItem) draggedItem.style.visibility = ""
-		draggedItem = null
-
-		if (onchange) onchange()
-	}
-
-	element.ondragover = e => {
-		e.preventDefault()
-		if (!draggedItem) return
-
-		const afterElement = getDragAfterElement(e.clientY)
-		if (afterElement == null) element.appendChild(draggedItem)
-		else element.insertBefore(draggedItem, afterElement)
-	}
-}
-
-function makeDragable2(element, onchange) {
 	const getElementAtY = y => {
 		for (e of element.childNodes) {
 			if (e.style.visibility == "hidden" || e.style.display == "none")
@@ -117,56 +67,49 @@ function makeDragable2(element, onchange) {
 			const box = e.getBoundingClientRect()
 			const offset = y - box.top
 
-			if (offset >= 0 && offset < box.height)
-				return {
-					target: e,
-					isAbove: offset <= box.height / 2.0,
-				}
+			if (offset >= 0 && offset < box.height) return e
 		}
 
-		return {
-			target: null,
-			above: false,
-		}
+		return null
 	}
 
 	let draggedItem = null
 
 	element.onmousedown = e => {
-		draggedItem = getElementAtY(e.y).target
+		draggedItem = getElementAtY(e.y)
 
-		document.onmouseup = e => {
-			document.onmouseup = null
+		const onend = e => {
+			element.classList.remove("draging")
+			draggedItem.classList.remove("draging")
+
+			element.onmouseup = null
+			element.onmouseleave = null
+
 			element.onmousemove = null
 			draggedItem = null
 
 			if (onchange) onchange()
 		}
 
+		element.onmouseup = onend
+		element.onmouseleave = onend
+
 		element.onmousemove = e => {
-			const target_data = getElementAtY(e.y)
+			const target = getElementAtY(e.y)
 
 			if (!draggedItem) return
-			if (!target_data.target) return
-			if (target_data.target === draggedItem) return
+			if (!target) return
+			if (target === draggedItem) return
 
-			//element.insertBefore(draggedItem, target_data.target)
-			/*
-			if (target_data.isAbove)
-				element.insertBefore(draggedItem, target_data.target)
-			else if (target_data.target.nextElementSibling)
-				element.insertBefore(
-					draggedItem,
-					target_data.target.nextElementSibling
-				)
-			else element.appendChild(draggedItem)
-			*/
+			element.classList.add("draging")
+			draggedItem.classList.add("draging")
 
-			if (target_data.target.nextElementSibling)
-				element.insertBefore(
-					draggedItem,
-					target_data.target.nextElementSibling
-				)
+			const box = draggedItem.getBoundingClientRect()
+			const isAbove = box.y + box.height > e.y
+
+			if (isAbove) element.insertBefore(draggedItem, target)
+			else if (target.nextElementSibling)
+				element.insertBefore(draggedItem, target.nextElementSibling)
 			else element.appendChild(draggedItem)
 		}
 	}
@@ -204,6 +147,7 @@ function initTodoFilter(todoList) {
 	const clear = document.getElementById("todo-filter-clear")
 	const info = document.getElementById("todo-filter-info")
 
+	text.value = ""
 	info.innerText = `${Array.from(todoList.children).length} Items`
 
 	const filter = () => {
@@ -336,8 +280,7 @@ window.onload = () => {
 		localStorage.setItem("todo", JSON.stringify(data))
 	}
 
-	//makeDragable(todoList, () => save_state())
-	makeDragable2(todoList, () => save_state())
+	makeDragable(todoList, () => save_state())
 
 	const removeTodo = entry => {
 		todoList.removeChild(entry)

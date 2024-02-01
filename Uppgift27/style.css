@@ -196,6 +196,16 @@ input[type="checkbox"]:checked:after {
 		/ auto 0.5rem 1fr auto;
 }
 
+.todo-item.draging {
+	transform: scale(1.05, 1.1);
+
+	user-select: none;
+}
+
+#todo-list.draging {
+	user-select: none;
+}
+
 .todo-item > .completed {
 	grid-area: completed;
 }

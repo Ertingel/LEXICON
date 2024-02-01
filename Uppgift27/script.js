@@ -109,47 +109,34 @@ function makeDragable(element, onchange) {
 }
 
 function makeDragable2(element, onchange) {
-	let draggedItem = null
+	const getElementAtY = y => {
+		for (e of element.childNodes) {
+			if (e.style.visibility == "hidden" || e.style.display == "none")
+				continue
 
-	const getDragAfterElement = y =>
-		[...element.childNodes].reduce(
-			(closest, child) => {
-				if (
-					child.style.visibility == "hidden" ||
-					child.style.display == "none"
-				)
-					return closest
+			const box = e.getBoundingClientRect()
+			const offset = y - box.top
 
-				const box = child.getBoundingClientRect()
-				const offset = y - box.top - box.height / 2
-				if (offset >= 0 || offset <= closest.offset) return closest
-
+			if (offset >= 0 && offset < box.height)
 				return {
-					offset: offset,
-					element: child,
+					target: e,
+					isAbove: offset <= box.height / 2.0,
 				}
-			},
-			{ offset: Number.NEGATIVE_INFINITY }
-		).element
+		}
 
-	const getElement = target => {
-		if (target === element) return null
-
-		while (target.parentElement != element)
-			if (target.parentElement) target = target.parentElement
-			else return null
-
-		return target
+		return {
+			target: null,
+			above: false,
+		}
 	}
 
+	let draggedItem = null
+
 	element.onmousedown = e => {
-		console.log("down", e)
-		draggedItem = getElement(e.target)
+		draggedItem = getElementAtY(e.y).target
 
-		element.onmouseup = e => {
-			console.log("up", e)
-
-			element.onmouseup = null
+		document.onmouseup = e => {
+			document.onmouseup = null
 			element.onmousemove = null
 			draggedItem = null
 
@@ -157,17 +144,30 @@ function makeDragable2(element, onchange) {
 		}
 
 		element.onmousemove = e => {
-			console.log("move", e)
+			const target_data = getElementAtY(e.y)
 
 			if (!draggedItem) return
-			if (getElement(e.target) === draggedItem) return
+			if (!target_data.target) return
+			if (target_data.target === draggedItem) return
 
-			const afterElement = getDragAfterElement(e.clientY)
+			//element.insertBefore(draggedItem, target_data.target)
+			/*
+			if (target_data.isAbove)
+				element.insertBefore(draggedItem, target_data.target)
+			else if (target_data.target.nextElementSibling)
+				element.insertBefore(
+					draggedItem,
+					target_data.target.nextElementSibling
+				)
+			else element.appendChild(draggedItem)
+			*/
 
-			//console.log(getElement(e.target) === draggedItem)
-
-			if (afterElement == null) element.appendChild(draggedItem)
-			else element.insertBefore(draggedItem, afterElement)
+			if (target_data.target.nextElementSibling)
+				element.insertBefore(
+					draggedItem,
+					target_data.target.nextElementSibling
+				)
+			else element.appendChild(draggedItem)
 		}
 	}
 }

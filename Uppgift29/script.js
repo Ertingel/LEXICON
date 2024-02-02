@@ -41,7 +41,12 @@ window.onload = () => {
 				.join("")
 		else
 			text.innerHTML = Array.from(word)
-				.map(c => `<p>${c}</p>`)
+				.map(
+					c =>
+						`<p${
+							correct.has(c) ? ' class="highlight"' : ""
+						}>${c}</p$>`
+				)
 				.join("")
 
 		Array.from(hangman.children).forEach((e, i) =>

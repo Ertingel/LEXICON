@@ -76,6 +76,10 @@ body {
 	background-color: #f99;
 }
 
+.lose #word > *.highlight {
+	color: #d00;
+}
+
 #tip {
 	color: #ccc;
 	font-weight: bold;

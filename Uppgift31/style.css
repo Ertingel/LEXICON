@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Ropa+Sans:ital@0;1&display=swap");
+
+html {
+	--yellow: #ffd600;
+	--background: #424242;
+	--gray-1: #e1dede;
+	--gray-2: #c4c4c4;
+	--gray-3: #8e8e8e;
+	--gray-4: #444444;
+	--green-gray: #748687;
+
+	font-size: 2vmin;
+	font-family: "Ropa Sans", sans-serif;
+}
+
+body {
+	min-height: 100vh;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 3.5rem;
+}
+
+h2 {
+	font-size: 1.7rem;
+}
+
+h3 {
+	font-size: 1.7rem;
+}
+
+h4 {
+	font-size: 1.5rem;
+}
+
+h5 {
+	font-size: 1.25rem;
+}
+
+h6 {
+	font-size: 1rem;
+}
+
+h1,
+h2 {
+	color: var(--yellow);
+}
+
+body {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+}
+
+body > header {
+	padding: 3.7rem;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+body > main {
+	flex-grow: 1;
+
+	background-color: var(--background);
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-evenly;
+	align-items: center;
+}

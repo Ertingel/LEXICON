@@ -102,6 +102,8 @@ body > main > article {
 	height: 34.5rem;
 	margin: 2rem;
 
+	border-top-right-radius: 0.5rem;
+	border-top-left-radius: 0.5rem;
 	box-shadow: 0 0 1rem #0008;
 
 	display: flex;
@@ -119,6 +121,7 @@ body > main > article > header {
 }
 
 body > main > article > main {
+	position: relative;
 	flex-grow: 1;
 	background-color: var(--gray-2);
 }
@@ -186,12 +189,66 @@ body > main > article > footer {
 }
 
 #info > main > * {
+	position: relative;
 	padding: 1rem 1rem;
 
 	flex-grow: 1;
 }
 
+#info > main table {
+	margin-left: 1rem;
+}
+
+#info > main table th {
+	padding: 0.1rem;
+}
+
+#info > main table th:first-child {
+	text-align: right;
+}
+#info > main table th:last-child {
+	text-align: left;
+}
+
 #home-planet {
 	color: var(--gray-1);
 	background-color: var(--gray-3);
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	width: 4rem;
+	aspect-ratio: 1;
+	--c: no-repeat linear-gradient(var(--gray-5) 0 0);
+	background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
+	background-size: 20% 100%;
+	animation: l1 1s infinite ease;
+}
+@keyframes l1 {
+	0% {
+		background-size: 20% 100%, 20% 100%, 20% 100%;
+	}
+	33% {
+		background-size: 20% 10%, 20% 100%, 20% 100%;
+	}
+	50% {
+		background-size: 20% 100%, 20% 10%, 20% 100%;
+	}
+	66% {
+		background-size: 20% 100%, 20% 100%, 20% 10%;
+	}
+	100% {
+		background-size: 20% 100%, 20% 100%, 20% 100%;
+	}
+}
+
+@media screen and (max-width: 150vmin) {
+	html {
+		font-size: 3.25vmin;
+	}
 }

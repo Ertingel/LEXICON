@@ -11,10 +11,39 @@ body {
 	min-height: 100vh;
 }
 
+body > main {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: center;
+}
+
 #list {
-	max-width: 50rem;
+	padding: 5rem;
 
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr;
+	gap: 1rem;
+
+	list-style: none;
+}
+
+#list > li {
+	width: 15rem;
+	padding: 1rem;
+
+	border-radius: 1rem;
+	box-shadow: 0 0 1rem #0008;
+}
+
+#list > li > img {
+	display: block;
+	max-width: 100%;
+	max-height: 10rem;
+	margin-inline: auto;
+}
+
+#list > li > h1 {
+	font-size: 1.25rem;
 }

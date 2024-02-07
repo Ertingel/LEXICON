@@ -23,22 +23,39 @@ function make(parent, type, { id, class: class_, ...data }) {
 }
 
 let cache = {}
-async function fetchData(url) {
+async function memoizedFetch(url) {
 	if (url in cache) return cache[url]
 
 	let data = await (await fetch(url)).json()
 	cache[url] = data
+
+	if (url.startsWith("https://api.punkapi.com/v2/beers?page="))
+		data.forEach(beer => {
+			cache[`https://api.punkapi.com/v2/beers/${beer.id}`] = beer
+		})
+
 	return data
 }
 
-async function init() {
+async function viewPage(page = 1) {
 	const list = document.getElementById("list")
 
-	const data = await fetchData(
-		"https://api.punkapi.com/v2/beers?page=1&per_page=25"
+	const data = await memoizedFetch(
+		"https://api.punkapi.com/v2/beers?page=1&per_page=24"
 	)
 
-	console.log(data)
+	data.forEach(beer => {
+		const li = make(list, "li", {})
+		make(li, "img", { src: beer.image_url })
+		make(li, "h1", { innerHTML: beer.name })
+		make(li, "p", { innerHTML: beer.tagline })
+	})
+
+	console.log(cache)
+}
+
+async function init() {
+	viewPage()
 }
 
 document.ready().then(async () => init())

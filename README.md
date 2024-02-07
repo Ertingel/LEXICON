@@ -47,3 +47,4 @@ Detta är min repository för läxor i LEXICON.
 -   Vecka 6 _(Javascript)_
     -   [**Uppgift30**](https://ertingel.github.io/LEXICON/Uppgift30): API Bootcamp
     -   [**Uppgift31**](https://ertingel.github.io/LEXICON/Uppgift31): Starwars Catalog
+    -   [**Uppgift32**](https://ertingel.github.io/LEXICON/Uppgift32): Punk API

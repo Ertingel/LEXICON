@@ -22,35 +22,126 @@ function make(parent, type, { id, class: class_, ...data }) {
 	return e
 }
 
+function addUnit(value, unit) {
+	if (value == "0") return "unknown"
+	return value == "unknown" ? value : `${value}${unit}`
+}
+
+function makeTable(parent, data) {
+	const table = make(parent, "table", {})
+	const tbody = make(table, "tbody", {})
+
+	Object.entries(data).forEach(([key, value]) => {
+		const tr = make(tbody, "tr", {})
+
+		key = key.replaceAll("_", " ")
+		make(tr, "th", { innerHTML: `${key}:` })
+		make(tr, "th", { innerHTML: value })
+	})
+}
+
+async function setHomePlanet(url) {
+	const homePlanet = document.getElementById("home-planet")
+
+	if (!url) {
+		homePlanet.innerHTML = ""
+		make(homePlanet, "h3", {
+			innerHTML: "Unknown",
+		})
+		return
+	}
+
+	homePlanet.innerHTML = '<div class="loader"></div>'
+
+	const planet = await (await fetch(url)).json()
+	console.log(planet)
+
+	if (planet.name == "unknown") {
+		homePlanet.innerHTML = ""
+		make(homePlanet, "h3", {
+			innerHTML: "Unknown",
+		})
+		return
+	}
+
+	homePlanet.innerHTML = ""
+	make(homePlanet, "h3", {
+		innerHTML: planet.name,
+	})
+
+	makeTable(homePlanet, {
+		Rotation_period: addUnit(planet.rotation_period, "h"),
+		Orbital_period: addUnit(planet.orbital_period, " days"),
+		Diameter: addUnit(planet.diameter, "km"),
+		Climate: planet.climate,
+		Gravity: planet.gravity,
+		Terrain: planet.terrain,
+	})
+}
+
+async function setCharacter(data) {
+	console.log(data)
+
+	const characterInfo = document.getElementById("character-info")
+	characterInfo.innerHTML = ""
+
+	make(characterInfo, "h3", {
+		innerHTML: data.name,
+	})
+
+	makeTable(characterInfo, {
+		Height: addUnit(data.height, "cm"),
+		Mass: addUnit(data.mass, "kg"),
+		Hair_color: data.hair_color,
+		Skin_color: data.skin_color,
+		Eye_color: data.eye_color,
+		Birth_year: data.birth_year,
+		Gender: data.gender,
+	})
+
+	setHomePlanet(data.homeworld)
+}
+
+let pageCount = 9
 async function setPage(url = "https://swapi.dev/api/people/?page=1") {
 	const list = document.getElementById("page")
+	const prevPage = document.getElementById("prev-page")
+	const nextPage = document.getElementById("next-page")
+	const nextNum = document.getElementById("page-num")
+
 	list.innerHTML = '<div class="loader"></div>'
+	prevPage.onclick = e => {}
+	nextPage.onclick = e => {}
+
+	const pageIndex = url.match(
+		/^https:\/\/swapi\.dev\/api\/people\/\?page=(\d+)$/u
+	)[1]
+	nextNum.innerHTML = `${pageIndex} / ${pageCount}`
 
 	const page = await (await fetch(url)).json()
 	console.log(page)
 
-	document.getElementById("prev-page").onclick = e => {
+	pageCount = Math.ceil(page.count / 10)
+	nextNum.innerHTML = `${pageIndex} / ${pageCount}`
+
+	prevPage.onclick = e => {
 		if (page.previous) setPage(page.previous)
 	}
 
-	document.getElementById("next-page").onclick = e => {
+	nextPage.onclick = e => {
 		if (page.next) setPage(page.next)
 	}
-
-	const pageCount = Math.ceil(page.count / 10)
-	const pageIndex = url.match(
-		/^https:\/\/swapi\.dev\/api\/people\/\?page=(\d+)$/u
-	)[1]
-	document.getElementById(
-		"page-num"
-	).innerHTML = `${pageIndex} / ${pageCount}`
 
 	list.innerHTML = ""
 	const ul = make(list, "ul", {})
 
 	page.results.forEach(character => {
-		make(ul, "li", {
+		const li = make(ul, "li", {})
+		make(li, "button", {
 			innerHTML: character.name,
+			onclick: e => {
+				setCharacter(character)
+			},
 		})
 	})
 

@@ -59,6 +59,7 @@ button {
 	line-height: 1em;
 	background: none;
 	border: none;
+	outline: none;
 }
 
 body {
@@ -157,25 +158,34 @@ body > main > article > footer {
 	list-style-type: none;
 }
 
-#list ul > li {
+#list ul > li > button {
+	width: 100%;
 	padding: 0.5rem 1rem;
 
 	font-size: 1.3rem;
+	text-align: left;
+
+	transition: padding-left 0.1s ease-in-out;
 }
 
-#list ul > li:nth-child(2n) {
+#list ul > li:nth-child(2n) > button {
 	color: var(--gray-5);
 	background-color: var(--gray-1);
 }
 
-#list ul > li:nth-child(4n - 1) {
+#list ul > li:nth-child(4n - 1) > button {
 	color: var(--gray-1);
 	background-color: var(--gray-4);
 }
 
-#list ul > li:nth-child(4n + 1) {
+#list ul > li:nth-child(4n + 1) > button {
 	color: var(--gray-1);
 	background-color: var(--gray-3);
+}
+
+#list ul > li > button:hover,
+#list ul > li > button:focus {
+	padding-left: 2rem;
 }
 
 #info > header {

@@ -215,6 +215,10 @@ body > main > article > footer {
 	background-color: var(--gray-3);
 }
 
+#home-planet .loader {
+	--c: no-repeat linear-gradient(var(--gray-1) 0 0);
+}
+
 /* HTML: <div class="loader"></div> */
 .loader {
 	position: absolute;
@@ -224,7 +228,7 @@ body > main > article > footer {
 
 	width: 4rem;
 	aspect-ratio: 1;
-	--c: no-repeat linear-gradient(var(--gray-5) 0 0);
+	--c: no-repeat linear-gradient(var(--gray-3) 0 0);
 	background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
 	background-size: 20% 100%;
 	animation: l1 1s infinite ease;

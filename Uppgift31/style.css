@@ -193,9 +193,11 @@ body > main > article > footer {
 }
 
 #info > main {
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: stretch;
+	display: grid;
+	grid:
+		"character-info" 1fr
+		"home-planet" 1fr
+		/ 1fr;
 }
 
 #info > main > * {
@@ -220,7 +222,13 @@ body > main > article > footer {
 	text-align: left;
 }
 
+#character-info {
+	grid-area: character-info;
+}
+
 #home-planet {
+	grid-area: home-planet;
+
 	color: var(--gray-1);
 	background-color: var(--gray-3);
 }

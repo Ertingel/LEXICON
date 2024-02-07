@@ -27,6 +27,12 @@ function addUnit(value, unit) {
 	return value == "unknown" ? value : `${value}${unit}`
 }
 
+let cache = {}
+async function fetchData(url) {
+	if (!(url in cache)) cache[url] = await (await fetch(url)).json()
+	return cache[url]
+}
+
 function makeTable(parent, data) {
 	const table = make(parent, "table", {})
 	const tbody = make(table, "tbody", {})
@@ -52,9 +58,7 @@ async function setHomePlanet(url) {
 	}
 
 	homePlanet.innerHTML = '<div class="loader"></div>'
-
-	const planet = await (await fetch(url)).json()
-	console.log(planet)
+	const planet = await fetchData(url)
 
 	if (planet.name == "unknown") {
 		homePlanet.innerHTML = ""
@@ -117,9 +121,7 @@ async function setPage(url = "https://swapi.dev/api/people/?page=1") {
 		/^https:\/\/swapi\.dev\/api\/people\/\?page=(\d+)$/u
 	)[1]
 	nextNum.innerHTML = `${pageIndex} / ${pageCount}`
-
-	const page = await (await fetch(url)).json()
-	console.log(page)
+	const page = await fetchData(url)
 
 	pageCount = Math.ceil(page.count / 10)
 	nextNum.innerHTML = `${pageIndex} / ${pageCount}`

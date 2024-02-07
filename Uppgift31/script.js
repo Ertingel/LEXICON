@@ -29,7 +29,25 @@ function addUnit(value, unit) {
 
 let cache = {}
 async function fetchData(url) {
-	if (!(url in cache)) cache[url] = await (await fetch(url)).json()
+	if (!(url in cache)) {
+		let data = await (await fetch(url)).json()
+
+		if (data.results)
+			data.results.forEach(e => {
+				if (e.url)
+					e.id = +e.url.match(
+						/^https:\/\/swapi\.dev\/api\/[^\/]+\/(\d+)\/$/u
+					)[1]
+			})
+
+		if (data.url)
+			data.id = data.url.match(
+				/^https:\/\/swapi\.dev\/api\/[^\/]+\/(\d+)\/$/u
+			)[1]
+
+		cache[url] = data
+		return data
+	}
 	return cache[url]
 }
 
@@ -83,8 +101,10 @@ async function setHomePlanet(url) {
 	})
 }
 
+let selectedCharacterID = -1
+let selectedCharacterButton = null
 async function setCharacter(data) {
-	console.log(data)
+	selectedCharacterID = data.id
 
 	const characterInfo = document.getElementById("character-info")
 	characterInfo.innerHTML = ""
@@ -106,8 +126,14 @@ async function setCharacter(data) {
 	setHomePlanet(data.homeworld)
 }
 
+function getPageNum(url) {
+	return url.match(/^https:\/\/swapi\.dev\/api\/people\/\?page=(\d+)$/u)[1]
+}
+
 let pageCount = 9
 async function setPage(url = "https://swapi.dev/api/people/?page=1") {
+	selectedCharacterButton = null
+
 	const list = document.getElementById("page")
 	const prevPage = document.getElementById("prev-page")
 	const nextPage = document.getElementById("next-page")
@@ -117,9 +143,7 @@ async function setPage(url = "https://swapi.dev/api/people/?page=1") {
 	prevPage.onclick = e => {}
 	nextPage.onclick = e => {}
 
-	const pageIndex = url.match(
-		/^https:\/\/swapi\.dev\/api\/people\/\?page=(\d+)$/u
-	)[1]
+	const pageIndex = getPageNum(url)
 	nextNum.innerHTML = `${pageIndex} / ${pageCount}`
 	const page = await fetchData(url)
 
@@ -139,12 +163,22 @@ async function setPage(url = "https://swapi.dev/api/people/?page=1") {
 
 	page.results.forEach(character => {
 		const li = make(ul, "li", {})
-		make(li, "button", {
+		const button = make(li, "button", {
 			innerHTML: character.name,
 			onclick: e => {
 				setCharacter(character)
+
+				if (selectedCharacterButton)
+					selectedCharacterButton.classList.remove("selected")
+				selectedCharacterButton = e.target
+				selectedCharacterButton.classList.add("selected")
 			},
 		})
+
+		if (character.id == selectedCharacterID) {
+			selectedCharacterButton = button
+			button.classList.add("selected")
+		}
 	})
 
 	return page

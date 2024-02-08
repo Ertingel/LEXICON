@@ -37,13 +37,40 @@ async function memoizedFetch(url) {
 	return data
 }
 
+function makeTable(parent, data) {
+	const table = make(parent, "table", {})
+	const tbody = make(table, "tbody", {})
+
+	Object.entries(data).forEach(([key, value]) => {
+		const tr = make(tbody, "tr", {})
+
+		key = key.replaceAll("_", " ")
+		make(tr, "th", { innerHTML: `${key}:` })
+		make(tr, "th", { innerHTML: value })
+	})
+}
+
 function viewProduct(beer) {
 	const modal = document.getElementById("modal")
+	console.log(beer)
 
+	modal.innerHTML = ""
 	const figure = make(modal, "figure", {})
 	make(figure, "img", { src: beer.image_url })
 	make(modal, "h1", { innerHTML: beer.name })
-	make(modal, "p", { innerHTML: beer.tagline })
+	make(modal, "b", { innerHTML: beer.tagline })
+
+	const ul = make(modal, "ul", {})
+
+	make(ul, "li", {
+		innerHTML: `Date: <time>${beer.first_brewed}</time>`,
+	})
+	make(ul, "li", {
+		innerHTML: `Volume: ${beer.volume.value} ${beer.volume.unit}`,
+	})
+
+	make(modal, "p", { innerHTML: beer.description })
+	make(modal, "p", { innerHTML: beer.brewers_tips })
 
 	modal.showModal()
 }
@@ -70,6 +97,17 @@ async function viewPage(page = 1) {
 }
 
 async function init() {
+	document.getElementById("modal").onclick = e => {
+		const rect = modal.getBoundingClientRect()
+		if (
+			rect.top > e.clientY ||
+			e.clientY > rect.top + rect.height ||
+			rect.left > e.clientX ||
+			e.clientX > rect.left + rect.width
+		)
+			modal.close()
+	}
+
 	viewPage()
 
 	document.getElementById("Show More").onclick = e => {

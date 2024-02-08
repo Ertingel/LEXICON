@@ -7,6 +7,10 @@ html {
 	padding: 0;
 }
 
+li {
+	margin-left: 2em;
+}
+
 button {
 	padding: 0.5em 1em;
 	font-size: 1em;
@@ -150,21 +154,16 @@ body > main {
 	box-shadow: 0 0 1rem #0008;
 	outline: none;
 
-	display: none;
-	grid:
-		"image" 20rem
-		"name" 1.5rem
-		"tagline" 5rem
-		/ 1fr;
-	gap: 1.5rem;
+	flex-flow: column nowrap;
+	gap: 1rem;
 }
 
 #modal[open] {
-	display: grid;
+	display: flex;
 }
 
 #modal > figure {
-	grid-area: image;
+	height: 20rem;
 }
 
 #modal > figure > img {
@@ -173,12 +172,4 @@ body > main {
 	height: 100%;
 	margin-inline: auto;
 	object-fit: contain;
-}
-
-#modal > h1 {
-	grid-area: name;
-}
-
-#modal > p {
-	grid-area: tagline;
 }

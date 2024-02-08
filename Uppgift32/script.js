@@ -37,8 +37,8 @@ async function memoizedFetch(url) {
 	return data
 }
 
-function makeTable(parent, data) {
-	const table = make(parent, "table", {})
+function makeTable(parent, data, params = {}) {
+	const table = make(parent, "table", params)
 	const tbody = make(table, "tbody", {})
 
 	Object.entries(data).forEach(([key, value]) => {
@@ -55,22 +55,37 @@ function viewProduct(beer) {
 	console.log(beer)
 
 	modal.innerHTML = ""
-	const figure = make(modal, "figure", {})
-	make(figure, "img", { src: beer.image_url })
-	make(modal, "h1", { innerHTML: beer.name })
-	make(modal, "b", { innerHTML: beer.tagline })
+	const figure = make(modal, "figure", { class: "image" })
+	make(figure, "img", { class: "", src: beer.image_url })
+	make(modal, "h1", { class: "name", innerHTML: beer.name })
 
-	const ul = make(modal, "ul", {})
+	const Hops = [
+		...new Set(beer.ingredients.hops.map(item => item.name)),
+	].join("<br>")
+	const Malt = [
+		...new Set(beer.ingredients.malt.map(item => item.name)),
+	].join("<br>")
+	const Yeast = beer.ingredients.yeast
+	const Food_pairing = beer.food_pairing.join("<br>")
 
-	make(ul, "li", {
-		innerHTML: `Date: <time>${beer.first_brewed}</time>`,
-	})
-	make(ul, "li", {
-		innerHTML: `Volume: ${beer.volume.value} ${beer.volume.unit}`,
-	})
+	makeTable(
+		modal,
+		{
+			Date: beer.first_brewed,
+			Volume: `${beer.volume.value} ${beer.volume.unit}`,
+			ABV: beer.abv,
+			Hops,
+			Malt,
+			Yeast,
+			Food_pairing,
+		},
+		{ class: "info" }
+	)
 
-	make(modal, "p", { innerHTML: beer.description })
-	make(modal, "p", { innerHTML: beer.brewers_tips })
+	make(modal, "h2", { class: "tagline", innerHTML: beer.tagline })
+	make(modal, "p", { class: "description", innerHTML: beer.description })
+	make(modal, "h2", { class: "tip-title", innerHTML: "Brewing Tip:" })
+	make(modal, "p", { class: "tip", innerHTML: beer.brewers_tips })
 
 	modal.showModal()
 }

@@ -2,13 +2,14 @@ html {
 	font-size: 2vmin;
 }
 
+body {
+	font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 * {
 	margin: 0;
 	padding: 0;
-}
-
-li {
-	margin-left: 2em;
 }
 
 button {
@@ -19,7 +20,7 @@ button {
 	background-color: #199bc9;
 	border: none;
 	border-radius: 0.5em;
-	box-shadow: 0 0 1rem #0008;
+	box-shadow: 0 0 1rem #00000088;
 
 	outline: none;
 	font-weight: bold;
@@ -49,7 +50,7 @@ body > main {
 	padding: 5rem;
 
 	background-color: #eeeeee;
-	box-shadow: 0 0 1rem #0008 inset;
+	box-shadow: 0 0 1rem #00000088 inset;
 
 	display: flex;
 	flex-flow: column nowrap;
@@ -74,7 +75,7 @@ body > main {
 
 	background-color: #ffffff;
 	border-radius: 1rem;
-	box-shadow: 0 0 1rem #0008;
+	box-shadow: 0 0 1rem #00000088;
 
 	display: grid;
 	grid:
@@ -149,21 +150,28 @@ body > main {
 	box-sizing: border-box;
 
 	background-color: #ffffff;
-	border: none;
+	border: solid 0.3rem #ffffff;
 	border-radius: 1rem;
-	box-shadow: 0 0 1rem #0008;
+	box-shadow: #00000088 0 0 1rem;
+
 	outline: none;
 
-	flex-flow: column nowrap;
+	display: none;
+	grid:
+		"image image" 20rem
+		"name name" auto
+		"info tagline" auto
+		"info description" auto
+		"info tip-title" auto
+		"info tip" auto
+		"info ." auto
+		/ 1fr 1fr;
+
 	gap: 1rem;
 }
 
 #modal[open] {
-	display: flex;
-}
-
-#modal > figure {
-	height: 20rem;
+	display: grid;
 }
 
 #modal > figure > img {
@@ -172,4 +180,57 @@ body > main {
 	height: 100%;
 	margin-inline: auto;
 	object-fit: contain;
+
+	user-select: none;
+}
+
+#modal > table {
+	border-spacing: 0.5rem;
+
+	border: solid 0.2rem #ccc;
+	border-radius: 1rem;
+}
+
+#modal > table > tbody > tr > th:first-child {
+	text-align: right;
+	vertical-align: top;
+
+	font-weight: bold;
+}
+
+#modal > table > tbody > tr > th:last-child {
+	text-align: left;
+	vertical-align: top;
+
+	font-weight: normal;
+}
+
+.image {
+	grid-area: image;
+}
+
+.name {
+	grid-area: name;
+	text-align: center;
+}
+
+.tagline {
+	grid-area: tagline;
+}
+
+.description {
+	grid-area: description;
+}
+
+.tip-title {
+	grid-area: tip-title;
+}
+
+.tip {
+	grid-area: tip;
+}
+
+.info {
+	grid-area: info;
+	align-self: start;
 }

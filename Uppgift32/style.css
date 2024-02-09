@@ -12,6 +12,19 @@ body {
 	padding: 0;
 }
 
+input {
+	padding: 0.4em 0.5em;
+	font-size: 1em;
+
+	color: #000000;
+	background-color: #ffffff;
+	border: 0.2rem solid #199bc9;
+	border-radius: 0.5em;
+
+	outline: none;
+}
+
+input[type="submit"],
 button {
 	padding: 0.5em 1em;
 	font-size: 1em;
@@ -20,7 +33,6 @@ button {
 	background-color: #199bc9;
 	border: none;
 	border-radius: 0.5em;
-	box-shadow: 0 0 1rem #00000088;
 
 	outline: none;
 	font-weight: bold;
@@ -29,11 +41,18 @@ button {
 	transition: transform 0.1s ease-in-out;
 }
 
+button {
+	box-shadow: 0 0 1rem #00000088;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus,
 button:hover,
 button:focus {
 	transform: scale(1.1);
 }
 
+input[type="submit"]:active,
 button:active {
 	transform: scale(0.95);
 }
@@ -56,6 +75,102 @@ body > main {
 	flex-flow: column nowrap;
 	justify-content: flex-start;
 	align-items: center;
+}
+
+#search-form {
+	width: 50rem;
+	padding: 1rem 2rem;
+
+	background-color: #ffffff;
+	border-radius: 1rem;
+	box-shadow: 0 0 1rem #00000088;
+
+	display: grid;
+	grid:
+		"filter-name-label filter-name-label filter-name-label filter-name-label filter-name-label" auto
+		"filter-name filter-name filter-name filter-name filter-name" auto
+		". . . . ." 0.5rem
+		"year-before-label . ABV-higher-label . filter-hops-label" auto
+		"year-before . ABV-higher . filter-hops" auto
+		". . . . ." 0.5rem
+		"year-after-label . ABV-lower-label . filter-malt-label" auto
+		"year-after . ABV-lower . filter-malt" auto
+		". . . . ." 1rem
+		"search search search search search" auto
+		/ 1fr 1rem 1fr 1rem 1fr;
+}
+
+#search-form > label {
+	margin-left: -0.5rem;
+}
+
+#search-form > input[type="submit"]:hover,
+#search-form > input[type="submit"]:focus {
+	transform: scale(1.04);
+}
+
+#search-form > input[type="submit"]:active {
+	transform: scale(0.96);
+}
+
+#filter-name-label {
+	grid-area: filter-name-label;
+}
+
+#filter-name {
+	grid-area: filter-name;
+}
+
+#year-before-label {
+	grid-area: year-before-label;
+}
+
+#year-before {
+	grid-area: year-before;
+}
+
+#year-after-label {
+	grid-area: year-after-label;
+}
+
+#year-after {
+	grid-area: year-after;
+}
+
+#ABV-higher-label {
+	grid-area: ABV-higher-label;
+}
+
+#ABV-higher {
+	grid-area: ABV-higher;
+}
+
+#ABV-lower-label {
+	grid-area: ABV-lower-label;
+}
+
+#ABV-lower {
+	grid-area: ABV-lower;
+}
+
+#filter-hops-label {
+	grid-area: filter-hops-label;
+}
+
+#filter-hops {
+	grid-area: filter-hops;
+}
+
+#filter-malt-label {
+	grid-area: filter-malt-label;
+}
+
+#filter-malt {
+	grid-area: filter-malt;
+}
+
+#search {
+	grid-area: search;
 }
 
 #list {

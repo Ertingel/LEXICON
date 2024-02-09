@@ -55,7 +55,8 @@ function viewProduct(beer) {
 
 	modal.innerHTML = ""
 	const figure = make(modal, "figure", { class: "image" })
-	make(figure, "img", { class: "", src: beer.image_url })
+	if (beer.image_url) make(figure, "img", { class: "", src: beer.image_url })
+	else make(figure, "img", { src: "./unknown.svg" })
 	make(modal, "h1", { class: "name", innerHTML: beer.name })
 
 	make(modal, "h2", { class: "tagline", innerHTML: beer.tagline })
@@ -95,7 +96,9 @@ async function viewPage(page = 1, filter = "") {
 	const list = document.getElementById("list")
 	const moreArea = document.getElementById("more-area")
 
+	moreArea.classList.remove("all")
 	moreArea.classList.add("loading")
+
 	const data = await memoizedFetch(
 		`https://api.punkapi.com/v2/beers?page=${page}&per_page=15${filter}`
 	)
@@ -105,6 +108,7 @@ async function viewPage(page = 1, filter = "") {
 		const figure = make(li, "figure", {})
 
 		if (beer.image_url) make(figure, "img", { src: beer.image_url })
+		else make(figure, "img", { src: "./unknown.svg" })
 
 		make(li, "h1", { innerHTML: beer.name })
 		make(li, "p", { innerHTML: beer.tagline })
@@ -115,6 +119,7 @@ async function viewPage(page = 1, filter = "") {
 	})
 
 	moreArea.classList.remove("loading")
+	if (data.length < 15) moreArea.classList.add("all")
 }
 
 async function init() {

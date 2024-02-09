@@ -14,7 +14,7 @@
 		<main>
 			<form id="search-form">
 				<label id="beer_name-label" for="beer_name">Name:</label>
-				<input id="beer_name" type="text" />
+				<input id="beer_name" type="text" placeholder="Search beer" />
 
 				<label id="brewed_before-label" for="brewed_before"
 					>Before year:</label
@@ -26,6 +26,7 @@
 					max="2050"
 					step="1"
 					value=""
+					placeholder="1950-2050"
 				/>
 				<label id="brewed_after-label" for="brewed_after"
 					>After year:</label
@@ -37,6 +38,7 @@
 					max="2050"
 					step="1"
 					value=""
+					placeholder="1950-2050"
 				/>
 
 				<label id="abv_gt-label" for="abv_gt">Higher ABV:</label>
@@ -47,6 +49,7 @@
 					max="50"
 					step="0.1"
 					value=""
+					placeholder="0-50"
 				/>
 				<label id="abv_lt-label" for="abv_lt">Lower ABV:</label>
 				<input
@@ -56,13 +59,24 @@
 					max="50"
 					step="0.1"
 					value=""
+					placeholder="0-50"
 				/>
 
 				<label id="hops-label" for="hops">Hops:</label>
-				<input id="hops" type="text" name="hops" />
+				<input
+					id="hops"
+					type="text"
+					name="hops"
+					placeholder="Fuggles Cascade etc..."
+				/>
 
 				<label id="malt-label" for="malt">Malt:</label>
-				<input id="malt" type="text" name="malt" />
+				<input
+					id="malt"
+					type="text"
+					name="malt"
+					placeholder="Caramalt Munich etc.."
+				/>
 
 				<input id="search" type="submit" value="Search" />
 			</form>

@@ -12,6 +12,56 @@
 		<dialog id="modal"></dialog>
 		<header><h1>Punk API</h1></header>
 		<main>
+			<form if="search-form">
+				<label for="year-after">After year:</label>
+				<input
+					id="year-after"
+					type="number"
+					min="1950"
+					max="2050"
+					step="1"
+					value=""
+				/>
+				<label for="year-before">Before year:</label>
+				<input
+					id="year-before"
+					type="number"
+					min="1950"
+					max="2050"
+					step="1"
+					value=""
+				/>
+
+				<label for="ABV-lower">Lower ABV:</label>
+				<input
+					id="ABV-lower"
+					type="number"
+					min="1950"
+					max="2050"
+					step="1"
+					value=""
+				/>
+				<label for="ABV-higher">Higher ABV:</label>
+				<input
+					id="ABV-higher"
+					type="number"
+					min="1950"
+					max="2050"
+					step="1"
+					value=""
+				/>
+
+				<label for="filter-hops">Hops:</label>
+				<input type="text" name="filter-hops" id="filter-hops" />
+
+				<label for="filter-malt">Malt:</label>
+				<input type="text" name="filter-malt" id="filter-malt" />
+
+				<label for="filter-name">Name:</label>
+				<input type="text" name="filter-name" id="filter-name" />
+
+				<input type="submit" value="Search" />
+			</form>
 			<ul id="list"></ul>
 			<button id="Show More">Show More</button>
 		</main>

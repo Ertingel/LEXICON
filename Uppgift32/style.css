@@ -80,10 +80,10 @@ body > main {
 	display: grid;
 	grid:
 		"image" 10rem
-		"name" 1.5rem
+		"." 1rem
+		"name" 2rem
 		"tagline" 5rem
 		/ 1fr;
-	gap: 0.5rem;
 
 	transform: scale(1);
 	transition: transform 0.1s ease-in-out;
@@ -158,16 +158,19 @@ body > main {
 
 	display: none;
 	grid:
-		"image image" 20rem
-		"name name" auto
-		"info tagline" auto
-		"info description" auto
-		"info tip-title" auto
-		"info tip" auto
-		"info ." auto
-		/ 1fr 1fr;
-
-	gap: 1rem;
+		"image image image" 20rem
+		". . ." 1rem
+		"name name name" auto
+		". . ." 0.5rem
+		"info . tagline" auto
+		"info . ." 0.5rem
+		"info . description" auto
+		"info . ." 1rem
+		"info . tip-title" auto
+		"info . ." 0.5rem
+		"info . tip" auto
+		"info . ." auto
+		/ 1fr 1rem 1fr;
 }
 
 #modal[open] {

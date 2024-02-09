@@ -87,14 +87,14 @@ body > main {
 
 	display: grid;
 	grid:
-		"filter-name-label filter-name-label filter-name-label filter-name-label filter-name-label" auto
-		"filter-name filter-name filter-name filter-name filter-name" auto
+		"beer_name-label beer_name-label beer_name-label beer_name-label beer_name-label" auto
+		"beer_name beer_name beer_name beer_name beer_name" auto
 		". . . . ." 0.5rem
-		"year-before-label . ABV-higher-label . filter-hops-label" auto
-		"year-before . ABV-higher . filter-hops" auto
+		"brewed_before-label . abv_gt-label . hops-label" auto
+		"brewed_before . abv_gt . hops" auto
 		". . . . ." 0.5rem
-		"year-after-label . ABV-lower-label . filter-malt-label" auto
-		"year-after . ABV-lower . filter-malt" auto
+		"brewed_after-label . abv_lt-label . malt-label" auto
+		"brewed_after . abv_lt . malt" auto
 		". . . . ." 1rem
 		"search search search search search" auto
 		/ 1fr 1rem 1fr 1rem 1fr;
@@ -113,60 +113,60 @@ body > main {
 	transform: scale(0.96);
 }
 
-#filter-name-label {
-	grid-area: filter-name-label;
+#beer_name-label {
+	grid-area: beer_name-label;
 }
 
-#filter-name {
-	grid-area: filter-name;
+#beer_name {
+	grid-area: beer_name;
 }
 
-#year-before-label {
-	grid-area: year-before-label;
+#brewed_before-label {
+	grid-area: brewed_before-label;
 }
 
-#year-before {
-	grid-area: year-before;
+#brewed_before {
+	grid-area: brewed_before;
 }
 
-#year-after-label {
-	grid-area: year-after-label;
+#brewed_after-label {
+	grid-area: brewed_after-label;
 }
 
-#year-after {
-	grid-area: year-after;
+#brewed_after {
+	grid-area: brewed_after;
 }
 
-#ABV-higher-label {
-	grid-area: ABV-higher-label;
+#abv_gt-label {
+	grid-area: abv_gt-label;
 }
 
-#ABV-higher {
-	grid-area: ABV-higher;
+#abv_gt {
+	grid-area: abv_gt;
 }
 
-#ABV-lower-label {
-	grid-area: ABV-lower-label;
+#abv_lt-label {
+	grid-area: abv_lt-label;
 }
 
-#ABV-lower {
-	grid-area: ABV-lower;
+#abv_lt {
+	grid-area: abv_lt;
 }
 
-#filter-hops-label {
-	grid-area: filter-hops-label;
+#hops-label {
+	grid-area: hops-label;
 }
 
-#filter-hops {
-	grid-area: filter-hops;
+#hops {
+	grid-area: hops;
 }
 
-#filter-malt-label {
-	grid-area: filter-malt-label;
+#malt-label {
+	grid-area: malt-label;
 }
 
-#filter-malt {
-	grid-area: filter-malt;
+#malt {
+	grid-area: malt;
 }
 
 #search {

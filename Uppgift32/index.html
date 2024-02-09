@@ -13,25 +13,25 @@
 		<header><h1>Punk API</h1></header>
 		<main>
 			<form id="search-form">
-				<label id="filter-name-label" for="filter-name">Name:</label>
-				<input id="filter-name" type="text" name="filter-name" />
+				<label id="beer_name-label" for="beer_name">Name:</label>
+				<input id="beer_name" type="text" />
 
-				<label id="year-before-label" for="year-before"
+				<label id="brewed_before-label" for="brewed_before"
 					>Before year:</label
 				>
 				<input
-					id="year-before"
+					id="brewed_before"
 					type="number"
 					min="1950"
 					max="2050"
 					step="1"
 					value=""
 				/>
-				<label id="year-after-label" for="year-after"
+				<label id="brewed_after-label" for="brewed_after"
 					>After year:</label
 				>
 				<input
-					id="year-after"
+					id="brewed_after"
 					type="number"
 					min="1950"
 					max="2050"
@@ -39,20 +39,18 @@
 					value=""
 				/>
 
-				<label id="ABV-higher-label" for="ABV-higher"
-					>Higher ABV:</label
-				>
+				<label id="abv_gt-label" for="abv_gt">Higher ABV:</label>
 				<input
-					id="ABV-higher"
+					id="abv_gt"
 					type="number"
 					min="0"
 					max="50"
 					step="0.1"
 					value=""
 				/>
-				<label id="ABV-lower-label" for="ABV-lower">Lower ABV:</label>
+				<label id="abv_lt-label" for="abv_lt">Lower ABV:</label>
 				<input
-					id="ABV-lower"
+					id="abv_lt"
 					type="number"
 					min="0"
 					max="50"
@@ -60,11 +58,11 @@
 					value=""
 				/>
 
-				<label id="filter-hops-label" for="filter-hops">Hops:</label>
-				<input id="filter-hops" type="text" name="filter-hops" />
+				<label id="hops-label" for="hops">Hops:</label>
+				<input id="hops" type="text" name="hops" />
 
-				<label id="filter-malt-label" for="filter-malt">Malt:</label>
-				<input id="filter-malt" type="text" name="filter-malt" />
+				<label id="malt-label" for="malt">Malt:</label>
+				<input id="malt" type="text" name="malt" />
 
 				<input id="search" type="submit" value="Search" />
 			</form>

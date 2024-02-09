@@ -52,7 +52,6 @@ function makeTable(parent, data, params = {}) {
 
 function viewProduct(beer) {
 	const modal = document.getElementById("modal")
-	console.log(beer)
 
 	modal.innerHTML = ""
 	const figure = make(modal, "figure", { class: "image" })
@@ -91,6 +90,7 @@ function viewProduct(beer) {
 }
 
 let curentPage = 1
+let curentFilter = ""
 async function viewPage(page = 1, filter = "") {
 	const list = document.getElementById("list")
 
@@ -112,6 +112,8 @@ async function viewPage(page = 1, filter = "") {
 }
 
 async function init() {
+	viewPage()
+
 	document.getElementById("modal").onclick = e => {
 		const rect = modal.getBoundingClientRect()
 		if (
@@ -123,14 +125,33 @@ async function init() {
 			modal.close()
 	}
 
-	viewPage()
-
 	document.getElementById("Show More").onclick = e => {
 		e.target.style.display = "none"
 
-		viewPage(++curentPage).then(() => {
+		viewPage(++curentPage, curentFilter).then(() => {
 			e.target.style.display = "block"
 		})
+	}
+
+	document.getElementById("search-form").onsubmit = function (e) {
+		curentPage = 1
+		curentFilter = [...e.target.children].reduce((acc, c) => {
+			if (c.value != "") {
+				if (c.type === "text")
+					acc += `&${c.id}=${c.value.replaceAll(" ", "_")}`
+				else if (c.type === "number") {
+					if (c.id.startsWith("brewed_"))
+						acc += `&${c.id}=01-${c.value}`
+					else acc += `&${c.id}=${c.value}`
+				}
+			}
+			return acc
+		}, "")
+
+		document.getElementById("list").innerHTML = ""
+		viewPage(curentPage, curentFilter)
+
+		return false
 	}
 }
 

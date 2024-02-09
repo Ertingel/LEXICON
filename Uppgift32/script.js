@@ -93,15 +93,19 @@ let curentPage = 1
 let curentFilter = ""
 async function viewPage(page = 1, filter = "") {
 	const list = document.getElementById("list")
+	const moreArea = document.getElementById("more-area")
 
+	moreArea.classList.add("loading")
 	const data = await memoizedFetch(
-		`https://api.punkapi.com/v2/beers?page=${page}&per_page=24${filter}`
+		`https://api.punkapi.com/v2/beers?page=${page}&per_page=15${filter}`
 	)
 
 	data.forEach(beer => {
 		const li = make(list, "li", {})
 		const figure = make(li, "figure", {})
-		make(figure, "img", { src: beer.image_url })
+
+		if (beer.image_url) make(figure, "img", { src: beer.image_url })
+
 		make(li, "h1", { innerHTML: beer.name })
 		make(li, "p", { innerHTML: beer.tagline })
 
@@ -109,6 +113,8 @@ async function viewPage(page = 1, filter = "") {
 			viewProduct(beer)
 		}
 	})
+
+	moreArea.classList.remove("loading")
 }
 
 async function init() {
@@ -125,12 +131,8 @@ async function init() {
 			modal.close()
 	}
 
-	document.getElementById("Show More").onclick = e => {
-		e.target.style.display = "none"
-
-		viewPage(++curentPage, curentFilter).then(() => {
-			e.target.style.display = "block"
-		})
+	document.getElementById("show-more").onclick = e => {
+		viewPage(++curentPage, curentFilter)
 	}
 
 	document.getElementById("search-form").onsubmit = function (e) {

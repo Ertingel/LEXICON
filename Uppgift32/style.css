@@ -59,6 +59,9 @@ button:active {
 
 body {
 	min-height: 100vh;
+
+	display: flex;
+	flex-flow: column nowrap;
 }
 
 body > header {
@@ -67,14 +70,24 @@ body > header {
 
 body > main {
 	padding: 5rem;
+	flex-grow: 1;
 
 	background-color: #eeeeee;
+	opacity: 1;
+	background-image: radial-gradient(#cccccc 0.12rem, #eeeeee 0.12rem);
+	background-size: 2rem 2rem;
 	box-shadow: 0 0 1rem #00000088 inset;
 
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: flex-start;
 	align-items: center;
+}
+
+body > footer {
+	min-height: 10rem;
+
+	background-color: #888888;
 }
 
 #search-form {
@@ -101,16 +114,7 @@ body > main {
 }
 
 #search-form > label {
-	margin-left: -0.5rem;
-}
-
-#search-form > input[type="submit"]:hover,
-#search-form > input[type="submit"]:focus {
-	transform: scale(1.04);
-}
-
-#search-form > input[type="submit"]:active {
-	transform: scale(0.96);
+	margin-left: -0.3rem;
 }
 
 #beer_name-label {
@@ -171,6 +175,15 @@ body > main {
 
 #search {
 	grid-area: search;
+}
+
+#search:hover,
+#search:focus {
+	transform: scale(1.04);
+}
+
+#search:active {
+	transform: scale(0.96);
 }
 
 #list {
@@ -292,6 +305,10 @@ body > main {
 	display: grid;
 }
 
+#modal::backdrop {
+	background: #00000044;
+}
+
 #modal > figure > img {
 	display: block;
 	width: 100%;
@@ -351,4 +368,64 @@ body > main {
 .info {
 	grid-area: info;
 	align-self: start;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+	margin-block: 1rem;
+	margin-inline: auto;
+
+	width: 90px;
+	height: 14px;
+	box-shadow: 0 3px 0 #888;
+	position: relative;
+	display: grid;
+	clip-path: inset(-60px 0 -5px);
+}
+.loader:after {
+	content: "";
+	position: relative;
+	background: repeating-linear-gradient(
+			90deg,
+			#0000 0 calc(50% - 8px),
+			#199bc9 0 calc(50% + 8px),
+			#0000 0 100%
+		)
+		0 0 / calc(100% / 3) 100%;
+	animation: l6-1 1s infinite;
+}
+.loader:before {
+	content: "";
+	position: absolute;
+	width: 14px;
+	aspect-ratio: 1;
+	left: calc(50% - 7px);
+	bottom: 0;
+	border-radius: 50%;
+	background: #f43544;
+	animation: l6-2 1s infinite;
+}
+@keyframes l6-1 {
+	50%,
+	100% {
+		background-position: calc(100% / 2) 0;
+	}
+}
+@keyframes l6-2 {
+	0%,
+	50% {
+		transform: translateY(-80px);
+	}
+}
+
+#more-area {
+	min-height: 3rem;
+}
+
+#more-area.loading #show-more {
+	display: none;
+}
+
+#more-area:not(.loading) .loader {
+	display: none;
 }

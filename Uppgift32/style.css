@@ -13,6 +13,7 @@ body {
 }
 
 input {
+	min-width: 3em;
 	padding: 0.4em 0.5em;
 	font-size: 1em;
 
@@ -80,7 +81,7 @@ body > main {
 	opacity: 1;
 	background-image: radial-gradient(#cccccc 0.12rem, #eeeeee 0.12rem);
 	background-size: 2rem 2rem;
-	background-position: center;
+	background-position: top;
 	box-shadow: 0 0 1rem #00000088 inset;
 
 	display: flex;
@@ -438,4 +439,71 @@ body > footer {
 
 #more-area:not(.loading) .loader {
 	display: none;
+}
+
+@media screen and (max-width: 115vh) {
+	html {
+		font-size: 2.5vmin;
+	}
+
+	#list {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	#search-form {
+		width: 31.5rem;
+		grid:
+			"beer_name-label beer_name-label beer_name-label" auto
+			"beer_name beer_name beer_name" auto
+			". . ." 0.5rem
+			"brewed_before-label . brewed_after-label" auto
+			"brewed_before . brewed_after" auto
+			". . ." 0.5rem
+			"abv_gt-label . abv_lt-label" auto
+			"abv_gt . abv_lt" auto
+			". . ." 0.5rem
+			"hops-label . malt-label" auto
+			"hops . malt" auto
+			". . ." 1rem
+			"search search search" auto
+			/ 1fr 1rem 1fr;
+	}
+}
+
+@media screen and (max-width: 70vh) {
+	html {
+		font-size: 5vmin;
+	}
+
+	#list {
+		grid-template-columns: 1fr;
+	}
+
+	#search-form {
+		width: 13rem;
+		grid:
+			"beer_name-label" auto
+			"beer_name" auto
+			"." 0.5rem
+			"brewed_before-label" auto
+			"brewed_before" auto
+			"." 0.5rem
+			"brewed_after-label" auto
+			"brewed_after" auto
+			"." 0.5rem
+			"abv_gt-label" auto
+			"abv_gt" auto
+			"." 0.5rem
+			"abv_lt-label" auto
+			"abv_lt" auto
+			"." 0.5rem
+			"hops-label" auto
+			"hops" auto
+			"." 0.5rem
+			"malt-label" auto
+			"malt" auto
+			"." 1rem
+			"search" auto
+			/ 1fr;
+	}
 }

@@ -100,7 +100,7 @@ async function viewPage(page = 1, filter = "") {
 	moreArea.classList.add("loading")
 
 	const data = await memoizedFetch(
-		`https://api.punkapi.com/v2/beers?page=${page}&per_page=15${filter}`
+		`https://api.punkapi.com/v2/beers?page=${page}&per_page=18${filter}`
 	)
 
 	data.forEach(beer => {
@@ -119,7 +119,7 @@ async function viewPage(page = 1, filter = "") {
 	})
 
 	moreArea.classList.remove("loading")
-	if (data.length < 15) moreArea.classList.add("all")
+	if (data.length < 18) moreArea.classList.add("all")
 }
 
 async function init() {

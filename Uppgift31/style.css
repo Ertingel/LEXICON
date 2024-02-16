@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
 
 html {
+	--blue: #0c43af;
 	--yellow: #ffd600;
 	--background: #424242;
 	--gray-1: #e1dede;
@@ -80,10 +81,15 @@ body {
 	flex-flow: column nowrap;
 	justify-content: flex-start;
 	align-items: stretch;
+
+	background-image: url("./background.svg");
+	background-position: top;
 }
 
 body > header {
 	padding: 3.7rem;
+
+	box-shadow: 0 0 1rem #000;
 
 	display: flex;
 	flex-flow: row nowrap;
@@ -265,6 +271,10 @@ body > main > article > footer {
 
 #character-info {
 	grid-area: character-info;
+}
+
+#character-info a {
+	color: var(--blue);
 }
 
 #home-planet {

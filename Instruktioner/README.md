@@ -15,7 +15,7 @@ Färdiga uppgifter kan hittas [här](https://github.com/Ertingel/LEXICON/).
     -   [**Uppgift4**](https://github.com/Ertingel/LEXICON/tree/main/Instruktioner/Uppgift4-Caffe-Retro.pdf): Caffe Retro
 -   Vecka 49 _(HTML & CSS)_
     -   [**Uppgift5**](https://github.com/Ertingel/LEXICON/tree/main/Instruktioner/Uppgift5-Mediaspelaren): Mediaspelaren
-    -   [**Uppgift6-1**](https://github.com/Ertingel/LEXICON/tree/main/Instruktioner/Uppgift6-Poster-shop): Poster shop
+    -   [**Uppgift6**](https://github.com/Ertingel/LEXICON/tree/main/Instruktioner/Uppgift6-Poster-shop): Poster shop
 -   Vecka 50 _(HTML & CSS)_
     -   [**Uppgift7**](https://github.com/Ertingel/LEXICON/tree/main/Instruktioner/Uppgift7-Insurance-project): Insurance Project
 -   Vecka 51 _(HTML & CSS)_

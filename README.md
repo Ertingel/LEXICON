@@ -1,8 +1,12 @@
 # LEXICON
 
-Detta är min repository för läxor i LEXICON.
+Detta är min repository för LEXICON läxor.
 
-## Läxor
+Varje uppgift har en länk till en _Github pages_ sida där man kan testa koden.
+
+Instruktioner för varje uppgift kan hittas [här](https://github.com/Ertingel/LEXICON/tree/main/Instruktioner).
+
+---
 
 -   Vecka 48 _(HTML & CSS)_
     -   [**Uppgift1**](https://ertingel.github.io/LEXICON/Uppgift1): Enkel hemsida om det favoritrecept _(Blev i stället om Kit the fox)_
@@ -48,3 +52,5 @@ Detta är min repository för läxor i LEXICON.
     -   [**Uppgift30**](https://ertingel.github.io/LEXICON/Uppgift30): API Bootcamp
     -   [**Uppgift31**](https://ertingel.github.io/LEXICON/Uppgift31): Starwars Catalog
     -   [**Uppgift32**](https://ertingel.github.io/LEXICON/Uppgift32): Punk API
+-   Vecka 8+ _(Vite/React)_
+    -   [**Vite/React**](https://github.com/Ertingel/LEXICON-Vite): Nytt repo för _Vite/React_

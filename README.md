@@ -1,6 +1,6 @@
 # LEXICON
 
-Detta är min repository för LEXICON läxor inom React.
+Detta är min repository för LEXICON läxor.
 
 Varje uppgift har en länk till en _Github pages_ sida där man kan testa koden.
 

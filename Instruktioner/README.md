@@ -1,6 +1,6 @@
 # LEXICON Instructioner
 
-Detta är min repository för LEXICON läxor inom React.
+Detta är min repository för LEXICON läxor.
 
 Varje uppgift har en länk till en respektive fil.
 

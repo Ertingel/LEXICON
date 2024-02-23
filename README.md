@@ -52,5 +52,5 @@ Instruktioner för varje uppgift kan hittas [här](https://github.com/Ertingel/L
     -   [**Uppgift30**](https://ertingel.github.io/LEXICON/Uppgift30): API Bootcamp
     -   [**Uppgift31**](https://ertingel.github.io/LEXICON/Uppgift31): Starwars Catalog
     -   [**Uppgift32**](https://ertingel.github.io/LEXICON/Uppgift32): Punk API
--   Vecka 8+ _(Vite/React)_
-    -   [**Vite/React**](https://github.com/Ertingel/LEXICON-Vite): Nytt repo för _Vite/React_
+-   Vecka 8+ _(React)_
+    -   [**React**](https://github.com/Ertingel/LEXICON-React): Nytt repo för _React_

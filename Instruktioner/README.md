@@ -50,5 +50,5 @@ Färdiga uppgifter kan hittas [här](https://github.com/Ertingel/LEXICON/).
     -   [**Uppgift30**](https://github.com/Ertingel/LEXICON/tree/main/Instruktioner/Uppgift30-API-Bootcamp.md): API Bootcamp
     -   [**Uppgift31**](https://github.com/Ertingel/LEXICON/tree/main/Instruktioner/Uppgift31-Starwars-Catalog): Starwars Catalog
     -   [**Uppgift32**](https://github.com/Ertingel/LEXICON/tree/main/Instruktioner/Uppgift32-Punk-API): Punk API
--   Vecka 8+ _(Vite/React)_
-    -   [**Vite/React**](https://github.com/Ertingel/LEXICON-Vite): Nytt repo för _Vite/React_
+-   Vecka 8+ _(React)_
+    -   [**React**](https://github.com/Ertingel/LEXICON-React): Nytt repo för _React_
